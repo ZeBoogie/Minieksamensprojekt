@@ -15,7 +15,7 @@ namespace PPAddIn__Minieks
 
         private void button1_Click(object sender, RibbonControlEventArgs e)
         {
-            Console.log("nice");
+            Console.WriteLine("nice");
         }
     }
 }
