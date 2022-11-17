@@ -1,9 +1,9 @@
 # Minieksamensprojekt
 
-Projektleder : Cathrine - vil have al magten
+Projektleder : Cathrine - Har styr på burndown chart og issues
 
 Design : Jonatan - Er i charge i hvert fald, med assistance
 
-Skriver : Cathrine og Jonathan - Cathrine har magten
+Skriver : Cathrine og Jonathan
 
-Programmør : Jonathan - med assistance fra Jonatan.
+Programmør : Jonathan - med assistance fra Jonatan og Cathrine.
