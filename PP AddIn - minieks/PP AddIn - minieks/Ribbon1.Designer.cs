@@ -37,16 +37,22 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
             this.Spoergsmaalslaver = this.Factory.CreateRibbonTab();
             this.spoergsmaal_grp = this.Factory.CreateRibbonGroup();
+            this.Session_grp = this.Factory.CreateRibbonGroup();
+            this.group1 = this.Factory.CreateRibbonGroup();
+            this.group2 = this.Factory.CreateRibbonGroup();
             this.Administrer_btn = this.Factory.CreateRibbonButton();
             this.Opret_btn = this.Factory.CreateRibbonButton();
-            this.Session_grp = this.Factory.CreateRibbonGroup();
             this.LavLink_menu = this.Factory.CreateRibbonMenu();
-            this.StartStopSession_btn = this.Factory.CreateRibbonButton();
             this.menu1 = this.Factory.CreateRibbonMenu();
             this.menu2 = this.Factory.CreateRibbonMenu();
+            this.StartStopSession_btn = this.Factory.CreateRibbonButton();
+            this.ChemSketch_btn = this.Factory.CreateRibbonButton();
+            this.button1 = this.Factory.CreateRibbonButton();
             this.Spoergsmaalslaver.SuspendLayout();
             this.spoergsmaal_grp.SuspendLayout();
             this.Session_grp.SuspendLayout();
+            this.group1.SuspendLayout();
+            this.group2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Spoergsmaalslaver
@@ -54,6 +60,8 @@
             this.Spoergsmaalslaver.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
             this.Spoergsmaalslaver.Groups.Add(this.spoergsmaal_grp);
             this.Spoergsmaalslaver.Groups.Add(this.Session_grp);
+            this.Spoergsmaalslaver.Groups.Add(this.group1);
+            this.Spoergsmaalslaver.Groups.Add(this.group2);
             this.Spoergsmaalslaver.Label = "Spørgsmålslaver";
             this.Spoergsmaalslaver.Name = "Spoergsmaalslaver";
             // 
@@ -63,6 +71,25 @@
             this.spoergsmaal_grp.Items.Add(this.Opret_btn);
             this.spoergsmaal_grp.Label = "Spørgsmål";
             this.spoergsmaal_grp.Name = "spoergsmaal_grp";
+            // 
+            // Session_grp
+            // 
+            this.Session_grp.Items.Add(this.LavLink_menu);
+            this.Session_grp.Items.Add(this.StartStopSession_btn);
+            this.Session_grp.Label = "Session";
+            this.Session_grp.Name = "Session_grp";
+            // 
+            // group1
+            // 
+            this.group1.Items.Add(this.button1);
+            this.group1.Label = "Excel";
+            this.group1.Name = "group1";
+            // 
+            // group2
+            // 
+            this.group2.Items.Add(this.ChemSketch_btn);
+            this.group2.Label = "ChemSketch";
+            this.group2.Name = "group2";
             // 
             // Administrer_btn
             // 
@@ -81,13 +108,6 @@
             this.Opret_btn.ShowImage = true;
             this.Opret_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click_1);
             // 
-            // Session_grp
-            // 
-            this.Session_grp.Items.Add(this.LavLink_menu);
-            this.Session_grp.Items.Add(this.StartStopSession_btn);
-            this.Session_grp.Label = "Session";
-            this.Session_grp.Name = "Session_grp";
-            // 
             // LavLink_menu
             // 
             this.LavLink_menu.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -98,13 +118,6 @@
             this.LavLink_menu.Label = "Lav link";
             this.LavLink_menu.Name = "LavLink_menu";
             this.LavLink_menu.ShowImage = true;
-            // 
-            // StartStopSession_btn
-            // 
-            this.StartStopSession_btn.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.StartStopSession_btn.Label = "Start session";
-            this.StartStopSession_btn.Name = "StartStopSession_btn";
-            this.StartStopSession_btn.ShowImage = true;
             // 
             // menu1
             // 
@@ -120,6 +133,32 @@
             this.menu2.Name = "menu2";
             this.menu2.ShowImage = true;
             // 
+            // StartStopSession_btn
+            // 
+            this.StartStopSession_btn.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.StartStopSession_btn.Image = ((System.Drawing.Image)(resources.GetObject("StartStopSession_btn.Image")));
+            this.StartStopSession_btn.Label = "Start session";
+            this.StartStopSession_btn.Name = "StartStopSession_btn";
+            this.StartStopSession_btn.ShowImage = true;
+            this.StartStopSession_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.StartStopSession_btn_Click);
+            // 
+            // ChemSketch_btn
+            // 
+            this.ChemSketch_btn.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.ChemSketch_btn.Image = ((System.Drawing.Image)(resources.GetObject("ChemSketch_btn.Image")));
+            this.ChemSketch_btn.Label = "Åben ChemSketch";
+            this.ChemSketch_btn.Name = "ChemSketch_btn";
+            this.ChemSketch_btn.ShowImage = true;
+            this.ChemSketch_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click_2);
+            // 
+            // button1
+            // 
+            this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Label = "Upload liste";
+            this.button1.Name = "button1";
+            this.button1.ShowImage = true;
+            // 
             // Ribbon1
             // 
             this.Name = "Ribbon1";
@@ -132,6 +171,10 @@
             this.spoergsmaal_grp.PerformLayout();
             this.Session_grp.ResumeLayout(false);
             this.Session_grp.PerformLayout();
+            this.group1.ResumeLayout(false);
+            this.group1.PerformLayout();
+            this.group2.ResumeLayout(false);
+            this.group2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -147,6 +190,10 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonMenu menu1;
         internal Microsoft.Office.Tools.Ribbon.RibbonMenu menu2;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton StartStopSession_btn;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton ChemSketch_btn;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
     }
 
     partial class ThisRibbonCollection
