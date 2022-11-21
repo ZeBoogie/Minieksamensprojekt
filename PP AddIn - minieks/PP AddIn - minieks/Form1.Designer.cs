@@ -40,7 +40,7 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(235, 50);
+            this.listBox1.Location = new System.Drawing.Point(138, 50);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(339, 244);
             this.listBox1.TabIndex = 0;
@@ -48,7 +48,7 @@
             // 
             // Ny_btn
             // 
-            this.Ny_btn.Location = new System.Drawing.Point(235, 300);
+            this.Ny_btn.Location = new System.Drawing.Point(138, 300);
             this.Ny_btn.Name = "Ny_btn";
             this.Ny_btn.Size = new System.Drawing.Size(70, 41);
             this.Ny_btn.TabIndex = 1;
@@ -58,7 +58,7 @@
             // 
             // Redigering_btn
             // 
-            this.Redigering_btn.Location = new System.Drawing.Point(311, 300);
+            this.Redigering_btn.Location = new System.Drawing.Point(214, 300);
             this.Redigering_btn.Name = "Redigering_btn";
             this.Redigering_btn.Size = new System.Drawing.Size(91, 41);
             this.Redigering_btn.TabIndex = 2;
@@ -67,7 +67,7 @@
             // 
             // Slet_btn
             // 
-            this.Slet_btn.Location = new System.Drawing.Point(408, 300);
+            this.Slet_btn.Location = new System.Drawing.Point(311, 300);
             this.Slet_btn.Name = "Slet_btn";
             this.Slet_btn.Size = new System.Drawing.Size(79, 41);
             this.Slet_btn.TabIndex = 3;
@@ -77,7 +77,7 @@
             // 
             // Annuller_btn
             // 
-            this.Annuller_btn.Location = new System.Drawing.Point(671, 397);
+            this.Annuller_btn.Location = new System.Drawing.Point(483, 397);
             this.Annuller_btn.Name = "Annuller_btn";
             this.Annuller_btn.Size = new System.Drawing.Size(117, 41);
             this.Annuller_btn.TabIndex = 4;
@@ -87,7 +87,7 @@
             // 
             // OK_btn
             // 
-            this.OK_btn.Location = new System.Drawing.Point(573, 397);
+            this.OK_btn.Location = new System.Drawing.Point(385, 397);
             this.OK_btn.Name = "OK_btn";
             this.OK_btn.Size = new System.Drawing.Size(92, 41);
             this.OK_btn.TabIndex = 5;
@@ -99,14 +99,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(612, 450);
             this.Controls.Add(this.OK_btn);
             this.Controls.Add(this.Annuller_btn);
             this.Controls.Add(this.Slet_btn);
             this.Controls.Add(this.Redigering_btn);
             this.Controls.Add(this.Ny_btn);
             this.Controls.Add(this.listBox1);
+            this.HelpButton = true;
             this.Name = "Spoergsmaalsstyring_frm";
+            this.ShowIcon = false;
             this.Text = "Spørgsmålsstyring";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
