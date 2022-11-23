@@ -42,6 +42,8 @@
             this.svar4_chk = new System.Windows.Forms.CheckBox();
             this.tilfoejSvar_btn = new System.Windows.Forms.Button();
             this.fjernSvar_btn = new System.Windows.Forms.Button();
+            this.titel_txt = new System.Windows.Forms.TextBox();
+            this.titel_lbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Annuller_btn
@@ -83,7 +85,7 @@
             // 
             // spoergsmaal_txt
             // 
-            this.spoergsmaal_txt.Location = new System.Drawing.Point(12, 46);
+            this.spoergsmaal_txt.Location = new System.Drawing.Point(12, 78);
             this.spoergsmaal_txt.Multiline = true;
             this.spoergsmaal_txt.Name = "spoergsmaal_txt";
             this.spoergsmaal_txt.Size = new System.Drawing.Size(776, 72);
@@ -95,7 +97,7 @@
             // svar1_chk
             // 
             this.svar1_chk.AutoSize = true;
-            this.svar1_chk.Location = new System.Drawing.Point(12, 124);
+            this.svar1_chk.Location = new System.Drawing.Point(12, 156);
             this.svar1_chk.Name = "svar1_chk";
             this.svar1_chk.Size = new System.Drawing.Size(22, 21);
             this.svar1_chk.TabIndex = 5;
@@ -104,7 +106,7 @@
             // 
             // svar2_txt
             // 
-            this.svar2_txt.Location = new System.Drawing.Point(40, 156);
+            this.svar2_txt.Location = new System.Drawing.Point(40, 188);
             this.svar2_txt.Multiline = true;
             this.svar2_txt.Name = "svar2_txt";
             this.svar2_txt.Size = new System.Drawing.Size(748, 26);
@@ -115,7 +117,7 @@
             // 
             // svar1_txt
             // 
-            this.svar1_txt.Location = new System.Drawing.Point(40, 124);
+            this.svar1_txt.Location = new System.Drawing.Point(40, 156);
             this.svar1_txt.Name = "svar1_txt";
             this.svar1_txt.Size = new System.Drawing.Size(748, 26);
             this.svar1_txt.TabIndex = 9;
@@ -126,7 +128,7 @@
             // svar2_chk
             // 
             this.svar2_chk.AutoSize = true;
-            this.svar2_chk.Location = new System.Drawing.Point(12, 156);
+            this.svar2_chk.Location = new System.Drawing.Point(12, 188);
             this.svar2_chk.Name = "svar2_chk";
             this.svar2_chk.Size = new System.Drawing.Size(22, 21);
             this.svar2_chk.TabIndex = 10;
@@ -136,7 +138,7 @@
             // 
             // svar3_txt
             // 
-            this.svar3_txt.Location = new System.Drawing.Point(40, 188);
+            this.svar3_txt.Location = new System.Drawing.Point(40, 220);
             this.svar3_txt.Name = "svar3_txt";
             this.svar3_txt.Size = new System.Drawing.Size(748, 26);
             this.svar3_txt.TabIndex = 12;
@@ -147,7 +149,7 @@
             // svar3_chk
             // 
             this.svar3_chk.AutoSize = true;
-            this.svar3_chk.Location = new System.Drawing.Point(12, 188);
+            this.svar3_chk.Location = new System.Drawing.Point(12, 220);
             this.svar3_chk.Name = "svar3_chk";
             this.svar3_chk.Size = new System.Drawing.Size(22, 21);
             this.svar3_chk.TabIndex = 13;
@@ -156,7 +158,7 @@
             // 
             // svar4_txt
             // 
-            this.svar4_txt.Location = new System.Drawing.Point(40, 220);
+            this.svar4_txt.Location = new System.Drawing.Point(40, 252);
             this.svar4_txt.Name = "svar4_txt";
             this.svar4_txt.Size = new System.Drawing.Size(748, 26);
             this.svar4_txt.TabIndex = 14;
@@ -166,7 +168,7 @@
             // svar4_chk
             // 
             this.svar4_chk.AutoSize = true;
-            this.svar4_chk.Location = new System.Drawing.Point(12, 220);
+            this.svar4_chk.Location = new System.Drawing.Point(12, 252);
             this.svar4_chk.Name = "svar4_chk";
             this.svar4_chk.Size = new System.Drawing.Size(22, 21);
             this.svar4_chk.TabIndex = 15;
@@ -175,7 +177,7 @@
             // 
             // tilfoejSvar_btn
             // 
-            this.tilfoejSvar_btn.Location = new System.Drawing.Point(40, 252);
+            this.tilfoejSvar_btn.Location = new System.Drawing.Point(40, 284);
             this.tilfoejSvar_btn.Name = "tilfoejSvar_btn";
             this.tilfoejSvar_btn.Size = new System.Drawing.Size(161, 33);
             this.tilfoejSvar_btn.TabIndex = 16;
@@ -186,7 +188,7 @@
             // 
             // fjernSvar_btn
             // 
-            this.fjernSvar_btn.Location = new System.Drawing.Point(207, 252);
+            this.fjernSvar_btn.Location = new System.Drawing.Point(207, 284);
             this.fjernSvar_btn.Name = "fjernSvar_btn";
             this.fjernSvar_btn.Size = new System.Drawing.Size(176, 33);
             this.fjernSvar_btn.TabIndex = 17;
@@ -195,12 +197,32 @@
             this.fjernSvar_btn.Visible = false;
             this.fjernSvar_btn.Click += new System.EventHandler(this.fjernSvar_btn_Click);
             // 
+            // titel_txt
+            // 
+            this.titel_txt.Location = new System.Drawing.Point(60, 46);
+            this.titel_txt.Name = "titel_txt";
+            this.titel_txt.Size = new System.Drawing.Size(323, 26);
+            this.titel_txt.TabIndex = 18;
+            this.titel_txt.Visible = false;
+            // 
+            // titel_lbl
+            // 
+            this.titel_lbl.AutoSize = true;
+            this.titel_lbl.Location = new System.Drawing.Point(12, 46);
+            this.titel_lbl.Name = "titel_lbl";
+            this.titel_lbl.Size = new System.Drawing.Size(42, 20);
+            this.titel_lbl.TabIndex = 19;
+            this.titel_lbl.Text = "Titel:";
+            this.titel_lbl.Visible = false;
+            // 
             // Nyt_spaargsmaal_frm
             // 
             this.AccessibleName = "";
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.titel_lbl);
+            this.Controls.Add(this.titel_txt);
             this.Controls.Add(this.fjernSvar_btn);
             this.Controls.Add(this.tilfoejSvar_btn);
             this.Controls.Add(this.svar4_chk);
@@ -239,5 +261,7 @@
         private System.Windows.Forms.CheckBox svar4_chk;
         private System.Windows.Forms.Button tilfoejSvar_btn;
         private System.Windows.Forms.Button fjernSvar_btn;
+        private System.Windows.Forms.TextBox titel_txt;
+        private System.Windows.Forms.Label titel_lbl;
     }
 }
