@@ -10,11 +10,113 @@ using System.Windows.Forms;
 
 namespace PP_AddIn___minieks
 {
-    public partial class Form2 : Form
+    public partial class Nyt_spaargsmaal_frm : Form
     {
-        public Form2()
+        int antalSpoergsmaal = 2;
+        public Nyt_spaargsmaal_frm()
         {
             InitializeComponent();
+        }
+        
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Svartype_comboB.SelectedItem != null)
+            {
+                string spoergsmaalstype = Svartype_comboB.SelectedItem.ToString();
+                 if (spoergsmaalstype == "Multiple choice")
+                {
+                    mulitpleChoice();
+                }
+            }
+        }
+        public void mulitpleChoice()
+        {
+            spoergsmaal_txt.Visible = true;
+            svar1_txt.Visible = true;
+            svar1_chk.Visible = true;
+            svar2_txt.Visible = true;
+            svar2_chk.Visible = true;
+            tilfoejSvar_btn.Visible = true;
+            tilfoejSvar_btn.Location = new Point(40, 188);
+        }
+
+        private void Annuller_btn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tilfoejSvar_btn_Click(object sender, EventArgs e)
+        {
+            if (antalSpoergsmaal == 2)
+            {
+                antalSpoergsmaal = 3;
+                svar3_chk.Visible = true;
+                svar3_txt.Visible = true;
+                fjernSvar_btn.Visible = true;
+                tilfoejSvar_btn.Location = new Point(40,220);
+                fjernSvar_btn.Location = new Point(207, 220);
+            } else if (antalSpoergsmaal == 3)
+            {
+                antalSpoergsmaal = 4;
+                svar4_chk.Visible = true;
+                svar4_txt.Visible = true;
+                tilfoejSvar_btn.Visible = false;
+                fjernSvar_btn.Location = new Point(207, 252);
+            }
+        }
+
+        private void svar3_txt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fjernSvar_btn_Click(object sender, EventArgs e)
+        {
+            if (antalSpoergsmaal == 3)
+            {
+                antalSpoergsmaal = 2;
+                svar3_chk.Visible = false;
+                svar3_txt.Visible = false;
+                fjernSvar_btn.Visible = false;
+                tilfoejSvar_btn.Location = new Point(40, 188);
+            }
+            else if (antalSpoergsmaal == 4)
+            {
+                antalSpoergsmaal = 3;
+                svar4_chk.Visible = false;
+                svar4_txt.Visible = false;
+                tilfoejSvar_btn.Visible = true;
+                fjernSvar_btn.Location = new Point(207, 220);
+            }
         }
     }
 }

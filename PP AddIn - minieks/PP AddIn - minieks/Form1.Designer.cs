@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.Button OK_btn;
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.Ny_btn = new System.Windows.Forms.Button();
             this.Redigering_btn = new System.Windows.Forms.Button();
             this.Slet_btn = new System.Windows.Forms.Button();
             this.Annuller_btn = new System.Windows.Forms.Button();
-            this.OK_btn = new System.Windows.Forms.Button();
+            OK_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -87,26 +88,25 @@
             // 
             // OK_btn
             // 
-            this.OK_btn.Location = new System.Drawing.Point(385, 397);
-            this.OK_btn.Name = "OK_btn";
-            this.OK_btn.Size = new System.Drawing.Size(92, 41);
-            this.OK_btn.TabIndex = 5;
-            this.OK_btn.Text = "OK";
-            this.OK_btn.UseVisualStyleBackColor = true;
-            this.OK_btn.Click += new System.EventHandler(this.button1_Click_3);
+            OK_btn.Location = new System.Drawing.Point(385, 397);
+            OK_btn.Name = "OK_btn";
+            OK_btn.Size = new System.Drawing.Size(92, 41);
+            OK_btn.TabIndex = 5;
+            OK_btn.Text = "OK";
+            OK_btn.UseVisualStyleBackColor = true;
+            OK_btn.Click += new System.EventHandler(this.button1_Click_3);
             // 
             // Spoergsmaalsstyring_frm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(612, 450);
-            this.Controls.Add(this.OK_btn);
+            this.Controls.Add(OK_btn);
             this.Controls.Add(this.Annuller_btn);
             this.Controls.Add(this.Slet_btn);
             this.Controls.Add(this.Redigering_btn);
             this.Controls.Add(this.Ny_btn);
             this.Controls.Add(this.listBox1);
-            this.HelpButton = true;
             this.Name = "Spoergsmaalsstyring_frm";
             this.ShowIcon = false;
             this.Text = "Spørgsmålsstyring";
@@ -122,6 +122,5 @@
         private System.Windows.Forms.Button Redigering_btn;
         private System.Windows.Forms.Button Slet_btn;
         private System.Windows.Forms.Button Annuller_btn;
-        private System.Windows.Forms.Button OK_btn;
     }
 }
