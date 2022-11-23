@@ -223,7 +223,7 @@
     <ManifestKeyFile>PP AddIn - minieks_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>18EB300D76DC07F2AFAA60B948EEA0BFF06D67C3</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>B5F90A275CFAFAEEA2D7EFA7398C8A100B622D43</ManifestCertificateThumbprint>
   </PropertyGroup>
   <!-- Include the build rules for a C# project. -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
