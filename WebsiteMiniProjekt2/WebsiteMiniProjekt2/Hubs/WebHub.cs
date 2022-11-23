@@ -10,12 +10,20 @@ namespace WebsiteMiniProjekt2.Hubs
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
 
-        public async Task verifyCode(string code)
+        public async Task isCodeAvailable(int code)
         {
-            await Clients.All.SendAsync("isYourCode", code);
-            Trace.WriteLine(code);
+            await Clients.All.SendAsync("checkYourCode", code);
             //all clients should have a listener for isYourCode, that sends back
             //the code that they use to everyone.
+
+            //since this is the webserver, it can ask everyone to privately send back their code, and then send out a 
+            //not used code to the client who asked for the code.
+        }
+
+        public Task PrintString(int String)
+        {
+            Trace.WriteLine(String);
+            return Task.CompletedTask;
         }
     }
 }
