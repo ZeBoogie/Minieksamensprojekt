@@ -100,7 +100,6 @@ _Chutzpah*
 ipch/
 *.aps
 *.ncb
-*.pfx
 *.opendb
 *.opensdf
 *.sdf
