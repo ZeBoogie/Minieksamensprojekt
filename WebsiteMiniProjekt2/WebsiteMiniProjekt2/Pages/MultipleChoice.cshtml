@@ -1,0 +1,109 @@
+﻿@page
+@model WebsiteMiniProjekt2.Pages.QuistionPageModel
+@{
+}
+ 
+<style>
+	.button {
+		border: none;
+		color: black;
+		padding: 64px 128px;
+		text-align: center;
+		font-size: 24px;
+		margin: 4px 2px;
+		border-radius: 4px;
+		opacity: 0.8;
+		transition: 0.3s;
+		display: inline-block;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	.button1
+	{
+		background-color: red;
+	}
+		.button1:hover {
+			opacity: 1
+		}
+
+	.Leftup {
+		position: absolute;
+		top: 25%;
+		left: 25%;
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+		-ms-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+	.button2
+	{
+		background-color: green;
+	}
+		.button2: hover{
+		opacity: 1
+		}
+
+	.Rightup {
+		position: absolute;
+		top: 25%;
+		left: 75%;
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+		-ms-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+
+	.button3 
+	{
+		background-color: blue;
+	}
+
+		.button3: hover {
+			opacity: 1
+		}
+
+	.Leftdown {
+		position: absolute;
+		top: 75%;
+		left: 25%;
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+		-ms-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+
+	.button4 
+	{
+		background-color: yellow;
+	}
+
+		.button4: hover {
+			opacity: 1
+		}
+
+	.Rightdown {
+		position: absolute;
+		top: 75%;
+		left: 75%;
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+		-ms-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+
+	</style>
+	<body>
+	<div class="Leftup">
+		<button class="button button1">A</button>
+		</div>
+	<div class="Rightup">
+		<button class="button button2">B</button>
+		</div>
+	<div class="Leftdown">
+		<button class="button button3">C</button>
+		</div>
+	<div class="Rightdown">
+		<button class="button button4">D</button>
+		</div>
+	</body>
+	
