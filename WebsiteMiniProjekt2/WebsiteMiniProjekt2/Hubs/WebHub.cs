@@ -34,7 +34,7 @@ namespace WebsiteMiniProjekt2.Hubs
             {
                 i++;
                 foundNewCode = true;
-                code = rnd.Next(1000, 1010);  // creates a number between 1 and 12
+                code = rnd.Next(1000, 10000);  // creates a number between 1 and 12
                 foreach(int usedCode in codesInUse)
                 {
                     Trace.WriteLine($"comparing usedcode {usedCode} and {code}");
