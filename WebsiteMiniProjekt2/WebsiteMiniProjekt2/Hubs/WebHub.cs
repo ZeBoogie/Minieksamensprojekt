@@ -7,7 +7,7 @@ namespace WebsiteMiniProjekt2.Hubs
 {
     public class WebHub : Hub
     {
-        List<int> codesInUse = new List<int>(); //hub class is transcient, so
+        static List<int> codesInUse = new List<int>(); //hub class is transcient, so
         // this is deleted each time you send a message
         public async Task SendMessage(string user, string message)
         {
