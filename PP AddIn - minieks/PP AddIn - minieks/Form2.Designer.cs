@@ -44,6 +44,7 @@
             this.fjernSvar_btn = new System.Windows.Forms.Button();
             this.titel_txt = new System.Windows.Forms.TextBox();
             this.titel_lbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Annuller_btn
@@ -215,12 +216,22 @@
             this.titel_lbl.Text = "Titel:";
             this.titel_lbl.Visible = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(378, 364);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 20);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "label1";
+            // 
             // Nyt_spaargsmaal_frm
             // 
             this.AccessibleName = "";
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.titel_lbl);
             this.Controls.Add(this.titel_txt);
             this.Controls.Add(this.fjernSvar_btn);
@@ -263,5 +274,6 @@
         private System.Windows.Forms.Button fjernSvar_btn;
         private System.Windows.Forms.TextBox titel_txt;
         private System.Windows.Forms.Label titel_lbl;
+        private System.Windows.Forms.Label label1;
     }
 }

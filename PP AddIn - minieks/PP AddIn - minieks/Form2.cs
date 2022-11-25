@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,8 +17,8 @@ namespace PP_AddIn___minieks
         int antalSpoergsmaal = 2;
         string titel;
         string spoergsmaal;
-        ArrayList svarMuligheder;
-        ArrayList korrektSvar;
+        List<string> svarMuligheder = new List<string>();
+        List<bool> korrektSvar = new List<bool>();
 
         public Nyt_spaargsmaal_frm()
         {
@@ -51,6 +52,9 @@ namespace PP_AddIn___minieks
             svar2_chk.Visible = true;
             tilfoejSvar_btn.Visible = true;
             tilfoejSvar_btn.Location = new Point(40, svar3_txt.Location.Y);
+            svarMuligheder.Add("banan");
+            svarMuligheder.Add("gullerrod");
+            label1.Text = string.Join(",", svarMuligheder);
         }
 
         private void Annuller_btn_Click(object sender, EventArgs e)
@@ -69,7 +73,8 @@ namespace PP_AddIn___minieks
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
+            svarMuligheder[1] = svar2_txt.Text;
+            label1.Text = string.Join(",", svarMuligheder);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -79,7 +84,8 @@ namespace PP_AddIn___minieks
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-
+            svarMuligheder[0] = svar1_txt.Text;
+            label1.Text = string.Join(",", svarMuligheder);
         }
 
         private void tilfoejSvar_btn_Click(object sender, EventArgs e)
@@ -92,6 +98,7 @@ namespace PP_AddIn___minieks
                 fjernSvar_btn.Visible = true;
                 tilfoejSvar_btn.Location = new Point(40, svar4_txt.Location.Y);
                 fjernSvar_btn.Location = new Point(207, svar4_txt.Location.Y);
+                svarMuligheder.Add("");
             } else if (antalSpoergsmaal == 3)
             {
                 antalSpoergsmaal = 4;
@@ -99,12 +106,14 @@ namespace PP_AddIn___minieks
                 svar4_txt.Visible = true;
                 tilfoejSvar_btn.Visible = false;
                 fjernSvar_btn.Location = new Point(207, 284);
+                svarMuligheder.Add("");
             }
         }
 
         private void svar3_txt_TextChanged(object sender, EventArgs e)
         {
-
+            svarMuligheder[2] = svar3_txt.Text;
+            label1.Text = string.Join(",", svarMuligheder);
         }
 
         private void fjernSvar_btn_Click(object sender, EventArgs e)
@@ -116,6 +125,7 @@ namespace PP_AddIn___minieks
                 svar3_txt.Visible = false;
                 fjernSvar_btn.Visible = false;
                 tilfoejSvar_btn.Location = new Point(40, svar3_txt.Location.Y);
+                svarMuligheder.RemoveAt(2);
             }
             else if (antalSpoergsmaal == 4)
             {
@@ -124,7 +134,14 @@ namespace PP_AddIn___minieks
                 svar4_txt.Visible = false;
                 tilfoejSvar_btn.Visible = true;
                 fjernSvar_btn.Location = new Point(207, svar4_txt.Location.Y);
+                svarMuligheder.RemoveAt(3);
             }
+        }
+
+        private void svar4_txt_TextChanged(object sender, EventArgs e)
+        {
+            svarMuligheder[3] = svar4_txt.Text;
+            label1.Text = string.Join(",", svarMuligheder);
         }
     }
 }
