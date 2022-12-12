@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Office.Tools.Ribbon;
 
 namespace PP_AddIn___minieks

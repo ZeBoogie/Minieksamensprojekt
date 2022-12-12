@@ -179,5 +179,10 @@ namespace PP_AddIn___minieks
             korrektSvar[3] = svar4_chk.Checked;
             label2.Text = string.Join(", ", korrektSvar);
         }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
