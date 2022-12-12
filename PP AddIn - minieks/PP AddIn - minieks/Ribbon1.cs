@@ -6,6 +6,8 @@ using System.Text;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Office.Tools.Ribbon;
 
+
+
 namespace PP_AddIn___minieks
 {
     public partial class Ribbon1
@@ -39,7 +41,7 @@ namespace PP_AddIn___minieks
 
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
-
+            SetupConnection();
         }
 
         private void button1_Click(object sender, RibbonControlEventArgs e)
@@ -67,6 +69,7 @@ namespace PP_AddIn___minieks
 
         private void StartStopSession_btn_Click(object sender, RibbonControlEventArgs e)
         {
+            _connection.InvokeAsync("giveMeCode");
         }
     }
 }
