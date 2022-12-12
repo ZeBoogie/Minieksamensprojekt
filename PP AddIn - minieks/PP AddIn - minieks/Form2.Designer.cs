@@ -44,6 +44,10 @@
             this.fjernSvar_btn = new System.Windows.Forms.Button();
             this.titel_txt = new System.Windows.Forms.TextBox();
             this.titel_lbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Annuller_btn
@@ -103,6 +107,7 @@
             this.svar1_chk.TabIndex = 5;
             this.svar1_chk.UseVisualStyleBackColor = true;
             this.svar1_chk.Visible = false;
+            this.svar1_chk.CheckedChanged += new System.EventHandler(this.svar1_chk_CheckedChanged);
             // 
             // svar2_txt
             // 
@@ -155,6 +160,7 @@
             this.svar3_chk.TabIndex = 13;
             this.svar3_chk.UseVisualStyleBackColor = true;
             this.svar3_chk.Visible = false;
+            this.svar3_chk.CheckedChanged += new System.EventHandler(this.svar3_chk_CheckedChanged);
             // 
             // svar4_txt
             // 
@@ -164,6 +170,7 @@
             this.svar4_txt.TabIndex = 14;
             this.svar4_txt.Text = "Skriv fjerde svarmulighed her";
             this.svar4_txt.Visible = false;
+            this.svar4_txt.TextChanged += new System.EventHandler(this.svar4_txt_TextChanged);
             // 
             // svar4_chk
             // 
@@ -174,6 +181,7 @@
             this.svar4_chk.TabIndex = 15;
             this.svar4_chk.UseVisualStyleBackColor = true;
             this.svar4_chk.Visible = false;
+            this.svar4_chk.CheckedChanged += new System.EventHandler(this.svar4_chk_CheckedChanged);
             // 
             // tilfoejSvar_btn
             // 
@@ -204,6 +212,7 @@
             this.titel_txt.Size = new System.Drawing.Size(323, 26);
             this.titel_txt.TabIndex = 18;
             this.titel_txt.Visible = false;
+            this.titel_txt.TextChanged += new System.EventHandler(this.titel_txt_TextChanged);
             // 
             // titel_lbl
             // 
@@ -215,12 +224,52 @@
             this.titel_lbl.Text = "Titel:";
             this.titel_lbl.Visible = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(464, 290);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(51, 20);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "label1";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(464, 310);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 20);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "label2";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(464, 330);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 20);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "label3";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(468, 354);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 20);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "label4";
+            // 
             // Nyt_spaargsmaal_frm
             // 
             this.AccessibleName = "";
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.titel_lbl);
             this.Controls.Add(this.titel_txt);
             this.Controls.Add(this.fjernSvar_btn);
@@ -263,5 +312,9 @@
         private System.Windows.Forms.Button fjernSvar_btn;
         private System.Windows.Forms.TextBox titel_txt;
         private System.Windows.Forms.Label titel_lbl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }

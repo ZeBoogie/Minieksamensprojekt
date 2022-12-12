@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,8 +18,8 @@ namespace PP_AddIn___minieks
         int antalSpoergsmaal = 2;
         string titel;
         string spoergsmaal;
-        ArrayList svarMuligheder;
-        ArrayList korrektSvar;
+        List<string> svarMuligheder = new List<string>();
+        List<bool> korrektSvar = new List<bool>();
 
         public Nyt_spaargsmaal_frm()
         {
@@ -29,13 +31,15 @@ namespace PP_AddIn___minieks
             this.Close();
         }
 
+        string tidligerespoergsmaalstype = "";
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Svartype_comboB.SelectedItem != null)
             {
                 string spoergsmaalstype = Svartype_comboB.SelectedItem.ToString();
-                 if (spoergsmaalstype == "Multiple choice")
+                 if (spoergsmaalstype == "Multiple choice" && tidligerespoergsmaalstype != spoergsmaalstype)
                 {
+                    tidligerespoergsmaalstype = spoergsmaalstype;
                     mulitpleChoice();
                 }
             }
@@ -51,6 +55,12 @@ namespace PP_AddIn___minieks
             svar2_chk.Visible = true;
             tilfoejSvar_btn.Visible = true;
             tilfoejSvar_btn.Location = new Point(40, svar3_txt.Location.Y);
+            svarMuligheder.Add("banan");
+            svarMuligheder.Add("gullerrod");
+            korrektSvar.Add(false);
+            korrektSvar.Add(false);
+            label1.Text = string.Join(",", svarMuligheder);
+            label2.Text = string.Join(",", korrektSvar);
         }
 
         private void Annuller_btn_Click(object sender, EventArgs e)
@@ -64,22 +74,26 @@ namespace PP_AddIn___minieks
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            spoergsmaal = spoergsmaal_txt.Text;
+            label3.Text = spoergsmaal;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
+            svarMuligheder[1] = svar2_txt.Text;
+            label1.Text = string.Join(",", svarMuligheder);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-
+            korrektSvar[1] = svar2_chk.Checked;
+            label2.Text = string.Join(", ", korrektSvar);
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-
+            svarMuligheder[0] = svar1_txt.Text;
+            label1.Text = string.Join(",", svarMuligheder);
         }
 
         private void tilfoejSvar_btn_Click(object sender, EventArgs e)
@@ -92,6 +106,8 @@ namespace PP_AddIn___minieks
                 fjernSvar_btn.Visible = true;
                 tilfoejSvar_btn.Location = new Point(40, svar4_txt.Location.Y);
                 fjernSvar_btn.Location = new Point(207, svar4_txt.Location.Y);
+                svarMuligheder.Add("");
+                korrektSvar.Add(svar3_chk.Checked);
             } else if (antalSpoergsmaal == 3)
             {
                 antalSpoergsmaal = 4;
@@ -99,12 +115,15 @@ namespace PP_AddIn___minieks
                 svar4_txt.Visible = true;
                 tilfoejSvar_btn.Visible = false;
                 fjernSvar_btn.Location = new Point(207, 284);
+                svarMuligheder.Add("");
+                korrektSvar.Add(svar4_chk.Checked);
             }
         }
 
         private void svar3_txt_TextChanged(object sender, EventArgs e)
         {
-
+            svarMuligheder[2] = svar3_txt.Text;
+            label1.Text = string.Join(",", svarMuligheder);
         }
 
         private void fjernSvar_btn_Click(object sender, EventArgs e)
@@ -116,6 +135,8 @@ namespace PP_AddIn___minieks
                 svar3_txt.Visible = false;
                 fjernSvar_btn.Visible = false;
                 tilfoejSvar_btn.Location = new Point(40, svar3_txt.Location.Y);
+                svarMuligheder.RemoveAt(2);
+                korrektSvar.RemoveAt(2);
             }
             else if (antalSpoergsmaal == 4)
             {
@@ -124,7 +145,39 @@ namespace PP_AddIn___minieks
                 svar4_txt.Visible = false;
                 tilfoejSvar_btn.Visible = true;
                 fjernSvar_btn.Location = new Point(207, svar4_txt.Location.Y);
+                svarMuligheder.RemoveAt(3);
+                korrektSvar.RemoveAt(3);
             }
+        }
+
+        private void svar4_txt_TextChanged(object sender, EventArgs e)
+        {
+            svarMuligheder[3] = svar4_txt.Text;
+            label1.Text = string.Join(",", svarMuligheder);
+        }
+
+        private void titel_txt_TextChanged(object sender, EventArgs e)
+        {
+            titel = titel_txt.Text;
+            label4.Text = titel;
+        }
+
+        private void svar1_chk_CheckedChanged(object sender, EventArgs e)
+        {
+            korrektSvar[0] = svar1_chk.Checked;
+            label2.Text = string.Join(", ", korrektSvar);
+        }
+
+        private void svar3_chk_CheckedChanged(object sender, EventArgs e)
+        {
+            korrektSvar[2] = svar3_chk.Checked;
+            label2.Text = string.Join(", ", korrektSvar);
+        }
+
+        private void svar4_chk_CheckedChanged(object sender, EventArgs e)
+        {
+            korrektSvar[3] = svar4_chk.Checked;
+            label2.Text = string.Join(", ", korrektSvar);
         }
     }
 }
