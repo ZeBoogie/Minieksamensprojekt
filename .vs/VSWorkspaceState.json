@@ -1,9 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\PPAddIn -Minieks",
-    "\\PPAddIn -Minieks\\PPAddIn -Minieks"
+    "\\PPAddIn -Minieks"
   ],
-  "SelectedNode": "\\PPAddIn -Minieks\\PPAddIn -Minieks\\ThisAddIn.cs",
   "PreviewInSolutionExplorer": false
 }
