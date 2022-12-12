@@ -1,0 +1,89 @@
+﻿@page
+@model WebsiteMiniProjekt2.Pages.ThreeAnswerModel
+@{
+}
+
+<style>
+	.button {
+		border: none;
+		color: black;
+		padding: 96px 192px;
+		text-align: center;
+		font-size: 24px;
+		margin: 4px 2px;
+		border-radius: 4px;
+		opacity: 0.8;
+		transition: 0.3s;
+		display: inline-block;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.button1 {
+		background-color: red;
+		opacity: 0.8;
+	}
+
+		.button1:hover {
+			opacity: 1
+		}
+
+	.Leftup {
+		position: absolute;
+		top: 10%;
+		left: 30%;
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+		-ms-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+
+	.button2 {
+		background-color: green;
+		opacity: 0.8;
+	}
+
+		.button2:hover {
+			opacity: 1
+		}
+
+	.Rightup {
+		position: absolute;
+		top: 10%;
+		left: 70%;
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+		-ms-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+
+	.button3 {
+		background-color: blue;
+		opacity: 0.8;
+	}
+
+		.button3:hover {
+			opacity: 1
+		}
+
+	.Leftdown {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+		-ms-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+	</style>
+<body>
+	<div class="Leftup">
+		<button class="button button1">A</button>
+	</div>
+	<div class="Rightup">
+		<button class="button button2">B</button>
+	</div>
+	<div class="Leftdown">
+		<button class="button button3">C</button>
+	</div>
+</body>
