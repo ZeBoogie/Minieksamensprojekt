@@ -48,6 +48,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.InsertBillede1_btn = new System.Windows.Forms.Button();
+            this.InsertBillede2_btn = new System.Windows.Forms.Button();
+            this.InsertBillede3_btn = new System.Windows.Forms.Button();
+            this.InsertBillede4_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Annuller_btn
@@ -114,7 +118,7 @@
             this.svar2_txt.Location = new System.Drawing.Point(40, 188);
             this.svar2_txt.Multiline = true;
             this.svar2_txt.Name = "svar2_txt";
-            this.svar2_txt.Size = new System.Drawing.Size(748, 26);
+            this.svar2_txt.Size = new System.Drawing.Size(714, 26);
             this.svar2_txt.TabIndex = 8;
             this.svar2_txt.Text = "Skriv anden svarmulighed her";
             this.svar2_txt.Visible = false;
@@ -124,7 +128,7 @@
             // 
             this.svar1_txt.Location = new System.Drawing.Point(40, 156);
             this.svar1_txt.Name = "svar1_txt";
-            this.svar1_txt.Size = new System.Drawing.Size(748, 26);
+            this.svar1_txt.Size = new System.Drawing.Size(714, 26);
             this.svar1_txt.TabIndex = 9;
             this.svar1_txt.Text = "Skriv første svarmulighed her";
             this.svar1_txt.Visible = false;
@@ -145,7 +149,7 @@
             // 
             this.svar3_txt.Location = new System.Drawing.Point(40, 220);
             this.svar3_txt.Name = "svar3_txt";
-            this.svar3_txt.Size = new System.Drawing.Size(748, 26);
+            this.svar3_txt.Size = new System.Drawing.Size(714, 26);
             this.svar3_txt.TabIndex = 12;
             this.svar3_txt.Text = "Skriv tredje svarmulighed her";
             this.svar3_txt.Visible = false;
@@ -166,7 +170,7 @@
             // 
             this.svar4_txt.Location = new System.Drawing.Point(40, 252);
             this.svar4_txt.Name = "svar4_txt";
-            this.svar4_txt.Size = new System.Drawing.Size(748, 26);
+            this.svar4_txt.Size = new System.Drawing.Size(714, 26);
             this.svar4_txt.TabIndex = 14;
             this.svar4_txt.Text = "Skriv fjerde svarmulighed her";
             this.svar4_txt.Visible = false;
@@ -261,12 +265,48 @@
             this.label4.TabIndex = 23;
             this.label4.Text = "label4";
             // 
+            // InsertBillede1_btn
+            // 
+            this.InsertBillede1_btn.Location = new System.Drawing.Point(760, 156);
+            this.InsertBillede1_btn.Name = "InsertBillede1_btn";
+            this.InsertBillede1_btn.Size = new System.Drawing.Size(26, 26);
+            this.InsertBillede1_btn.TabIndex = 24;
+            this.InsertBillede1_btn.UseVisualStyleBackColor = true;
+            // 
+            // InsertBillede2_btn
+            // 
+            this.InsertBillede2_btn.Location = new System.Drawing.Point(760, 188);
+            this.InsertBillede2_btn.Name = "InsertBillede2_btn";
+            this.InsertBillede2_btn.Size = new System.Drawing.Size(26, 26);
+            this.InsertBillede2_btn.TabIndex = 25;
+            this.InsertBillede2_btn.UseVisualStyleBackColor = true;
+            // 
+            // InsertBillede3_btn
+            // 
+            this.InsertBillede3_btn.Location = new System.Drawing.Point(760, 220);
+            this.InsertBillede3_btn.Name = "InsertBillede3_btn";
+            this.InsertBillede3_btn.Size = new System.Drawing.Size(26, 26);
+            this.InsertBillede3_btn.TabIndex = 26;
+            this.InsertBillede3_btn.UseVisualStyleBackColor = true;
+            // 
+            // InsertBillede4_btn
+            // 
+            this.InsertBillede4_btn.Location = new System.Drawing.Point(760, 252);
+            this.InsertBillede4_btn.Name = "InsertBillede4_btn";
+            this.InsertBillede4_btn.Size = new System.Drawing.Size(26, 26);
+            this.InsertBillede4_btn.TabIndex = 27;
+            this.InsertBillede4_btn.UseVisualStyleBackColor = true;
+            // 
             // Nyt_spaargsmaal_frm
             // 
             this.AccessibleName = "";
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.InsertBillede4_btn);
+            this.Controls.Add(this.InsertBillede3_btn);
+            this.Controls.Add(this.InsertBillede2_btn);
+            this.Controls.Add(this.InsertBillede1_btn);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -317,5 +357,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button InsertBillede1_btn;
+        private System.Windows.Forms.Button InsertBillede2_btn;
+        private System.Windows.Forms.Button InsertBillede3_btn;
+        private System.Windows.Forms.Button InsertBillede4_btn;
     }
 }
