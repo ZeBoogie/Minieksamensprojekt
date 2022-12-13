@@ -12,7 +12,7 @@ connection.on("ReceiveMessage", function (user, message) {
 
 connection.start().then(function () {
     document.getElementById("Submit").disabled = false;
-    connection.invoke("PrintString", 123).catch(function (err) {
+    connection.invoke("PrintString", "connection started").catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();
@@ -29,16 +29,9 @@ document.getElementById("Submit").addEventListener("click", function (event) {
     event.preventDefault();
 });
 
-connection.on("checkYourCode", function (code) {
-    connection.invoke("PrintString", code).catch(function (err) {
-        return console.error(err.toString());
-    });
-    event.preventDefault();
-});
 
 //method to receive commands on which page the webpage should be on.
 connection.on("goToPage", function (nameOfPage) {
-    document.getElementById("topText").innerHTML = "Sorry, that code is invalid!";
     connection.invoke("PrintString", "page to go to is: " + nameOfPage).catch(function (err) {
         return console.error(err.toString());
     });
@@ -47,3 +40,6 @@ connection.on("goToPage", function (nameOfPage) {
 
 });
 
+connection.on("wrongCode", function (nameOfPage) {
+    document.getElementById("topText").innerHTML = "Sorry, that code is invalid!";
+});

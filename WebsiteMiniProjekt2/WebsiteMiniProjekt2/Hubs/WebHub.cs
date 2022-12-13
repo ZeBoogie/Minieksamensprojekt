@@ -15,10 +15,23 @@ namespace WebsiteMiniProjekt2.Hubs
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
 
-        public async Task AttemptedLogin(string csode)
+        public async Task AttemptedLogin(string code)
         {
-            await Clients.Caller.SendAsync("goToPage", "Namepage");
             Trace.WriteLine("attempted login method");
+
+            //return wrong code, if input isn't a number, or of it isn't in our list
+            if (!int.TryParse(code, out int codeint) || !codesInUse.Contains(codeint))
+            {
+                Trace.WriteLine("wrong code");
+
+                await Clients.Caller.SendAsync("wrongCode");
+                return;
+            }
+
+            await Clients.Caller.SendAsync("goToPage", "Namepage");
+
+
+
 
             //Client (webpage), asks if a user has entered a valid code
             //if this is the case, then send back a command to the client
