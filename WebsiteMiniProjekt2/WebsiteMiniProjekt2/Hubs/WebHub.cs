@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Collections;
 using System.Diagnostics;
 using System.Xml.Linq;
@@ -14,9 +15,14 @@ namespace WebsiteMiniProjekt2.Hubs
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
 
-        public async Task isCodeAvailable(int code)
+        public async Task AttemptedLogin(string csode)
         {
-            await Clients.All.SendAsync("checkYourCode", code);
+            await Clients.Caller.SendAsync("goToPage", "waiting");
+            Trace.WriteLine("attempted login method");
+
+            //Client (webpage), asks if a user has entered a valid code
+            //if this is the case, then send back a command to the client
+            //telling them to switch side
             //all clients should have a listener for isYourCode, that sends back
             //the code that they use to everyone.
 
@@ -24,18 +30,19 @@ namespace WebsiteMiniProjekt2.Hubs
             //not used code to the client who asked for the code.
         }
 
+
         public async Task giveMeCode()
         {
             Random rnd = new Random();
             bool foundNewCode = false;
             int code = 0;
             int i = 0;
-            while(!foundNewCode)
+            while (!foundNewCode)
             {
                 i++;
                 foundNewCode = true;
                 code = rnd.Next(1000, 10000);  // creates a number between 1 and 12
-                foreach(int usedCode in codesInUse)
+                foreach (int usedCode in codesInUse)
                 {
                     Trace.WriteLine($"comparing usedcode {usedCode} and {code}");
 
@@ -56,9 +63,20 @@ namespace WebsiteMiniProjekt2.Hubs
 
             await Clients.Caller.SendAsync("useThisCode", code);
         }
-        public Task PrintString(int String)
+
+
+        public Task PrintString(string String) //be aware that input from
+                                               //html forms, will most likely be a string, you have earlier in your
+                                               //life spent more than an hour being confused why there was an
+                                               //error on your server, due to this... 13-12-2022
         {
             Trace.WriteLine(String);
+            return Task.CompletedTask;
+        }
+
+        public Task PrintBool(bool bollean)
+        {
+            Trace.WriteLine(bollean);
             return Task.CompletedTask;
         }
     }
