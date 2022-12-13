@@ -17,7 +17,7 @@ namespace WebsiteMiniProjekt2.Hubs
 
         public async Task AttemptedLogin(string csode)
         {
-            await Clients.Caller.SendAsync("goToPage", "waiting");
+            await Clients.Caller.SendAsync("goToPage", "Namepage");
             Trace.WriteLine("attempted login method");
 
             //Client (webpage), asks if a user has entered a valid code

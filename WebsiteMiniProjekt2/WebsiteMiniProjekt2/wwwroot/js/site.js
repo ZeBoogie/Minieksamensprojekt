@@ -37,12 +37,13 @@ connection.on("checkYourCode", function (code) {
 });
 
 //method to receive commands on which page the webpage should be on.
-connection.on("goToPage", function (code) {
-    connection.invoke("PrintString", code).catch(function (err) {
+connection.on("goToPage", function (nameOfPage) {
+    document.getElementById("topText").innerHTML = "Sorry, that code is invalid!";
+    connection.invoke("PrintString", "page to go to is: " + nameOfPage).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();
-    window.location.replace("/Namepage");
+    window.location.replace("/" + nameOfPage);
 
 });
 
