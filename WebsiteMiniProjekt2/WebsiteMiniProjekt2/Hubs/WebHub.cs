@@ -24,7 +24,7 @@ namespace WebsiteMiniProjekt2.Hubs
             {
                 Trace.WriteLine("wrong code");
 
-                await Clients.Caller.SendAsync("wrongCode");
+                await Clients.Caller.SendAsync("wrongStatement", "code");
                 return;
             }
 
