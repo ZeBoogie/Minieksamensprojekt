@@ -79,5 +79,15 @@ namespace PP_AddIn___minieks
                 StartStopSession_btn.Image = Properties.Resources.Screenshot_2022_12_13_185628;
             }
         }
+
+        private void button2_Click(object sender, RibbonControlEventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, RibbonControlEventArgs e)
+        {
+
+        }
     }
 }

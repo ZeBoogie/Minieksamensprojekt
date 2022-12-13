@@ -8,17 +8,21 @@ namespace WebsiteMiniProjekt2.Hubs
 {
     public class WebHub : Hub
     {
-        static List<int> codesInUse = new List<int>(); //hub class is transcient, so
-        // this is deleted each time you send a message
+        static List<int> codesInUse = new List<int>();
+        static List<string> namesInUse = new List<string>();
+
         public async Task SendMessage(string user, string message)
         {
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
-
+        
         public async Task AttemptedLogin(string code)
         {
-            Trace.WriteLine("attempted login method");
-
+            Trace.WriteLine("attempted login method with " + code);
+            if(!codesInUse.Contains(42))
+            {
+                codesInUse.Add(42);
+            }
             //return wrong code, if input isn't a number, or of it isn't in our list
             if (!int.TryParse(code, out int codeint) || !codesInUse.Contains(codeint))
             {
@@ -30,17 +34,29 @@ namespace WebsiteMiniProjekt2.Hubs
 
             await Clients.Caller.SendAsync("goToPage", "Namepage");
 
+            //Client (webpage), asks if a user has entered a valid code
+            //if this is the case, then send back a command to the client
+            //telling them to switch side
+        }
 
+        public async Task AttamptedUsername(string userName) 
+            //this method hasn't been tested
+        {
+            Trace.WriteLine("attempted chossing following username " + userName);
+            //return wrong code, if input isn't a number, or of it isn't in our list
+            if (namesInUse.Contains(userName))
+            {
+                Trace.WriteLine("username is not available");
 
+                await Clients.Caller.SendAsync("wrongStatement", "username");
+                return;
+            }
+
+            await Clients.Caller.SendAsync("goToPage", "Index");
 
             //Client (webpage), asks if a user has entered a valid code
             //if this is the case, then send back a command to the client
             //telling them to switch side
-            //all clients should have a listener for isYourCode, that sends back
-            //the code that they use to everyone.
-
-            //since this is the webserver, it can ask everyone to privately send back their code, and then send out a 
-            //not used code to the client who asked for the code.
         }
 
 

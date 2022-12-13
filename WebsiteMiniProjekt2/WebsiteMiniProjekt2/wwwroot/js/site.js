@@ -30,17 +30,7 @@ document.getElementById("Submit").addEventListener("click", function (event) {
 });
 
 
-//when name is submittet, on namepage, this should be called
 
-/* for now this will stop everything wroker, without an error, if it exists...
-document.getElementById("submitName").addEventListener("click", function (event) {
-    var code = document.getElementById("QuizCode").value //this is a string!
-    connection.invoke("AttemptedLogin", code).catch(function (err) {
-        return console.error(err.toString());
-    });
-    event.preventDefault();
-});
-*/
 
 //method to receive commands on which page the webpage should be on.
 connection.on("goToPage", function (nameOfPage) {
@@ -49,7 +39,6 @@ connection.on("goToPage", function (nameOfPage) {
     });
     event.preventDefault();
     window.location.replace("/" + nameOfPage);
-
 });
 
 connection.on("wrongStatement", function (errorStatement) {

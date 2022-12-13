@@ -28,4 +28,44 @@
 
     </body>
     </html>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
 
+<script>
+    "use strict";
+
+    var connection = new signalR.HubConnectionBuilder().withUrl("/webHub").build();
+
+    //Disable the send button until connection is established.
+    document.getElementById("submitName").disabled = true;
+
+    connection.start().then(function () {
+        document.getElementById("submitName").disabled = false;
+        connection.invoke("PrintString", "connection namepage started").catch(function (err) {
+            return console.error(err.toString());
+        });
+        event.preventDefault();
+    });
+
+    //eventlistener for submit button, that takes the name, and 
+    document.getElementById("submitName").addEventListener("click", function (event) {
+        var username = document.getElementById("Name").value //this is a string!
+        connection.invoke("AttamptedUsername", username).catch(function (err) {
+            return console.error(err.toString());
+        });
+        event.preventDefault();
+    });
+
+    connection.on("wrongStatement", function (errorStatement) {
+    var textToShow = "Sorry, that " + errorStatement + " is invalid!";
+    document.getElementById("topText").innerHTML =  textToShow;
+    });
+
+    //method to receive commands on which page the webpage should be on.
+    connection.on("goToPage", function (nameOfPage) {
+    connection.invoke("PrintString", "page to go to is: " + nameOfPage).catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+    window.location.replace("/" + nameOfPage);
+});
+</script>
