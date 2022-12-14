@@ -14,7 +14,7 @@ namespace PP_AddIn___minieks
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            PowerPoint.Shape te = PowerPoint.Slide()
+            
             Directory.CreateDirectory("C:\\ProgramData\\PowerPointQuiz");
         }
 
