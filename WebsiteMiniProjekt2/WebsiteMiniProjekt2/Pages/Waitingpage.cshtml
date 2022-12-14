@@ -4,5 +4,27 @@
 }
 
 <div class="text-center">
-    <h1>Waiting... </h1>
+    <h1 id ="topText">Waiting... </h1>
 </div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+
+<script>
+    "use strict";
+
+    var connection = new signalR.HubConnectionBuilder().withUrl("/webHub").build();
+
+    connection.start().then(function () {
+        document.getElementById("topText").innerHTML = "connection started page";
+        connection.invoke("PrintString", "connection waitingPage started").catch(function (err) {
+            return console.error(err.toString());
+        });
+        event.preventDefault();
+    });
+
+    connection.on("nextQuestion", function () 
+    {
+        document.getElementById("topText").innerHTML = "changing page";
+        window.location.replace("/MultipleChoice");
+    });
+</script>

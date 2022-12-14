@@ -7,9 +7,6 @@ document.getElementById("Submit").disabled = true;
 
 
 
-connection.on("ReceiveMessage", function (user, message) {
-});
-
 connection.start().then(function () {
     document.getElementById("Submit").disabled = false;
     connection.invoke("PrintString", "connection started").catch(function (err) {
