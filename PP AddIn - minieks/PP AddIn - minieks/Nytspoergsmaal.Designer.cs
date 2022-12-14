@@ -48,10 +48,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.InsertBillede1_btn = new System.Windows.Forms.Button();
-            this.InsertBillede2_btn = new System.Windows.Forms.Button();
-            this.InsertBillede3_btn = new System.Windows.Forms.Button();
-            this.InsertBillede4_btn = new System.Windows.Forms.Button();
+            this.insertBillede1_btn = new System.Windows.Forms.Button();
+            this.insertBillede2_btn = new System.Windows.Forms.Button();
+            this.insertBillede3_btn = new System.Windows.Forms.Button();
+            this.insertBillede4_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Annuller_btn
@@ -265,37 +265,45 @@
             this.label4.TabIndex = 23;
             this.label4.Text = "label4";
             // 
-            // InsertBillede1_btn
+            // insertBillede1_btn
             // 
-            this.InsertBillede1_btn.Location = new System.Drawing.Point(760, 156);
-            this.InsertBillede1_btn.Name = "InsertBillede1_btn";
-            this.InsertBillede1_btn.Size = new System.Drawing.Size(26, 26);
-            this.InsertBillede1_btn.TabIndex = 24;
-            this.InsertBillede1_btn.UseVisualStyleBackColor = true;
+            this.insertBillede1_btn.Location = new System.Drawing.Point(760, 156);
+            this.insertBillede1_btn.Name = "insertBillede1_btn";
+            this.insertBillede1_btn.Size = new System.Drawing.Size(26, 26);
+            this.insertBillede1_btn.TabIndex = 24;
+            this.insertBillede1_btn.UseVisualStyleBackColor = true;
+            this.insertBillede1_btn.Visible = false;
+            this.insertBillede1_btn.Click += new System.EventHandler(this.InsertBillede1_btn_Click);
             // 
-            // InsertBillede2_btn
+            // insertBillede2_btn
             // 
-            this.InsertBillede2_btn.Location = new System.Drawing.Point(760, 188);
-            this.InsertBillede2_btn.Name = "InsertBillede2_btn";
-            this.InsertBillede2_btn.Size = new System.Drawing.Size(26, 26);
-            this.InsertBillede2_btn.TabIndex = 25;
-            this.InsertBillede2_btn.UseVisualStyleBackColor = true;
+            this.insertBillede2_btn.Location = new System.Drawing.Point(760, 188);
+            this.insertBillede2_btn.Name = "insertBillede2_btn";
+            this.insertBillede2_btn.Size = new System.Drawing.Size(26, 26);
+            this.insertBillede2_btn.TabIndex = 25;
+            this.insertBillede2_btn.UseVisualStyleBackColor = true;
+            this.insertBillede2_btn.Visible = false;
+            this.insertBillede2_btn.Click += new System.EventHandler(this.insertBillede2_btn_Click);
             // 
-            // InsertBillede3_btn
+            // insertBillede3_btn
             // 
-            this.InsertBillede3_btn.Location = new System.Drawing.Point(760, 220);
-            this.InsertBillede3_btn.Name = "InsertBillede3_btn";
-            this.InsertBillede3_btn.Size = new System.Drawing.Size(26, 26);
-            this.InsertBillede3_btn.TabIndex = 26;
-            this.InsertBillede3_btn.UseVisualStyleBackColor = true;
+            this.insertBillede3_btn.Location = new System.Drawing.Point(760, 220);
+            this.insertBillede3_btn.Name = "insertBillede3_btn";
+            this.insertBillede3_btn.Size = new System.Drawing.Size(26, 26);
+            this.insertBillede3_btn.TabIndex = 26;
+            this.insertBillede3_btn.UseVisualStyleBackColor = true;
+            this.insertBillede3_btn.Visible = false;
+            this.insertBillede3_btn.Click += new System.EventHandler(this.insertBillede3_btn_Click);
             // 
-            // InsertBillede4_btn
+            // insertBillede4_btn
             // 
-            this.InsertBillede4_btn.Location = new System.Drawing.Point(760, 252);
-            this.InsertBillede4_btn.Name = "InsertBillede4_btn";
-            this.InsertBillede4_btn.Size = new System.Drawing.Size(26, 26);
-            this.InsertBillede4_btn.TabIndex = 27;
-            this.InsertBillede4_btn.UseVisualStyleBackColor = true;
+            this.insertBillede4_btn.Location = new System.Drawing.Point(760, 252);
+            this.insertBillede4_btn.Name = "insertBillede4_btn";
+            this.insertBillede4_btn.Size = new System.Drawing.Size(26, 26);
+            this.insertBillede4_btn.TabIndex = 27;
+            this.insertBillede4_btn.UseVisualStyleBackColor = true;
+            this.insertBillede4_btn.Visible = false;
+            this.insertBillede4_btn.Click += new System.EventHandler(this.insertBillede4_btn_Click);
             // 
             // Nyt_spaargsmaal_frm
             // 
@@ -303,10 +311,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.InsertBillede4_btn);
-            this.Controls.Add(this.InsertBillede3_btn);
-            this.Controls.Add(this.InsertBillede2_btn);
-            this.Controls.Add(this.InsertBillede1_btn);
+            this.Controls.Add(this.insertBillede4_btn);
+            this.Controls.Add(this.insertBillede3_btn);
+            this.Controls.Add(this.insertBillede2_btn);
+            this.Controls.Add(this.insertBillede1_btn);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -357,9 +365,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button InsertBillede1_btn;
-        private System.Windows.Forms.Button InsertBillede2_btn;
-        private System.Windows.Forms.Button InsertBillede3_btn;
-        private System.Windows.Forms.Button InsertBillede4_btn;
+        private System.Windows.Forms.Button insertBillede1_btn;
+        private System.Windows.Forms.Button insertBillede2_btn;
+        private System.Windows.Forms.Button insertBillede3_btn;
+        private System.Windows.Forms.Button insertBillede4_btn;
     }
 }
