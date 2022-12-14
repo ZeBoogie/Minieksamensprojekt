@@ -351,6 +351,42 @@
   <ItemGroup>
     <None Include="Resources\Screenshot 2022-12-13 185628.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stopknap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UploadIkon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Startknap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Administrer sprøgsmål.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChemSketchlogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lav link.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lav link2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lav link3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lav link4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nyt spørgsmål %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nyt spørgsmål.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Administrer sprøgsmål %282%29.png" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

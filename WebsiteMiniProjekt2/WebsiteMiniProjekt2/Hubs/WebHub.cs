@@ -52,13 +52,17 @@ namespace WebsiteMiniProjekt2.Hubs
                 return;
             }
 
-            await Clients.Caller.SendAsync("goToPage", "Index");
+            await Clients.Caller.SendAsync("goToPage", "Waitingpage");
 
             //Client (webpage), asks if a user has entered a valid code
             //if this is the case, then send back a command to the client
             //telling them to switch side
         }
-
+        public async Task nextQuestion()
+        {
+            await Clients.All.SendAsync("nextQuestion");
+            Trace.WriteLine("sending clients to next question");
+        }
 
         public async Task giveMeCode()
         {

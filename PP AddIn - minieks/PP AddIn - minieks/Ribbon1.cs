@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Office.Interop.PowerPoint;
 using Microsoft.Office.Tools.Ribbon;
 
 
@@ -70,22 +71,32 @@ namespace PP_AddIn___minieks
             if(!sessionActive)
             {
                 _connection.InvokeAsync("giveMeCode");
-                StartStopSession_btn.Image = Properties.Resources.Image1;
+                StartStopSession_btn.Image = Properties.Resources.Stopknap;
                 sessionActive = true;
             }
             else
             {
                 sessionActive = false;
-                StartStopSession_btn.Image = Properties.Resources.Screenshot_2022_12_13_185628;
+                StartStopSession_btn.Image = Properties.Resources.Startknap;
             }
         }
 
-        private void button2_Click(object sender, RibbonControlEventArgs e)
+        private void BRbutton_Click(object sender, RibbonControlEventArgs e)
+        {
+            
+        }
+
+        private void TLbutton_Click(object sender, RibbonControlEventArgs e)
         {
 
         }
 
-        private void button4_Click(object sender, RibbonControlEventArgs e)
+        private void TRbutton_Click(object sender, RibbonControlEventArgs e)
+        {
+
+        }
+
+        private void BLbutton_Click(object sender, RibbonControlEventArgs e)
         {
 
         }
