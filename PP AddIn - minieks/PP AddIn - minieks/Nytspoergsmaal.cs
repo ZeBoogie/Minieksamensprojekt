@@ -34,7 +34,7 @@ namespace PP_AddIn___minieks
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Spoergsmaalsdata data = new Spoergsmaalsdata(titel_txt.Text, spoergsmaal_txt.Text, svarMuligheder, korrektSvar, billede);
+            Spoergsmaalsdata data = new Spoergsmaalsdata(titel_txt.Text, spoergsmaal_txt.Text, svarMuligheder, korrektSvar, billede,Svartype_comboB.Text);
             string fileName = "C:\\ProgramData\\PowerPointQuiz\\" + titel_txt.Text + ".json";
             string jsonString = JsonConvert.SerializeObject(data, Formatting.Indented);
             File.WriteAllText(fileName, jsonString );
@@ -251,6 +251,11 @@ namespace PP_AddIn___minieks
         private void insertBillede4_btn_Click(object sender, EventArgs e)
         {
             billedeHentning(3);
+        }
+
+        private void Nyt_spaargsmaal_frm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

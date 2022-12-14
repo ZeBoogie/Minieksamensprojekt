@@ -75,6 +75,7 @@
             this.Redigering_btn.TabIndex = 2;
             this.Redigering_btn.Text = "Rediger";
             this.Redigering_btn.UseVisualStyleBackColor = true;
+            this.Redigering_btn.Click += new System.EventHandler(this.Redigering_btn_Click);
             // 
             // Slet_btn
             // 

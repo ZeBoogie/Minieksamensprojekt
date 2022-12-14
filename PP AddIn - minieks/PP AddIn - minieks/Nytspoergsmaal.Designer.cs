@@ -338,6 +338,7 @@
             this.Name = "Nyt_spaargsmaal_frm";
             this.ShowIcon = false;
             this.Text = "Nyt spørgsmål";
+            this.Load += new System.EventHandler(this.Nyt_spaargsmaal_frm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

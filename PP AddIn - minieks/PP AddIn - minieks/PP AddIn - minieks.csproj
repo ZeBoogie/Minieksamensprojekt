@@ -289,6 +289,12 @@
     <Compile Include="Administrer.Designer.cs">
       <DependentUpon>Administrer.cs</DependentUpon>
     </Compile>
+    <Compile Include="RedigerSpergsmaal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RedigerSpergsmaal.Designer.cs">
+      <DependentUpon>RedigerSpergsmaal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Spoergsmaalsdata.cs" />
     <Compile Include="Nytspoergsmaal.cs">
       <SubType>Form</SubType>
@@ -301,6 +307,9 @@
     </Compile>
     <EmbeddedResource Include="Administrer.resx">
       <DependentUpon>Administrer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RedigerSpergsmaal.resx">
+      <DependentUpon>RedigerSpergsmaal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Nytspoergsmaal.resx">
       <DependentUpon>Nytspoergsmaal.cs</DependentUpon>

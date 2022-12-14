@@ -11,8 +11,12 @@ using System.Windows.Forms;
 
 namespace PP_AddIn___minieks
 {
+    
     public partial class Spoergsmaalsstyring_frm : Form
     {
+        
+        public string valgt;
+
         public Spoergsmaalsstyring_frm()
         {
             InitializeComponent();
@@ -54,7 +58,19 @@ namespace PP_AddIn___minieks
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
+
+        private void Redigering_btn_Click(object sender, EventArgs e)
+        {
+            if (Spoergsmaalsliste_lb.SelectedIndex != -1)
+            {
+                valgt = Spoergsmaalsliste_lb.SelectedItem.ToString();
+                var myForm = new redigerSpoergsmaal_frm();
+                myForm.tilRedigering(valgt);
+                myForm.Show();
+            }
+        }
+        
     }
 }
