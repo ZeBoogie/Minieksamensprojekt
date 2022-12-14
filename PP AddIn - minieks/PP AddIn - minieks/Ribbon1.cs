@@ -87,7 +87,7 @@ namespace PP_AddIn___minieks
         private void BRbutton_Click(object sender, RibbonControlEventArgs e)
         {
             PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
-            PowerPoint.SlideRange ppSR = ppApp.ActiveWindow.Selection.SlideRange
+            PowerPoint.SlideRange ppSR = ppApp.ActiveWindow.Selection.SlideRange;
             PowerPoint.Shape ppShap = ppSR.Shapes.AddLabel(Office.MsoTextOrientation
                 .msoTextOrientationHorizontal, 0, 0, 200, 25);
             ppShap.TextEffect.Text = "Hello World!";
