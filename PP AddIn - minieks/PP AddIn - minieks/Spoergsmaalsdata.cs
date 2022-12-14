@@ -8,11 +8,11 @@ namespace PP_AddIn___minieks
 {
     internal class Spoergsmaalsdata
     {
-        string titel;
-        string spoergsmaal;
-        List<string> svarMuligheder;
-        List<bool> korrektSvar;
-        List<string> billeder;
+        public string titel;
+        public string spoergsmaal;
+        public List<string> svarMuligheder;
+        public List<bool> korrektSvar;
+        public List<string> billeder;
         public Spoergsmaalsdata(string titel, string spoergsmaal, List<string> svarMuligheder, List<bool> korrektSvar, List<string> billeder)
         {
             this.titel = titel;

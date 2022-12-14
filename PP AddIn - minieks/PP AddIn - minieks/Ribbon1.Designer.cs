@@ -42,16 +42,16 @@
             this.Session_grp = this.Factory.CreateRibbonGroup();
             this.LavLink_menu = this.Factory.CreateRibbonMenu();
             this.menu1 = this.Factory.CreateRibbonMenu();
+            this.button2 = this.Factory.CreateRibbonButton();
+            this.button4 = this.Factory.CreateRibbonButton();
+            this.button5 = this.Factory.CreateRibbonButton();
+            this.button3 = this.Factory.CreateRibbonButton();
             this.menu2 = this.Factory.CreateRibbonMenu();
             this.StartStopSession_btn = this.Factory.CreateRibbonButton();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.button1 = this.Factory.CreateRibbonButton();
             this.group2 = this.Factory.CreateRibbonGroup();
             this.ChemSketch_btn = this.Factory.CreateRibbonButton();
-            this.button2 = this.Factory.CreateRibbonButton();
-            this.button3 = this.Factory.CreateRibbonButton();
-            this.button4 = this.Factory.CreateRibbonButton();
-            this.button5 = this.Factory.CreateRibbonButton();
             this.Spoergsmaalslaver.SuspendLayout();
             this.spoergsmaal_grp.SuspendLayout();
             this.Session_grp.SuspendLayout();
@@ -122,6 +122,32 @@
             this.menu1.Name = "menu1";
             this.menu1.ShowImage = true;
             // 
+            // button2
+            // 
+            this.button2.Label = " BR";
+            this.button2.Name = "button2";
+            this.button2.ShowImage = true;
+            this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
+            // 
+            // button4
+            // 
+            this.button4.Label = " BL";
+            this.button4.Name = "button4";
+            this.button4.ShowImage = true;
+            this.button4.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Label = "TL";
+            this.button5.Name = "button5";
+            this.button5.ShowImage = true;
+            // 
+            // button3
+            // 
+            this.button3.Label = " TR";
+            this.button3.Name = "button3";
+            this.button3.ShowImage = true;
+            // 
             // menu2
             // 
             this.menu2.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -166,32 +192,6 @@
             this.ChemSketch_btn.Name = "ChemSketch_btn";
             this.ChemSketch_btn.ShowImage = true;
             this.ChemSketch_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click_2);
-            // 
-            // button2
-            // 
-            this.button2.Label = " BR";
-            this.button2.Name = "button2";
-            this.button2.ShowImage = true;
-            this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Label = " TR";
-            this.button3.Name = "button3";
-            this.button3.ShowImage = true;
-            // 
-            // button4
-            // 
-            this.button4.Label = " BL";
-            this.button4.Name = "button4";
-            this.button4.ShowImage = true;
-            this.button4.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button4_Click);
-            // 
-            // button5
-            // 
-            this.button5.Label = "TL";
-            this.button5.Name = "button5";
-            this.button5.ShowImage = true;
             // 
             // Ribbon1
             // 

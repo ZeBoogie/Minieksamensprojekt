@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Button OK_btn;
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.Spoergsmaalsliste_lb = new System.Windows.Forms.ListBox();
             this.Ny_btn = new System.Windows.Forms.Button();
             this.Redigering_btn = new System.Windows.Forms.Button();
             this.Slet_btn = new System.Windows.Forms.Button();
@@ -37,15 +37,25 @@
             OK_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listBox1
+            // OK_btn
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(138, 50);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(339, 244);
-            this.listBox1.TabIndex = 0;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            OK_btn.Location = new System.Drawing.Point(385, 397);
+            OK_btn.Name = "OK_btn";
+            OK_btn.Size = new System.Drawing.Size(92, 41);
+            OK_btn.TabIndex = 5;
+            OK_btn.Text = "OK";
+            OK_btn.UseVisualStyleBackColor = true;
+            OK_btn.Click += new System.EventHandler(this.button1_Click_3);
+            // 
+            // Spoergsmaalsliste_lb
+            // 
+            this.Spoergsmaalsliste_lb.FormattingEnabled = true;
+            this.Spoergsmaalsliste_lb.ItemHeight = 20;
+            this.Spoergsmaalsliste_lb.Location = new System.Drawing.Point(138, 50);
+            this.Spoergsmaalsliste_lb.Name = "Spoergsmaalsliste_lb";
+            this.Spoergsmaalsliste_lb.Size = new System.Drawing.Size(339, 244);
+            this.Spoergsmaalsliste_lb.TabIndex = 0;
+            this.Spoergsmaalsliste_lb.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // Ny_btn
             // 
@@ -86,16 +96,6 @@
             this.Annuller_btn.UseVisualStyleBackColor = true;
             this.Annuller_btn.Click += new System.EventHandler(this.button1_Click_2);
             // 
-            // OK_btn
-            // 
-            OK_btn.Location = new System.Drawing.Point(385, 397);
-            OK_btn.Name = "OK_btn";
-            OK_btn.Size = new System.Drawing.Size(92, 41);
-            OK_btn.TabIndex = 5;
-            OK_btn.Text = "OK";
-            OK_btn.UseVisualStyleBackColor = true;
-            OK_btn.Click += new System.EventHandler(this.button1_Click_3);
-            // 
             // Spoergsmaalsstyring_frm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -106,7 +106,7 @@
             this.Controls.Add(this.Slet_btn);
             this.Controls.Add(this.Redigering_btn);
             this.Controls.Add(this.Ny_btn);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.Spoergsmaalsliste_lb);
             this.Name = "Spoergsmaalsstyring_frm";
             this.ShowIcon = false;
             this.Text = "Spørgsmålsstyring";
@@ -117,7 +117,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox Spoergsmaalsliste_lb;
         private System.Windows.Forms.Button Ny_btn;
         private System.Windows.Forms.Button Redigering_btn;
         private System.Windows.Forms.Button Slet_btn;

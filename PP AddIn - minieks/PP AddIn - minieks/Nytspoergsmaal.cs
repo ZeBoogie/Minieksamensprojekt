@@ -14,6 +14,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using Microsoft.Extensions.Options;
 
 namespace PP_AddIn___minieks
 {
@@ -27,15 +29,15 @@ namespace PP_AddIn___minieks
         public Nyt_spaargsmaal_frm()
         {
             InitializeComponent();
-        }
+        }	
+
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Spoergsmaalsdata data = new Spoergsmaalsdata(titel_txt.Text,spoergsmaal_txt.Text, svarMuligheder, korrektSvar, billede);
-            string fileName = "C:\\ProgramData\\PowerPointQuiz\\" + titel_txt.Text+".json";
-            FileStream createStream = File.Create(fileName);
-            string jsonString = JsonSerializer.Serialize(data);
-            File.WriteAllText(fileName, jsonString);
+            Spoergsmaalsdata data = new Spoergsmaalsdata(titel_txt.Text, spoergsmaal_txt.Text, svarMuligheder, korrektSvar, billede);
+            string fileName = "C:\\ProgramData\\PowerPointQuiz\\" + titel_txt.Text + ".json";
+            string jsonString = JsonConvert.SerializeObject(data, Formatting.Indented);
+            File.WriteAllText(fileName, jsonString );
             this.Close();
         }
 
@@ -71,6 +73,8 @@ namespace PP_AddIn___minieks
             korrektSvar.Add(false);
             label1.Text = string.Join(",", svarMuligheder);
             label2.Text = string.Join(",", korrektSvar);
+            billede.Add("");
+            billede.Add("");
         }
 
         private void Annuller_btn_Click(object sender, EventArgs e)

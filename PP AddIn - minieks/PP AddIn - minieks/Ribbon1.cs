@@ -44,13 +44,14 @@ namespace PP_AddIn___minieks
 
         private void button1_Click(object sender, RibbonControlEventArgs e)
         {
-                var myForm = new Spoergsmaalsstyring_frm();
-                myForm.Show();
+            var myForm = new Spoergsmaalsstyring_frm();
+            myForm.Show();
         }
 
         private void button1_Click_1(object sender, RibbonControlEventArgs e)
         {
-
+             var myForm = new Nyt_spaargsmaal_frm();
+             myForm.Show();
         }
 
         private void gallery1_Click(object sender, RibbonControlEventArgs e)
