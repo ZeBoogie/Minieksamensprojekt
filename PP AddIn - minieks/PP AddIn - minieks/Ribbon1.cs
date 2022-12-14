@@ -6,6 +6,8 @@ using System.Text;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Office.Interop.PowerPoint;
 using Microsoft.Office.Tools.Ribbon;
+using PowerPoint = Microsoft.Office.Interop.PowerPoint;
+using Office = Microsoft.Office.Core;
 
 
 
@@ -84,7 +86,11 @@ namespace PP_AddIn___minieks
 
         private void BRbutton_Click(object sender, RibbonControlEventArgs e)
         {
-            
+            PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
+            PowerPoint.SlideRange ppSR = ppApp.ActiveWindow.Selection.SlideRange
+            PowerPoint.Shape ppShap = ppSR.Shapes.AddLabel(Office.MsoTextOrientation
+                .msoTextOrientationHorizontal, 0, 0, 200, 25);
+            ppShap.TextEffect.Text = "Hello World!";
         }
 
         private void TLbutton_Click(object sender, RibbonControlEventArgs e)
