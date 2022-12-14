@@ -3,17 +3,24 @@
 @{
 }
     <html>
-    <head>
-        <meta charset="utf-8" />
-        <title></title>
-    </head>
+    <style >
+    .TextPlacement {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        -ms-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }
+    </style>
     <body>
-        <div class="text-center">
+    <div class="TextPlacement" style="text-align:center";>
 
             <h2>Write your name</h2>
             <form>
                 <input type="text" id="Name" name="WriteName"><br>
-            <input type="submit" value="Submit" asp-page="/Waitingpage"> <br>
+            <input type="submit" id ="submitName" value="Submit"> <br>
             </form>
 
 
@@ -21,4 +28,44 @@
 
     </body>
     </html>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
 
+<script>
+    "use strict";
+
+    var connection = new signalR.HubConnectionBuilder().withUrl("/webHub").build();
+
+    //Disable the send button until connection is established.
+    document.getElementById("submitName").disabled = true;
+
+    connection.start().then(function () {
+        document.getElementById("submitName").disabled = false;
+        connection.invoke("PrintString", "connection namepage started").catch(function (err) {
+            return console.error(err.toString());
+        });
+        event.preventDefault();
+    });
+
+    //eventlistener for submit button, that takes the name, and 
+    document.getElementById("submitName").addEventListener("click", function (event) {
+        var username = document.getElementById("Name").value //this is a string!
+        connection.invoke("AttamptedUsername", username).catch(function (err) {
+            return console.error(err.toString());
+        });
+        event.preventDefault();
+    });
+
+    connection.on("wrongStatement", function (errorStatement) {
+    var textToShow = "Sorry, that " + errorStatement + " is invalid!";
+    document.getElementById("topText").innerHTML =  textToShow;
+    });
+
+    //method to receive commands on which page the webpage should be on.
+    connection.on("goToPage", function (nameOfPage) {
+    connection.invoke("PrintString", "page to go to is: " + nameOfPage).catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+    window.location.replace("/" + nameOfPage);
+});
+</script>

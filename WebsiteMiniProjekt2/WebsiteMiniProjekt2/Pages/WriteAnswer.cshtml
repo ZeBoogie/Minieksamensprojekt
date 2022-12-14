@@ -1,0 +1,27 @@
+﻿@page
+@model WebsiteMiniProjekt2.Pages.Shared.WriteAnswerModel
+@{
+}
+<html>
+
+    <style>
+        .TextPlacement{
+		position:absolute;
+		top: 30%;
+		left: 50%;
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+		-ms-transform: translateX(-50%);
+		transform: translateX(-50%);
+	}
+    </style>
+    <body>
+    <div class="TextPlacement" style= "text-align:center";>
+            <h2>Write your answer</h2>
+            <form>
+                <input type="text" id="Answer" name="WriteAnswer"><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </body>
+    </html>

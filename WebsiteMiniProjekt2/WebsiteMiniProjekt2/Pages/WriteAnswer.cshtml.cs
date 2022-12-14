@@ -1,13 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebsiteMiniProjekt2.Pages
+namespace WebsiteMiniProjekt2.Pages.Shared
 {
-    public class NamepageModel : PageModel
+    public class WriteAnswerModel : PageModel
     {
         public void OnGet()
         {
         }
     }
 }
-
