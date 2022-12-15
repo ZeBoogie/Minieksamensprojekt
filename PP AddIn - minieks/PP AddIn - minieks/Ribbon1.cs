@@ -8,8 +8,7 @@ using Microsoft.Office.Interop.PowerPoint;
 using Microsoft.Office.Tools.Ribbon;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 using Office = Microsoft.Office.Core;
-
-
+using System.Drawing.Drawing2D;
 
 namespace PP_AddIn___minieks
 {
@@ -57,10 +56,6 @@ namespace PP_AddIn___minieks
              myForm.Show();
         }
 
-        private void gallery1_Click(object sender, RibbonControlEventArgs e)
-        {
-
-        }
 
         private void button1_Click_2(object sender, RibbonControlEventArgs e)
         {
@@ -76,6 +71,7 @@ namespace PP_AddIn___minieks
                 _connection.InvokeAsync("giveMeCode");
                 StartStopSession_btn.Image = Properties.Resources.Stopknap;
                 sessionActive = true;
+
             }
             else
             {
@@ -92,9 +88,15 @@ namespace PP_AddIn___minieks
 
         int textboxwidth = 300;
         int textboxheight = 50;
+        string nonCodeText = "Join the quiz with XXXX\nat Myrequizzen.com";
         private void BRbutton_Click(object sender, RibbonControlEventArgs e)
         {
             Trace.WriteLine("brbutton");
+            insertTextBox(1, 1);
+        }
+
+        private void insertTextBox(int x, int y)
+        {
             PowerPoint.Slides s = Globals.ThisAddIn.Application.ActivePresentation.Slides;
             float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
             float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
@@ -102,53 +104,33 @@ namespace PP_AddIn___minieks
             foreach (PowerPoint.Slide slide in s)
             {
                 PowerPoint.Shape textBox = slide.Shapes.AddTextbox(
-                    Office.MsoTextOrientation.msoTextOrientationHorizontal, width-textboxwidth, height-textboxheight, textboxwidth, textboxheight);
-                textBox.TextFrame.TextRange.InsertAfter("This text was added by using code.");
+                    Office.MsoTextOrientation.msoTextOrientationHorizontal, (width-textboxwidth)*x, (height-textboxheight)*y, textboxwidth, textboxheight);
+                textBox.TextFrame.TextRange.InsertAfter(nonCodeText);
+                if(x == 1)
+                {
+                    textBox.TextFrame.TextRange.ParagraphFormat.Alignment = PpParagraphAlignment.ppAlignRight;
+                }
             }
         }
 
         private void TLbutton_Click(object sender, RibbonControlEventArgs e)
         {
             Trace.WriteLine("brbutton");
-            PowerPoint.Slides s = Globals.ThisAddIn.Application.ActivePresentation.Slides;
-            float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
-            float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
+            insertTextBox(0, 0);
 
-            foreach (PowerPoint.Slide slide in s)
-            {
-                PowerPoint.Shape textBox = slide.Shapes.AddTextbox(
-                    Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, textboxwidth, textboxheight);
-                textBox.TextFrame.TextRange.InsertAfter("This text was added by using code.");
-            }
         }
 
         private void TRbutton_Click(object sender, RibbonControlEventArgs e)
         {
             Trace.WriteLine("brbutton");
-            PowerPoint.Slides s = Globals.ThisAddIn.Application.ActivePresentation.Slides;
-            float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
-            float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
+            insertTextBox(1, 0);
 
-            foreach (PowerPoint.Slide slide in s)
-            {
-                PowerPoint.Shape textBox = slide.Shapes.AddTextbox(
-                    Office.MsoTextOrientation.msoTextOrientationHorizontal, width-textboxwidth, 0, textboxwidth, textboxheight);
-                textBox.TextFrame.TextRange.InsertAfter("This text was added by using code.");
-            }
         }
         private void BLbutton_Click(object sender, RibbonControlEventArgs e)
         {
             Trace.WriteLine("brbutton");
-            PowerPoint.Slides s = Globals.ThisAddIn.Application.ActivePresentation.Slides;
-            float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
-            float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
+            insertTextBox(0, 1);
 
-            foreach (PowerPoint.Slide slide in s)
-            {
-                PowerPoint.Shape textBox = slide.Shapes.AddTextbox(
-                    Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, height-textboxheight, textboxwidth, textboxheight);
-                textBox.TextFrame.TextRange.InsertAfter("This text was added by using code.");
-            }
         }
     }
 }
