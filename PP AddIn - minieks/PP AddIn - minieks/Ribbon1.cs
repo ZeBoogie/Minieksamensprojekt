@@ -83,29 +83,72 @@ namespace PP_AddIn___minieks
                 StartStopSession_btn.Image = Properties.Resources.Startknap;
             }
         }
+        static PowerPoint.Slide Slds;
+        public static void savePowerpoint(PowerPoint.Slide Sld)
+        {
+            Trace.WriteLine("savepowerpoint");
+            Slds = Sld;
+        }
 
+        int textboxwidth = 300;
+        int textboxheight = 50;
         private void BRbutton_Click(object sender, RibbonControlEventArgs e)
         {
-            PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
-            PowerPoint.SlideRange ppSR = ppApp.ActiveWindow.Selection.SlideRange
-            PowerPoint.Shape ppShap = ppSR.Shapes.AddLabel(Office.MsoTextOrientation
-                .msoTextOrientationHorizontal, 0, 0, 200, 25);
-            ppShap.TextEffect.Text = "Hello World!";
+            Trace.WriteLine("brbutton");
+            PowerPoint.Slides s = Globals.ThisAddIn.Application.ActivePresentation.Slides;
+            float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
+            float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
+
+            foreach (PowerPoint.Slide slide in s)
+            {
+                PowerPoint.Shape textBox = slide.Shapes.AddTextbox(
+                    Office.MsoTextOrientation.msoTextOrientationHorizontal, width-textboxwidth, height-textboxheight, textboxwidth, textboxheight);
+                textBox.TextFrame.TextRange.InsertAfter("This text was added by using code.");
+            }
         }
 
         private void TLbutton_Click(object sender, RibbonControlEventArgs e)
         {
+            Trace.WriteLine("brbutton");
+            PowerPoint.Slides s = Globals.ThisAddIn.Application.ActivePresentation.Slides;
+            float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
+            float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
 
+            foreach (PowerPoint.Slide slide in s)
+            {
+                PowerPoint.Shape textBox = slide.Shapes.AddTextbox(
+                    Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, textboxwidth, textboxheight);
+                textBox.TextFrame.TextRange.InsertAfter("This text was added by using code.");
+            }
         }
 
         private void TRbutton_Click(object sender, RibbonControlEventArgs e)
         {
+            Trace.WriteLine("brbutton");
+            PowerPoint.Slides s = Globals.ThisAddIn.Application.ActivePresentation.Slides;
+            float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
+            float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
 
+            foreach (PowerPoint.Slide slide in s)
+            {
+                PowerPoint.Shape textBox = slide.Shapes.AddTextbox(
+                    Office.MsoTextOrientation.msoTextOrientationHorizontal, width-textboxwidth, 0, textboxwidth, textboxheight);
+                textBox.TextFrame.TextRange.InsertAfter("This text was added by using code.");
+            }
         }
-
         private void BLbutton_Click(object sender, RibbonControlEventArgs e)
         {
+            Trace.WriteLine("brbutton");
+            PowerPoint.Slides s = Globals.ThisAddIn.Application.ActivePresentation.Slides;
+            float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
+            float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
 
+            foreach (PowerPoint.Slide slide in s)
+            {
+                PowerPoint.Shape textBox = slide.Shapes.AddTextbox(
+                    Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, height-textboxheight, textboxwidth, textboxheight);
+                textBox.TextFrame.TextRange.InsertAfter("This text was added by using code.");
+            }
         }
     }
 }

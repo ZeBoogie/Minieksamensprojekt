@@ -7,6 +7,9 @@ using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 using Office = Microsoft.Office.Core;
 using System.IO;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Collections.ObjectModel;
+using Microsoft.Office.Interop.PowerPoint;
+using System.Windows.Forms;
 
 namespace PP_AddIn___minieks
 {
@@ -19,15 +22,17 @@ namespace PP_AddIn___minieks
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
+
+
         }
 
-        #region VSTO generated code
+    #region VSTO generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InternalStartup()
+    /// <summary>
+    /// Required method for Designer support - do not modify
+    /// the contents of this method with the code editor.
+    /// </summary>
+    private void InternalStartup()
         {
             this.Startup += new System.EventHandler(ThisAddIn_Startup);
             this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
