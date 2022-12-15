@@ -9,6 +9,8 @@ using Microsoft.Office.Tools.Ribbon;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 using Office = Microsoft.Office.Core;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
+using Microsoft.Office.Core;
 
 namespace PP_AddIn___minieks
 {
@@ -66,12 +68,31 @@ namespace PP_AddIn___minieks
 
         private void StartStopSession_btn_Click(object sender, RibbonControlEventArgs e)
         {
-            if(!sessionActive)
+            if (!sessionActive)
             {
                 _connection.InvokeAsync("giveMeCode");
                 StartStopSession_btn.Image = Properties.Resources.Stopknap;
                 sessionActive = true;
-
+                PowerPoint.Slides s = Globals.ThisAddIn.Application.ActivePresentation.Slides;
+                foreach (PowerPoint.Slide slide in s)
+                {
+                    foreach(var item in slide.Shapes)
+                    {
+                        var shape = (PowerPoint.Shape)item;
+                        MessageBox.Show(shape.Name);
+                        if (shape.HasTextFrame == MsoTriState.msoTrue)
+                        {
+                            if (shape.TextFrame.HasText == MsoTriState.msoTrue)
+                            {
+                                var textRange = shape.TextFrame.TextRange;
+                                var text = textRange.Text;
+                                MessageBox.Show(text);
+                                shape.TextFrame.TextRange.Text = "hej";
+                            }
+                        }
+                    }
+                    Trace.WriteLine("hi");
+                }
             }
             else
             {
@@ -79,12 +100,7 @@ namespace PP_AddIn___minieks
                 StartStopSession_btn.Image = Properties.Resources.Startknap;
             }
         }
-        static PowerPoint.Slide Slds;
-        public static void savePowerpoint(PowerPoint.Slide Sld)
-        {
-            Trace.WriteLine("savepowerpoint");
-            Slds = Sld;
-        }
+
 
         int textboxwidth = 300;
         int textboxheight = 50;
