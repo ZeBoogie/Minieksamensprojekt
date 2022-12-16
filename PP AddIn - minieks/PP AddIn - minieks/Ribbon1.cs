@@ -11,6 +11,8 @@ using Office = Microsoft.Office.Core;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Microsoft.Office.Core;
+using System.Collections;
+using System.Drawing;
 
 namespace PP_AddIn___minieks
 {
@@ -114,6 +116,8 @@ namespace PP_AddIn___minieks
             {
                 sessionActive = false;
                 StartStopSession_btn.Image = Properties.Resources.Startknap;
+                _connection.InvokeAsync("removeCode", mycode);
+                changetext(nonCodeText, codeText);
 				StartStopSession_btn.Label = "Start session";
 				changetext(nonCodeText, codeText);
                 mycode = 0;
@@ -147,6 +151,37 @@ namespace PP_AddIn___minieks
             }
         }
 
+        public void insertBigBox()
+        {
+            PowerPoint.Slide Sld = Globals.ThisAddIn.Application.ActiveWindow.View.Slide;
+            float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
+            float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
+
+            PowerPoint.Shape shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 500, 50);
+            shape.Name = "shape1";
+            shape.TextFrame.TextRange.InsertAfter("This text was added by using code.");
+
+            shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 100, 500, 50);
+            shape.TextFrame.TextRange.InsertAfter("This text was also added by using code.");
+            shape.Name = "shape2";
+
+            
+            shape = Sld.Shapes.AddShape(MsoAutoShapeType.msoShapeActionButtonCustom, 0, 100, 500, 50);
+            shape.TextFrame.TextRange.InsertAfter("This text was also added by using code.");
+            shape.Name = "shape3";
+
+            string[] myRangeArray = new string[3];
+            myRangeArray[0] = "shape1";
+            myRangeArray[1] = "shape2";
+            myRangeArray[2] = "shape3";
+            Sld.Shapes.Range(myRangeArray).Group();
+
+
+        }
+        private void jdklsaf()
+        {
+
+        }
         private void TLbutton_Click(object sender, RibbonControlEventArgs e)
         {
             Trace.WriteLine("brbutton");
@@ -158,6 +193,7 @@ namespace PP_AddIn___minieks
         {
             Trace.WriteLine("brbutton");
             insertTextBox(1, 0);
+            insertBigBox();
 
         }
         private void BLbutton_Click(object sender, RibbonControlEventArgs e)

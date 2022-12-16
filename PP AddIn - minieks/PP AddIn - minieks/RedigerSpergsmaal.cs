@@ -46,6 +46,7 @@ namespace PP_AddIn___minieks
             Svartype_comboB.SelectedItem = data.type;
             antalSpoergsmaal = data.svarMuligheder.Count; 
             spoergsmaal_txt.Visible = true;
+            spoergsmaal_txt.Text = data.spoergsmaal;
             titel_lbl.Visible = true;
             titel_txt.Visible = true;
             titel_txt.Text = data.titel;
@@ -113,7 +114,7 @@ namespace PP_AddIn___minieks
         {
             string fileName = "C:\\ProgramData\\PowerPointQuiz\\" + titel_txt.Text + ".json";
             bool preExist = false;
-            if (titel_txt != null)
+            if (titel_txt.Text != "")
             {
                 string path = "C:\\ProgramData\\PowerPointQuiz";
                 DirectoryInfo d = new DirectoryInfo(path);
@@ -296,6 +297,8 @@ namespace PP_AddIn___minieks
                 insertBillede4_btn.Visible = false;
                 tilfoejSvar_btn.Visible = true;
                 fjernSvar_btn.Location = new Point(207, svar4_txt.Location.Y);
+                tilfoejSvar_btn.Location = new Point(40, svar4_txt.Location.Y);
+
                 svarMuligheder.RemoveAt(3);
                 korrektSvar.RemoveAt(3);
                 billede.RemoveAt(3);
