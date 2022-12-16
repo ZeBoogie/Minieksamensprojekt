@@ -36,7 +36,7 @@ namespace PP_AddIn___minieks
         {
             string fileName = "C:\\ProgramData\\PowerPointQuiz\\" + titel_txt.Text + ".json";
             bool preExist = false;
-            if (titel_txt != null)
+            if (titel_txt.Text != "")
             {
                 string path = "C:\\ProgramData\\PowerPointQuiz";
                 DirectoryInfo d = new DirectoryInfo(path);
@@ -56,8 +56,11 @@ namespace PP_AddIn___minieks
                     this.Close();
                 } else
                 {
-                    MessageBox.Show("Spørgsmålets titel eksisterer allerede", "Forkert titel");
+                    MessageBox.Show("Spørgsmålets titel eksisterer allerede.", "Forkert titel");
                 }
+            } else
+            {
+                MessageBox.Show("Spørgsmålets skal have en titel.", "Forkert titel");
             }
         }
 

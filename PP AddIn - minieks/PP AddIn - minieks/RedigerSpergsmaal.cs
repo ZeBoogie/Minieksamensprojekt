@@ -102,12 +102,41 @@ namespace PP_AddIn___minieks
 
         private void OK_btn_Click(object sender, EventArgs e)
         {
-            File.Delete("C:\\ProgramData\\PowerPointQuiz\\" + tidligereTitel + ".json");
-            Spoergsmaalsdata data = new Spoergsmaalsdata(titel_txt.Text, spoergsmaal_txt.Text, svarMuligheder, korrektSvar, billede, Svartype_comboB.Text);
             string fileName = "C:\\ProgramData\\PowerPointQuiz\\" + titel_txt.Text + ".json";
-            string jsonString = JsonConvert.SerializeObject(data, Formatting.Indented);
-            File.WriteAllText(fileName, jsonString);
-            this.Close();
+            bool preExist = false;
+            if (titel_txt != null)
+            {
+                string path = "C:\\ProgramData\\PowerPointQuiz";
+                DirectoryInfo d = new DirectoryInfo(path);
+                FileInfo[] Files = d.GetFiles();
+                foreach (FileInfo file in Files)
+                {
+                    if (titel_txt.Text + ".json" == file.Name)
+                    {
+                        preExist = true;
+                    }
+                }
+
+                if (titel_txt.Text == tidligereTitel)
+                {
+                    preExist = false;
+                }
+
+                if (preExist == false)
+                {
+                    File.Delete("C:\\ProgramData\\PowerPointQuiz\\" + tidligereTitel + ".json");
+                    Spoergsmaalsdata data = new Spoergsmaalsdata(titel_txt.Text, spoergsmaal_txt.Text, svarMuligheder, korrektSvar, billede, Svartype_comboB.Text);
+                    string jsonString = JsonConvert.SerializeObject(data, Formatting.Indented);
+                    File.WriteAllText(fileName, jsonString);
+                    this.Close();
+                } else
+                {
+                    MessageBox.Show("Spørgsmålets titel eksisterer allerede.", "Forkert titel");
+                }
+            } else
+            {
+                MessageBox.Show("Der skal være en titel.", "Manglende titel");
+            }
         }
 
         private void Annuller_btn_Click(object sender, EventArgs e)
