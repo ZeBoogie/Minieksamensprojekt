@@ -30,7 +30,22 @@ namespace PP_AddIn___minieks
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
+            if (Spoergsmaalsliste_lb.SelectedIndex != -1)
+            {
+                valgt = Spoergsmaalsliste_lb.SelectedItem.ToString();
+                string fileName = "C:\\ProgramData\\PowerPointQuiz\\" + valgt + ".json";
+                File.Delete(fileName);
+                Spoergsmaalsliste_lb.Items.Clear();
+                string path = "C:\\ProgramData\\PowerPointQuiz";
+                DirectoryInfo d = new DirectoryInfo(path);
+                FileInfo[] Files = d.GetFiles();
+                foreach (FileInfo file in Files)
+                {
+                    string navn = file.Name;
+                    navn = navn.Remove(navn.Length - 5, 5);
+                    Spoergsmaalsliste_lb.Items.Add(navn);
+                }
+            }
         }
 
         private void button1_Click_2(object sender, EventArgs e)

@@ -44,10 +44,6 @@
             this.fjernSvar_btn = new System.Windows.Forms.Button();
             this.titel_txt = new System.Windows.Forms.TextBox();
             this.titel_lbl = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.insertBillede1_btn = new System.Windows.Forms.Button();
             this.insertBillede2_btn = new System.Windows.Forms.Button();
             this.insertBillede3_btn = new System.Windows.Forms.Button();
@@ -228,43 +224,6 @@
             this.titel_lbl.Text = "Titel:";
             this.titel_lbl.Visible = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(464, 290);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 20);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "label1";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(464, 310);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 20);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "label2";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(464, 330);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 20);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "label3";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(468, 354);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 20);
-            this.label4.TabIndex = 23;
-            this.label4.Text = "label4";
-            // 
             // insertBillede1_btn
             // 
             this.insertBillede1_btn.Location = new System.Drawing.Point(760, 156);
@@ -315,10 +274,6 @@
             this.Controls.Add(this.insertBillede3_btn);
             this.Controls.Add(this.insertBillede2_btn);
             this.Controls.Add(this.insertBillede1_btn);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.titel_lbl);
             this.Controls.Add(this.titel_txt);
             this.Controls.Add(this.fjernSvar_btn);
@@ -362,10 +317,6 @@
         private System.Windows.Forms.Button fjernSvar_btn;
         private System.Windows.Forms.TextBox titel_txt;
         private System.Windows.Forms.Label titel_lbl;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button insertBillede1_btn;
         private System.Windows.Forms.Button insertBillede2_btn;
         private System.Windows.Forms.Button insertBillede3_btn;
