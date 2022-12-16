@@ -66,11 +66,14 @@ namespace PP_AddIn___minieks
             p.Start();
         }
 
+        string nonCodeText = "Join the quiz with XXXX\nat Myrequizzen.com";
+
         private void StartStopSession_btn_Click(object sender, RibbonControlEventArgs e)
         {
             if (!sessionActive)
             {
                 _connection.InvokeAsync("giveMeCode");
+                string codetext = "Join the quiz with " + mycode + "\nat Myrequizzen.com";
                 StartStopSession_btn.Image = Properties.Resources.Stopknap;
                 sessionActive = true;
                 PowerPoint.Slides s = Globals.ThisAddIn.Application.ActivePresentation.Slides;
@@ -87,7 +90,7 @@ namespace PP_AddIn___minieks
                                 var textRange = shape.TextFrame.TextRange;
                                 var text = textRange.Text;
                                 MessageBox.Show(text);
-                                shape.TextFrame.TextRange.Text = "hej";
+                                shape.TextFrame.TextRange.Text = codetext;
                             }
                         }
                     }
@@ -104,7 +107,6 @@ namespace PP_AddIn___minieks
 
         int textboxwidth = 300;
         int textboxheight = 50;
-        string nonCodeText = "Join the quiz with XXXX\nat Myrequizzen.com";
         private void BRbutton_Click(object sender, RibbonControlEventArgs e)
         {
             Trace.WriteLine("brbutton");
