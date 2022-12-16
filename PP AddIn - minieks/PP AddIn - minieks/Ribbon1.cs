@@ -35,6 +35,7 @@ namespace PP_AddIn___minieks
             {
                 System.Diagnostics.Trace.WriteLine($"Ok, i will use this code {code}");
                 mycode = code;
+                changetext();
             });
 
 
@@ -68,34 +69,40 @@ namespace PP_AddIn___minieks
 
         string nonCodeText = "Join the quiz with XXXX\nat Myrequizzen.com";
 
+        public void changetext()
+        {
+            string codetext = "Join the quiz with " + mycode + "\nat Myrequizzen.com";
+            PowerPoint.Slides s = Globals.ThisAddIn.Application.ActivePresentation.Slides;
+            foreach (PowerPoint.Slide slide in s)
+            {
+                foreach (var item in slide.Shapes)
+                {
+                    var shape = (PowerPoint.Shape)item;
+                    MessageBox.Show(shape.Name);
+                    if (shape.HasTextFrame == MsoTriState.msoTrue)
+                    {
+                        if (shape.TextFrame.HasText == MsoTriState.msoTrue)
+                        {
+                            var textRange = shape.TextFrame.TextRange;
+                            var text = textRange.Text;
+                            MessageBox.Show(text);
+                            shape.TextFrame.TextRange.Text = codetext;
+                        }
+                    }
+                }
+                Trace.WriteLine("hi");
+            }
+        }
+
         private void StartStopSession_btn_Click(object sender, RibbonControlEventArgs e)
         {
             if (!sessionActive)
             {
                 _connection.InvokeAsync("giveMeCode");
-                string codetext = "Join the quiz with " + mycode + "\nat Myrequizzen.com";
+                Trace.WriteLine("hi");
                 StartStopSession_btn.Image = Properties.Resources.Stopknap;
                 sessionActive = true;
-                PowerPoint.Slides s = Globals.ThisAddIn.Application.ActivePresentation.Slides;
-                foreach (PowerPoint.Slide slide in s)
-                {
-                    foreach(var item in slide.Shapes)
-                    {
-                        var shape = (PowerPoint.Shape)item;
-                        MessageBox.Show(shape.Name);
-                        if (shape.HasTextFrame == MsoTriState.msoTrue)
-                        {
-                            if (shape.TextFrame.HasText == MsoTriState.msoTrue)
-                            {
-                                var textRange = shape.TextFrame.TextRange;
-                                var text = textRange.Text;
-                                MessageBox.Show(text);
-                                shape.TextFrame.TextRange.Text = codetext;
-                            }
-                        }
-                    }
-                    Trace.WriteLine("hi");
-                }
+
             }
             else
             {
