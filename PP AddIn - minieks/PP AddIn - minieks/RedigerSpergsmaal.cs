@@ -87,7 +87,16 @@ namespace PP_AddIn___minieks
                 fjernSvar_btn.Location = new Point(207, svar4_txt.Location.Y);
             } else if (antalSpoergsmaal == 4)
             {
-                svar4_chk.Visible = true;
+				svar3_chk.Visible = true;
+				korrektSvar.Add(data.korrektSvar[2]);
+				svar3_chk.Checked = data.korrektSvar[2];
+				svar3_txt.Visible = true;
+				svarMuligheder.Add(data.svarMuligheder[2]);
+				svar3_txt.Text = data.svarMuligheder[2];
+				insertBillede3_btn.Visible = true;
+				billede.Add(data.billeder[2]);
+				fjernSvar_btn.Visible = true;
+				svar4_chk.Visible = true;
                 korrektSvar.Add(data.korrektSvar[3]);
                 svar4_chk.Checked = data.korrektSvar[3];
                 svar4_txt.Visible = true;
