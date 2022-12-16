@@ -21,6 +21,9 @@ namespace PP_AddIn___minieks
         bool sessionActive = false;
 
         private const string uri = "https://localhost:7252/webHub";
+        string nonCodeText = "Join the quiz with XXXX\nat Myrequizzen.com";
+        string codeText = "error";
+
 
         void SetupConnection()
         {
@@ -35,7 +38,8 @@ namespace PP_AddIn___minieks
             {
                 System.Diagnostics.Trace.WriteLine($"Ok, i will use this code {code}");
                 mycode = code;
-                changetext();
+                codeText = "Join the quiz with " + mycode + "\nat Myrequizzen.com";
+                changetext(codeText, nonCodeText);
             });
 
 
@@ -67,11 +71,9 @@ namespace PP_AddIn___minieks
             p.Start();
         }
 
-        string nonCodeText = "Join the quiz with XXXX\nat Myrequizzen.com";
 
-        public void changetext()
+        public void changetext(string newText, string oldText)
         {
-            string codetext = "Join the quiz with " + mycode + "\nat Myrequizzen.com";
             PowerPoint.Slides s = Globals.ThisAddIn.Application.ActivePresentation.Slides;
             foreach (PowerPoint.Slide slide in s)
             {
@@ -83,14 +85,17 @@ namespace PP_AddIn___minieks
                     {
                         if (shape.TextFrame.HasText == MsoTriState.msoTrue)
                         {
+                            
                             var textRange = shape.TextFrame.TextRange;
                             var text = textRange.Text;
                             MessageBox.Show(text);
-                            shape.TextFrame.TextRange.Text = codetext;
+                            if(text == oldText)
+                            {
+                                shape.TextFrame.TextRange.Text = newText;
+                            }
                         }
                     }
                 }
-                Trace.WriteLine("hi");
             }
         }
 
@@ -108,6 +113,8 @@ namespace PP_AddIn___minieks
             {
                 sessionActive = false;
                 StartStopSession_btn.Image = Properties.Resources.Startknap;
+                changetext(nonCodeText, codeText);
+                mycode = 0;
             }
         }
 

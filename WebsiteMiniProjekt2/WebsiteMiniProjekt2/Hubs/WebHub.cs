@@ -15,7 +15,16 @@ namespace WebsiteMiniProjekt2.Hubs
         {
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
-        
+
+        public async Task removeCode(int code)
+        {
+            if(codesInUse.Contains(code))
+            {
+                codesInUse.Remove(code);
+            }
+        }
+
+
         public async Task AttemptedLogin(string code)
         {
             Trace.WriteLine("attempted login method with " + code);
