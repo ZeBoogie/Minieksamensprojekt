@@ -93,6 +93,7 @@
             this.insertBillede4_btn.TabIndex = 40;
             this.insertBillede4_btn.UseVisualStyleBackColor = true;
             this.insertBillede4_btn.Visible = false;
+            this.insertBillede4_btn.Click += new System.EventHandler(this.insertBillede4_btn_Click);
             // 
             // insertBillede3_btn
             // 
@@ -102,6 +103,7 @@
             this.insertBillede3_btn.TabIndex = 39;
             this.insertBillede3_btn.UseVisualStyleBackColor = true;
             this.insertBillede3_btn.Visible = false;
+            this.insertBillede3_btn.Click += new System.EventHandler(this.insertBillede3_btn_Click);
             // 
             // insertBillede2_btn
             // 
@@ -111,6 +113,7 @@
             this.insertBillede2_btn.TabIndex = 38;
             this.insertBillede2_btn.UseVisualStyleBackColor = true;
             this.insertBillede2_btn.Visible = false;
+            this.insertBillede2_btn.Click += new System.EventHandler(this.insertBillede2_btn_Click);
             // 
             // insertBillede1_btn
             // 
@@ -120,6 +123,7 @@
             this.insertBillede1_btn.TabIndex = 37;
             this.insertBillede1_btn.UseVisualStyleBackColor = true;
             this.insertBillede1_btn.Visible = false;
+            this.insertBillede1_btn.Click += new System.EventHandler(this.insertBillede1_btn_Click);
             // 
             // svar4_chk
             // 
@@ -130,6 +134,7 @@
             this.svar4_chk.TabIndex = 36;
             this.svar4_chk.UseVisualStyleBackColor = true;
             this.svar4_chk.Visible = false;
+            this.svar4_chk.CheckedChanged += new System.EventHandler(this.svar4_chk_CheckedChanged);
             // 
             // svar4_txt
             // 
@@ -139,6 +144,7 @@
             this.svar4_txt.TabIndex = 35;
             this.svar4_txt.Text = "Skriv fjerde svarmulighed her";
             this.svar4_txt.Visible = false;
+            this.svar4_txt.TextChanged += new System.EventHandler(this.svar4_txt_TextChanged);
             // 
             // svar3_chk
             // 
@@ -149,6 +155,7 @@
             this.svar3_chk.TabIndex = 34;
             this.svar3_chk.UseVisualStyleBackColor = true;
             this.svar3_chk.Visible = false;
+            this.svar3_chk.CheckedChanged += new System.EventHandler(this.svar3_chk_CheckedChanged);
             // 
             // svar3_txt
             // 
@@ -158,6 +165,7 @@
             this.svar3_txt.TabIndex = 33;
             this.svar3_txt.Text = "Skriv tredje svarmulighed her";
             this.svar3_txt.Visible = false;
+            this.svar3_txt.TextChanged += new System.EventHandler(this.svar3_txt_TextChanged);
             // 
             // svar2_chk
             // 
@@ -168,6 +176,7 @@
             this.svar2_chk.TabIndex = 32;
             this.svar2_chk.UseVisualStyleBackColor = true;
             this.svar2_chk.Visible = false;
+            this.svar2_chk.CheckedChanged += new System.EventHandler(this.svar2_chk_CheckedChanged);
             // 
             // svar1_txt
             // 
@@ -177,6 +186,7 @@
             this.svar1_txt.TabIndex = 31;
             this.svar1_txt.Text = "Skriv første svarmulighed her";
             this.svar1_txt.Visible = false;
+            this.svar1_txt.TextChanged += new System.EventHandler(this.svar1_txt_TextChanged);
             // 
             // svar2_txt
             // 
@@ -187,6 +197,7 @@
             this.svar2_txt.TabIndex = 30;
             this.svar2_txt.Text = "Skriv anden svarmulighed her";
             this.svar2_txt.Visible = false;
+            this.svar2_txt.TextChanged += new System.EventHandler(this.svar2_txt_TextChanged);
             // 
             // svar1_chk
             // 
@@ -197,6 +208,7 @@
             this.svar1_chk.TabIndex = 29;
             this.svar1_chk.UseVisualStyleBackColor = true;
             this.svar1_chk.Visible = false;
+            this.svar1_chk.CheckedChanged += new System.EventHandler(this.svar1_chk_CheckedChanged);
             // 
             // spoergsmaal_txt
             // 
@@ -217,6 +229,7 @@
             this.fjernSvar_btn.Text = "Fjern svarmulighed";
             this.fjernSvar_btn.UseVisualStyleBackColor = true;
             this.fjernSvar_btn.Visible = false;
+            this.fjernSvar_btn.Click += new System.EventHandler(this.fjernSvar_btn_Click);
             // 
             // tilfoejSvar_btn
             // 
@@ -227,6 +240,7 @@
             this.tilfoejSvar_btn.Text = "Tilføj svarmulighed";
             this.tilfoejSvar_btn.UseVisualStyleBackColor = true;
             this.tilfoejSvar_btn.Visible = false;
+            this.tilfoejSvar_btn.Click += new System.EventHandler(this.tilfoejSvar_btn_Click);
             // 
             // OK_btn
             // 

@@ -12,8 +12,6 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Options;
 
@@ -34,11 +32,34 @@ namespace PP_AddIn___minieks
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Spoergsmaalsdata data = new Spoergsmaalsdata(titel_txt.Text, spoergsmaal_txt.Text, svarMuligheder, korrektSvar, billede,Svartype_comboB.Text);
             string fileName = "C:\\ProgramData\\PowerPointQuiz\\" + titel_txt.Text + ".json";
-            string jsonString = JsonConvert.SerializeObject(data, Formatting.Indented);
-            File.WriteAllText(fileName, jsonString );
-            this.Close();
+            bool preExist = false;
+            if (titel_txt.Text != "")
+            {
+                string path = "C:\\ProgramData\\PowerPointQuiz";
+                DirectoryInfo d = new DirectoryInfo(path);
+                FileInfo[] Files = d.GetFiles();
+                foreach (FileInfo file in Files)
+                {
+                    if (titel_txt.Text+".json" == file.Name)
+                    {
+                        preExist = true;
+                    }
+                }
+                if (preExist == false)
+                {
+                    Spoergsmaalsdata data = new Spoergsmaalsdata(titel_txt.Text, spoergsmaal_txt.Text, svarMuligheder, korrektSvar, billede, Svartype_comboB.Text);
+                    string jsonString = JsonConvert.SerializeObject(data, Formatting.Indented);
+                    File.WriteAllText(fileName, jsonString);
+                    this.Close();
+                } else
+                {
+                    MessageBox.Show("Spørgsmålets titel eksisterer allerede.", "Forkert titel");
+                }
+            } else
+            {
+                MessageBox.Show("Spørgsmålets skal have en titel.", "Forkert titel");
+            }
         }
 
         string tidligerespoergsmaalstype = "";
@@ -71,8 +92,6 @@ namespace PP_AddIn___minieks
             svarMuligheder.Add("gullerrod");
             korrektSvar.Add(false);
             korrektSvar.Add(false);
-            label1.Text = string.Join(",", svarMuligheder);
-            label2.Text = string.Join(",", korrektSvar);
             billede.Add("");
             billede.Add("");
         }
@@ -94,19 +113,16 @@ namespace PP_AddIn___minieks
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             svarMuligheder[1] = svar2_txt.Text;
-            label1.Text = string.Join(",", svarMuligheder);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             korrektSvar[1] = svar2_chk.Checked;
-            label2.Text = string.Join(", ", korrektSvar);
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             svarMuligheder[0] = svar1_txt.Text;
-            label1.Text = string.Join(",", svarMuligheder);
         }
 
         private void tilfoejSvar_btn_Click(object sender, EventArgs e)
@@ -140,7 +156,6 @@ namespace PP_AddIn___minieks
         private void svar3_txt_TextChanged(object sender, EventArgs e)
         {
             svarMuligheder[2] = svar3_txt.Text;
-            label1.Text = string.Join(",", svarMuligheder);
         }
 
         private void fjernSvar_btn_Click(object sender, EventArgs e)
@@ -174,7 +189,6 @@ namespace PP_AddIn___minieks
         private void svar4_txt_TextChanged(object sender, EventArgs e)
         {
             svarMuligheder[3] = svar4_txt.Text;
-            label1.Text = string.Join(",", svarMuligheder);
         }
 
         private void titel_txt_TextChanged(object sender, EventArgs e)
@@ -185,19 +199,16 @@ namespace PP_AddIn___minieks
         private void svar1_chk_CheckedChanged(object sender, EventArgs e)
         {
             korrektSvar[0] = svar1_chk.Checked;
-            label2.Text = string.Join(", ", korrektSvar);
         }
 
         private void svar3_chk_CheckedChanged(object sender, EventArgs e)
         {
             korrektSvar[2] = svar3_chk.Checked;
-            label2.Text = string.Join(", ", korrektSvar);
         }
 
         private void svar4_chk_CheckedChanged(object sender, EventArgs e)
         {
             korrektSvar[3] = svar4_chk.Checked;
-            label2.Text = string.Join(", ", korrektSvar);
         }
 
         private void label1_Click_1(object sender, EventArgs e)
@@ -218,7 +229,7 @@ namespace PP_AddIn___minieks
               using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
                     openFileDialog.InitialDirectory = "C:\\Users\\Pictures";
-                    openFileDialog.Filter = "HTML files (*.webp)|*.webp|PNG files (*.png)|*.png||JPEG files(*.jpg)|*.jpg|All files (*.*)|*.*";
+                    openFileDialog.Filter = "HTML files (*.webp)|*.webp|PNG files (*.png)|*.png|JPEG files(*.jpg)|*.jpg|All files (*.*)|*.*";
                     openFileDialog.FilterIndex = 2;
                     openFileDialog.RestoreDirectory = true;
 

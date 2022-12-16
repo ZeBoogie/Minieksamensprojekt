@@ -108,6 +108,7 @@ namespace PP_AddIn___minieks
                 _connection.InvokeAsync("giveMeCode");
                 Trace.WriteLine("hi");
                 StartStopSession_btn.Image = Properties.Resources.Stopknap;
+                StartStopSession_btn.Label = "Stop session";
                 sessionActive = true;
 
             }
@@ -117,6 +118,8 @@ namespace PP_AddIn___minieks
                 StartStopSession_btn.Image = Properties.Resources.Startknap;
                 _connection.InvokeAsync("removeCode", mycode);
                 changetext(nonCodeText, codeText);
+				StartStopSession_btn.Label = "Start session";
+				changetext(nonCodeText, codeText);
                 mycode = 0;
             }
         }
