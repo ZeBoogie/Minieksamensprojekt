@@ -155,7 +155,7 @@ namespace PP_AddIn___minieks
 
 
 
-
+        
 
         public void questionPage(string Question, string[] answerOptions)
         {
@@ -195,42 +195,7 @@ namespace PP_AddIn___minieks
             */
 
         }
-        static int count = 0;
-        public static void jdklsaf(SlideShowWindow Wn)
-        {
-            if (count == 0)
-            {
-                MessageBox.Show("count is " + count);
-                count = count + 1;
-                return;
-            }
-            Microsoft.Office.Interop.PowerPoint.Presentation objPres;
-            Microsoft.Office.Interop.PowerPoint.SlideShowView objSlideShowView;
-
-            objPres = Globals.ThisAddIn.Application.ActivePresentation;
-            objPres.SlideShowSettings.ShowPresenterView = MsoTriState.msoFalse;
-            try
-            {
-                objPres.SlideShowSettings.Run();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Couldn't go to next question.");
-                return;
-            }
-            objSlideShowView = objPres.SlideShowWindow.View;
-
-            objSlideShowView = objPres.SlideShowWindow.View;
-            objSlideShowView.GotoSlide(1);
-
-
-            //get first slide, and insert text on it.
-            PowerPoint.Slide Sld = Wn.Presentation.Slides.Application.ActivePresentation.Slides[1];
-            PowerPoint.Shape textBox = Sld.Shapes.AddTextbox(
-                Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 500, 50);
-            textBox.TextFrame.TextRange.InsertAfter("This text was added by using code.");
-
-        }
+        
         private void TLbutton_Click(object sender, RibbonControlEventArgs e)
         {
             Trace.WriteLine("brbutton");
