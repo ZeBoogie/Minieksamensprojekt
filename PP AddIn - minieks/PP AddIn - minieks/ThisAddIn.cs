@@ -6,20 +6,28 @@ using System.Xml.Linq;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 using Office = Microsoft.Office.Core;
 using System.IO;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Collections.ObjectModel;
-using Microsoft.Office.Interop.PowerPoint;
+using System.Runtime.InteropServices.ComTypes;
 using System.Windows.Forms;
+using Microsoft.Office.Interop.PowerPoint;
 
 namespace PP_AddIn___minieks
 {
     public partial class ThisAddIn
     {
+
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
+            
             Directory.CreateDirectory("C:\\ProgramData\\PowerPointQuiz");
+
+
+            this.Application.SlideShowNextSlide += new PowerPoint.EApplication_SlideShowNextSlideEventHandler(Ribbon1.jdklsaf);
         }
 
+        void Application_SlideShowNextSlide(SlideShowWindow Wn)
+        {
+            
+        }
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
 
