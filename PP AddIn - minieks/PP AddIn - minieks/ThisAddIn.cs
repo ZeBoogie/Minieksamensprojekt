@@ -123,6 +123,8 @@ namespace PP_AddIn___minieks
             PowerPoint.Shape textBox = Sld.Shapes.AddTextbox(
                 Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 200, 500, 50);
             textBox.TextFrame.TextRange.InsertAfter("Congratulations, you are on the result page.");
+            //TODO: tilføj al teksten som det skal være på Result Page. Lige nu kan det ses at det bare er en enkelt tekstboks et tilfældigt sted
+            //(Det som Cahtrine startede på at designe i powerpoint, nu i kode)
         }
 
         private void showQuestion(int index)
@@ -133,6 +135,8 @@ namespace PP_AddIn___minieks
                 Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 500, 50);
             textBox.TextFrame.TextRange.InsertAfter("And this is how the question page looks for now.");
 
+            //TODO: tilføj al teksten som det skal være på Question pagen.. Lige nu kan det ses at det bare er en enkelt tekstboks et tilfældigt sted
+            //(Det som Cahtrine startede på at designe i powerpoint, nu i kode)
         }
         void Application_SlideShowNextSlide(SlideShowWindow Wn)
         {
