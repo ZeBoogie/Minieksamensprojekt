@@ -13,6 +13,7 @@ using Microsoft.Office.Core;
 using System.Drawing.Text;
 using System.Threading;
 using System.Reflection;
+using System.Security.Cryptography;
 
 namespace PP_AddIn___minieks
 {
@@ -55,7 +56,6 @@ namespace PP_AddIn___minieks
                 count += 1;
                 firstTimeLaunched = false;
             }
-            MessageBox.Show("count is " + count);
             if (!firstTimeSlideChanged)
             {
                 firstTimeSlideChanged = true;
@@ -66,22 +66,23 @@ namespace PP_AddIn___minieks
 
             if (isOnQuestionSlide() && count > 0 && count < amountOfQuestion())
             {
-                MessageBox.Show("This is a question Slide");
                 int slideIndex = getCurrentSlideIndex();
 
                 //delete everything on current slide, so that the slide is ready to be updated.
                 PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[slideIndex];
-                foreach (PowerPoint.Shape shap in Sld.Shapes)
+                for (int i = 0; i < Sld.Shapes.Count+1; i++)
                 {
-                    shap.Delete();
-                }
+                    Sld.Shapes[1].Delete();
 
+                }
+                
 
                 //change whatever is on the current slide to question or result, depending on what
                 //previous condition was (onQuestion)
                 if (onQuestion)
                 {
                     onQuestion = false;
+
                     showQuestion(slideIndex);
                 }
                 else
