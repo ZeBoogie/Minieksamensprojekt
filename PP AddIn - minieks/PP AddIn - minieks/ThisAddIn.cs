@@ -45,6 +45,8 @@ namespace PP_AddIn___minieks
             //TODO: Write code that gets the index of the current slide WHEN PRESENTING
             return 1;
         }
+
+
         bool firstTimeLaunched = true;
         int count = 0;
         bool onQuestion = true;
@@ -70,10 +72,10 @@ namespace PP_AddIn___minieks
 
                 //delete everything on current slide, so that the slide is ready to be updated.
                 PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[slideIndex];
-                for (int i = 0; i < Sld.Shapes.Count+1; i++)
+                int shapesCount = Sld.Shapes.Count;
+                for (int i = 0; i < shapesCount; i++)
                 {
-                    Sld.Shapes[1].Delete();
-
+                        Sld.Shapes[1].Delete();
                 }
                 
 
@@ -83,12 +85,12 @@ namespace PP_AddIn___minieks
                 {
                     onQuestion = false;
 
-                    showQuestion(slideIndex);
+                    showQuestionPage(slideIndex, count);
                 }
                 else
                 {
                     onQuestion = true;
-                    showResult(slideIndex);
+                    showResult(slideIndex, count);
                     count += 1;
                 }
 
@@ -110,35 +112,88 @@ namespace PP_AddIn___minieks
                 objSlideShowView = objPres.SlideShowWindow.View;
                 objSlideShowView = objPres.SlideShowWindow.View;
                 objSlideShowView.GotoSlide(1);
-
-                
-
-                
             }
         }
 
-        private void showResult(int index)
+        private void showResult(int index, int questionCount)
         {
             //TODO: make method that changes the current slide to result design.
             PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[index];
+            MessageBox.Show("from result page: " + Sld.Shapes.Count);
+
             PowerPoint.Shape textBox = Sld.Shapes.AddTextbox(
                 Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 200, 500, 50);
             textBox.TextFrame.TextRange.InsertAfter("Congratulations, you are on the result page.");
             //TODO: tilføj al teksten som det skal være på Result Page. Lige nu kan det ses at det bare er en enkelt tekstboks et tilfældigt sted
             //(Det som Cahtrine startede på at designe i powerpoint, nu i kode)
         }
-
-        private void showQuestion(int index)
+        public void showQuestionPage(int index, int questionCount)
         {
-            //get first slide, and insert text on it.
-            PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[index];
-            PowerPoint.Shape textBox = Sld.Shapes.AddTextbox(
-                Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 500, 50);
-            textBox.TextFrame.TextRange.InsertAfter("And this is how the question page looks for now.");
 
             //TODO: tilføj al teksten som det skal være på Question pagen.. Lige nu kan det ses at det bare er en enkelt tekstboks et tilfældigt sted
             //(Det som Cahtrine startede på at designe i powerpoint, nu i kode)
+
+            //Variables with the answer options an the question itself
+            string[] answerOptions = { "" };
+            string question;
+
+            //method that should be made where the variables are available:
+            answerOptions = getAnswerOptions(questionCount);
+            question = getQuestion(questionCount);
+
+
+            if (answerOptions.Length != 4)
+            {
+                MessageBox.Show("error, multiple choice should have 4 question options, only received " + answerOptions.Length);
+                return;
+            }
+
+            //get slide at index
+            PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[index];
+            float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
+            float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
+
+            
+
+            //insert 4 questions
+            PowerPoint.Shape shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 100, 100, 500, 50);
+            shape.TextFrame.TextRange.InsertAfter(answerOptions[0]);
+
+            shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 100, 500, 50);
+            shape.TextFrame.TextRange.InsertAfter(answerOptions[1]);
+            // TODO: repeat with different coordinates. also make the design with boxes with colors etc
+
+
+            //Insert question
+            //TODO: figure out coordinates, and possibly size of text as well.
+            shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 500, 50);
+            shape.TextFrame.TextRange.InsertAfter(question);
+
+
+
+            /* Code for grouping, if needed...
+            string[] myRangeArray = new string[3];
+            myRangeArray[0] = "shape1";
+            myRangeArray[1] = "shape2";
+            myRangeArray[2] = "shape3";
+            Sld.Shapes.Range(myRangeArray).Group();
+            */
+
         }
+
+        string[] getAnswerOptions(int questionCount)
+        {
+            //TODO: Get the answer options at a specific question
+            string[] returnstring = {"Jonathan", "Jonatan", "Johnathan", "Cathrine"};
+            return returnstring;
+        }
+        string getQuestion(int questionCount)
+        {
+            //TODO: Get the question at a specific question
+            string returnstring = "Hvordan staves Jonathan?";
+            return returnstring;
+        }
+
         void Application_SlideShowNextSlide(SlideShowWindow Wn)
         {
             

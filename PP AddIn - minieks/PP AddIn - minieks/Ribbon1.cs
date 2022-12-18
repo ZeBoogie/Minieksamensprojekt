@@ -112,14 +112,12 @@ namespace PP_AddIn___minieks
                 StartStopSession_btn.Image = Properties.Resources.Stopknap;
                 StartStopSession_btn.Label = "Stop session";
                 sessionActive = true;
-
             }
             else
             {
                 sessionActive = false;
                 StartStopSession_btn.Image = Properties.Resources.Startknap;
                 _connection.InvokeAsync("removeCode", mycode);
-                changetext(nonCodeText, codeText);
 				StartStopSession_btn.Label = "Start session";
 				changetext(nonCodeText, codeText);
                 mycode = 0;
@@ -157,44 +155,7 @@ namespace PP_AddIn___minieks
 
         
 
-        public void questionPage(string Question, string[] answerOptions)
-        {
-            if (answerOptions.Length != 4) 
-            {
-                MessageBox.Show("error, multiple choice should have 4 question options, only received " + answerOptions.Length);
-                return;
-            }
-
-            //get the current slide
-            PowerPoint.Slide Sld = Globals.ThisAddIn.Application.ActiveWindow.View.Slide;
-            float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
-            float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
-
-            //insert 4 questions
-            PowerPoint.Shape shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 500, 50);
-            shape.TextFrame.TextRange.InsertAfter(answerOptions[0]);
-
-            shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 100, 500, 50);
-            shape.TextFrame.TextRange.InsertAfter(answerOptions[1]);
-            // TODO: repeat with different coordinates. also make the design with boxes with colors etc.
-
-
-            //Insert question
-            //TODO: figure out coordinates, and possibly size of text as well.
-            shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 500, 50);
-            shape.TextFrame.TextRange.InsertAfter(Question);
-
-
-
-            /* Code for grouping, if needed...
-            string[] myRangeArray = new string[3];
-            myRangeArray[0] = "shape1";
-            myRangeArray[1] = "shape2";
-            myRangeArray[2] = "shape3";
-            Sld.Shapes.Range(myRangeArray).Group();
-            */
-
-        }
+        
         
         private void TLbutton_Click(object sender, RibbonControlEventArgs e)
         {
@@ -207,9 +168,6 @@ namespace PP_AddIn___minieks
         {
             Trace.WriteLine("brbutton");
             insertTextBox(1, 0);
-            string[] a = { "1", "2", "3", "4" };
-            questionPage("hej", a);
-
         }
         private void BLbutton_Click(object sender, RibbonControlEventArgs e)
         {
