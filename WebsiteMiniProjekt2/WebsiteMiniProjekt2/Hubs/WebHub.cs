@@ -67,7 +67,7 @@ namespace WebsiteMiniProjekt2.Hubs
             //if this is the case, then send back a command to the client
             //telling them to switch side
         }
-        public async Task nextQuestion()
+        public async Task nextQuestion() //sends webpages to multiple choice
         {
             await Clients.All.SendAsync("nextQuestion");
             Trace.WriteLine("sending clients to next question");

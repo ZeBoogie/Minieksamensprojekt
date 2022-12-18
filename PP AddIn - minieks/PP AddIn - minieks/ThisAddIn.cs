@@ -140,7 +140,7 @@ namespace PP_AddIn___minieks
         public void showQuestionPage(int index, int questionCount)
         {
             //Tell webserver to send webpages to multiple choice question
-            Ribbon1.invokeConnection("sendMessage");
+            Ribbon1.invokeConnection("nextQuestion");
 
 
             //TODO: tilføj al teksten som det skal være på Question pagen.. Lige nu kan det ses at det bare er en enkelt tekstboks et tilfældigt sted
