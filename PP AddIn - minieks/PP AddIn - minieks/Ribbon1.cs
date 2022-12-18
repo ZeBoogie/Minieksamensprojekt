@@ -20,14 +20,18 @@ namespace PP_AddIn___minieks
 {
     public partial class Ribbon1
     {
-        HubConnection _connection;
+        static HubConnection _connection;
         int mycode;
         bool sessionActive = false;
 
         private const string uri = "https://localhost:7252/webHub";
-        string nonCodeText = "Join the quiz with XXXX\nat Myrequizzen.com";
+        static string nonCodeText = "Join the quiz with XXXX\nat Myrequizzen.com";
         string codeText = "error";
 
+        public static string getNonCodeText()
+        {
+            return nonCodeText;
+        }
 
         void SetupConnection()
         {
@@ -48,6 +52,11 @@ namespace PP_AddIn___minieks
 
 
             _connection.StartAsync();
+        }
+
+        public static void invokeConnection(string methodName)
+        {
+            _connection.InvokeAsync(methodName);
         }
 
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)

@@ -58,6 +58,8 @@ namespace PP_AddIn___minieks
                 count += 1;
                 firstTimeLaunched = false;
             }
+
+            //when powerpoint is opened, it counts as a slide change, whic
             if (!firstTimeSlideChanged)
             {
                 firstTimeSlideChanged = true;
@@ -70,12 +72,20 @@ namespace PP_AddIn___minieks
             {
                 int slideIndex = getCurrentSlideIndex();
 
-                //delete everything on current slide, so that the slide is ready to be updated.
+                //delete everything on current slide (except code), so that the slide is ready to be updated.
                 PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[slideIndex];
                 int shapesCount = Sld.Shapes.Count;
+                int shapeIndexToDelete = 1;
                 for (int i = 0; i < shapesCount; i++)
                 {
-                        Sld.Shapes[1].Delete();
+                    if (!(Sld.Shapes[shapeIndexToDelete].TextFrame.TextRange.Text == Ribbon1.getNonCodeText()))
+                    {
+                        Sld.Shapes[shapeIndexToDelete].Delete();
+                    }
+                    else
+                    {
+                        shapeIndexToDelete += 1;
+                    }
                 }
                 
 
@@ -129,6 +139,9 @@ namespace PP_AddIn___minieks
         }
         public void showQuestionPage(int index, int questionCount)
         {
+            //Tell webserver to send webpages to multiple choice question
+            Ribbon1.invokeConnection("sendMessage");
+
 
             //TODO: tilføj al teksten som det skal være på Question pagen.. Lige nu kan det ses at det bare er en enkelt tekstboks et tilfældigt sted
             //(Det som Cahtrine startede på at designe i powerpoint, nu i kode)
