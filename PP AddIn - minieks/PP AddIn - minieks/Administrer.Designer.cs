@@ -43,7 +43,7 @@
             OK_btn.Name = "OK_btn";
             OK_btn.Size = new System.Drawing.Size(92, 41);
             OK_btn.TabIndex = 5;
-            OK_btn.Text = "OK";
+            OK_btn.Text = "Indsæt";
             OK_btn.UseVisualStyleBackColor = true;
             OK_btn.Click += new System.EventHandler(this.button1_Click_3);
             // 
