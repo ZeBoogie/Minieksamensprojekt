@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Office.Interop.PowerPoint;
+using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 
 namespace PP_AddIn___minieks
 {
@@ -56,6 +58,8 @@ namespace PP_AddIn___minieks
 
         private void button1_Click_3(object sender, EventArgs e)
         {
+            //PowerPoint.Shape bob = new PowerPoint.Shape();
+            //bob.
             this.Close();
         }
 

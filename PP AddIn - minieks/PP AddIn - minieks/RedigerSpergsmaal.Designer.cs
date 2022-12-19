@@ -34,7 +34,6 @@
             this.insertBillede4_btn = new System.Windows.Forms.Button();
             this.insertBillede3_btn = new System.Windows.Forms.Button();
             this.insertBillede2_btn = new System.Windows.Forms.Button();
-            this.insertBillede1_btn = new System.Windows.Forms.Button();
             this.svar4_chk = new System.Windows.Forms.CheckBox();
             this.svar4_txt = new System.Windows.Forms.TextBox();
             this.svar3_chk = new System.Windows.Forms.CheckBox();
@@ -48,6 +47,7 @@
             this.tilfoejSvar_btn = new System.Windows.Forms.Button();
             this.OK_btn = new System.Windows.Forms.Button();
             this.Annuller_btn = new System.Windows.Forms.Button();
+            this.insertBillede1_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Svartype_comboB
@@ -87,6 +87,7 @@
             // 
             // insertBillede4_btn
             // 
+            this.insertBillede4_btn.Image = global::PP_AddIn___minieks.Properties.Resources.Billedeikon3;
             this.insertBillede4_btn.Location = new System.Drawing.Point(760, 252);
             this.insertBillede4_btn.Name = "insertBillede4_btn";
             this.insertBillede4_btn.Size = new System.Drawing.Size(26, 26);
@@ -97,6 +98,7 @@
             // 
             // insertBillede3_btn
             // 
+            this.insertBillede3_btn.Image = global::PP_AddIn___minieks.Properties.Resources.Billedeikon3;
             this.insertBillede3_btn.Location = new System.Drawing.Point(760, 220);
             this.insertBillede3_btn.Name = "insertBillede3_btn";
             this.insertBillede3_btn.Size = new System.Drawing.Size(26, 26);
@@ -107,6 +109,7 @@
             // 
             // insertBillede2_btn
             // 
+            this.insertBillede2_btn.Image = global::PP_AddIn___minieks.Properties.Resources.Billedeikon3;
             this.insertBillede2_btn.Location = new System.Drawing.Point(760, 188);
             this.insertBillede2_btn.Name = "insertBillede2_btn";
             this.insertBillede2_btn.Size = new System.Drawing.Size(26, 26);
@@ -114,16 +117,6 @@
             this.insertBillede2_btn.UseVisualStyleBackColor = true;
             this.insertBillede2_btn.Visible = false;
             this.insertBillede2_btn.Click += new System.EventHandler(this.insertBillede2_btn_Click);
-            // 
-            // insertBillede1_btn
-            // 
-            this.insertBillede1_btn.Location = new System.Drawing.Point(760, 156);
-            this.insertBillede1_btn.Name = "insertBillede1_btn";
-            this.insertBillede1_btn.Size = new System.Drawing.Size(26, 26);
-            this.insertBillede1_btn.TabIndex = 37;
-            this.insertBillede1_btn.UseVisualStyleBackColor = true;
-            this.insertBillede1_btn.Visible = false;
-            this.insertBillede1_btn.Click += new System.EventHandler(this.insertBillede1_btn_Click);
             // 
             // svar4_chk
             // 
@@ -261,6 +254,19 @@
             this.Annuller_btn.Text = "Annuller";
             this.Annuller_btn.UseVisualStyleBackColor = true;
             this.Annuller_btn.Click += new System.EventHandler(this.Annuller_btn_Click);
+            // 
+            // insertBillede1_btn
+            // 
+            this.insertBillede1_btn.Cursor = System.Windows.Forms.Cursors.Default;
+            this.insertBillede1_btn.Image = global::PP_AddIn___minieks.Properties.Resources.Billedeikon3;
+            this.insertBillede1_btn.Location = new System.Drawing.Point(760, 156);
+            this.insertBillede1_btn.Name = "insertBillede1_btn";
+            this.insertBillede1_btn.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.insertBillede1_btn.Size = new System.Drawing.Size(26, 26);
+            this.insertBillede1_btn.TabIndex = 37;
+            this.insertBillede1_btn.UseVisualStyleBackColor = true;
+            this.insertBillede1_btn.Visible = false;
+            this.insertBillede1_btn.Click += new System.EventHandler(this.insertBillede1_btn_Click);
             // 
             // redigerSpoergsmaal_frm
             // 
