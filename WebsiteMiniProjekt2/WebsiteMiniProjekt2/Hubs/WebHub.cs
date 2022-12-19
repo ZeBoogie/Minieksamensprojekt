@@ -122,6 +122,17 @@ namespace WebsiteMiniProjekt2.Hubs
 				Trace.WriteLine("printing dictionary");
 				Trace.WriteLine("dictionary key is " + ele2.Key + " and count is " + ele2.Value.Count);
 			}
+            try
+            {
+				List<string> answers = playersAndAnswers["nameOfQuizzer"];
+				answers.Add(nameOfQuizzer);
+				playersAndAnswers["nameOfQuizzer"] = answers;
+			}
+            catch(Exception ex)
+            {
+
+            }
+            
 			Trace.WriteLine(playersAndAnswers);
 			return Task.CompletedTask;
 
