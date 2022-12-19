@@ -57,11 +57,25 @@ namespace PP_AddIn___minieks
             return 5;
         }
 
+        //returns whatever 
         string getQuestionOnSlide(SlideShowWindow Wn)
         {
-
-            return "Hvordan staver man til Jonathan.";
-
+            int slideIndex = Wn.View.CurrentShowPosition;
+            MessageBox.Show("getClickindex is: " + slideIndex);
+            PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[slideIndex];
+            string[] titles = Spoergsmaalsstyring_frm.loadFiles();
+            foreach (PowerPoint.Shape shape in Sld.Shapes)
+            {
+                for (int i = 0; i < titles.Length; i++)
+                {
+                    if (shape.TextFrame.TextRange.Text == titles[i])
+                    {
+                        MessageBox.Show("The title on this page is" + titles[i]);
+                        return titles[i];
+                    }
+                }
+            }
+            return "Error";
         }
 
 
@@ -86,7 +100,7 @@ namespace PP_AddIn___minieks
             firstTimeSlideChanged = false;
 
 
-            if (isOnQuestionSlide(Wn) && count > 0 && count < amountOfQuestion())
+            if (isOnQuestionSlide(Wn))
             {
                 string titelOfQuestion = getQuestionOnSlide(Wn);
                 int slideIndex = Wn.View.CurrentShowPosition;
