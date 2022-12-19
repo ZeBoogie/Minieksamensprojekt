@@ -96,7 +96,7 @@
 	</style>
 	<body>
 	<div class="Leftup">
-		<button class="button button1">A</button>
+		<button class="button button1" id="TL">A</button>
 		</div>
 	<div class="Rightup">
 		<button class="button button2">B</button>
@@ -108,4 +108,31 @@
 		<button class="button button4">D</button>
 		</div>
 	</body>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+
+<script>
+	"use strict";
+
+	var connection = new signalR.HubConnectionBuilder().withUrl("/webHub").build();
+
+	connection.start().then(function () {
+		connection.invoke("PrintString", "connection MultipleChoice started").catch(function (err) {
+			return console.error(err.toString());
+		});
+		event.preventDefault();
+	});
+
+	document.getElementById("TL").addEventListener("click", function (event) {
+		connection.invoke("submitAnswer", "nameOfQuizzer", 0).catch(function (err) {
+			return console.error(err.toString());
+		});
+		event.preventDefault();
+	});
+
+	connection.on("nextQuestion", function () {
+		document.getElementById("topText").innerHTML = "changing page";
+		window.location.replace("/MultipleChoice");
+	});
+</script>
 	

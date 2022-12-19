@@ -13,19 +13,25 @@ using System.Windows.Forms;
 using Microsoft.Office.Core;
 using System.Collections;
 using System.Drawing;
+using System.Runtime.Remoting;
+using System.Reflection;
 
 namespace PP_AddIn___minieks
 {
     public partial class Ribbon1
     {
-        HubConnection _connection;
+        static HubConnection _connection;
         int mycode;
         bool sessionActive = false;
 
         private const string uri = "https://localhost:7252/webHub";
-        string nonCodeText = "Join the quiz with XXXX\nat Myrequizzen.com";
+        static string nonCodeText = "Join the quiz with XXXX\nat Myrequizzen.com";
         string codeText = "error";
 
+        public static string getNonCodeText()
+        {
+            return nonCodeText;
+        }
 
         void SetupConnection()
         {
@@ -46,6 +52,11 @@ namespace PP_AddIn___minieks
 
 
             _connection.StartAsync();
+        }
+
+        public static void invokeConnection(string methodName)
+        {
+            _connection.InvokeAsync(methodName);
         }
 
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
@@ -110,14 +121,12 @@ namespace PP_AddIn___minieks
                 StartStopSession_btn.Image = Properties.Resources.Stopknap;
                 StartStopSession_btn.Label = "Stop session";
                 sessionActive = true;
-
             }
             else
             {
                 sessionActive = false;
                 StartStopSession_btn.Image = Properties.Resources.Startknap;
                 _connection.InvokeAsync("removeCode", mycode);
-                changetext(nonCodeText, codeText);
 				StartStopSession_btn.Label = "Start session";
 				changetext(nonCodeText, codeText);
                 mycode = 0;
@@ -151,37 +160,12 @@ namespace PP_AddIn___minieks
             }
         }
 
-        public void insertBigBox()
-        {
-            PowerPoint.Slide Sld = Globals.ThisAddIn.Application.ActiveWindow.View.Slide;
-            float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
-            float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
-
-            PowerPoint.Shape shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 500, 50);
-            shape.Name = "shape1";
-            shape.TextFrame.TextRange.InsertAfter("This text was added by using code.");
-
-            shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 100, 500, 50);
-            shape.TextFrame.TextRange.InsertAfter("This text was also added by using code.");
-            shape.Name = "shape2";
-
-            
-            shape = Sld.Shapes.AddShape(MsoAutoShapeType.msoShapeActionButtonCustom, 0, 100, 500, 50);
-            shape.TextFrame.TextRange.InsertAfter("This text was also added by using code.");
-            shape.Name = "shape3";
-
-            string[] myRangeArray = new string[3];
-            myRangeArray[0] = "shape1";
-            myRangeArray[1] = "shape2";
-            myRangeArray[2] = "shape3";
-            Sld.Shapes.Range(myRangeArray).Group();
 
 
-        }
-        private void jdklsaf()
-        {
+        
 
-        }
+        
+        
         private void TLbutton_Click(object sender, RibbonControlEventArgs e)
         {
             Trace.WriteLine("brbutton");
@@ -193,8 +177,6 @@ namespace PP_AddIn___minieks
         {
             Trace.WriteLine("brbutton");
             insertTextBox(1, 0);
-            insertBigBox();
-
         }
         private void BLbutton_Click(object sender, RibbonControlEventArgs e)
         {
