@@ -14,6 +14,7 @@ using System.Drawing.Text;
 using System.Threading;
 using System.Reflection;
 using System.Security.Cryptography;
+using Newtonsoft.Json;
 
 namespace PP_AddIn___minieks
 {
@@ -139,6 +140,7 @@ namespace PP_AddIn___minieks
         }
         public void showQuestionPage(int index, int questionCount)
         {
+
             //Tell webserver to send webpages to multiple choice question
             Ribbon1.invokeConnection("nextQuestion");
 
@@ -147,17 +149,18 @@ namespace PP_AddIn___minieks
             //(Det som Cahtrine startede på at designe i powerpoint, nu i kode)
 
             //Variables with the answer options an the question itself
-            string[] answerOptions = { "" };
+            List<string> answerOptions = new List<string>();
             string question;
 
             //method that should be made where the variables are available:
-            answerOptions = getAnswerOptions(questionCount);
-            question = getQuestion(questionCount);
+            string titel = "";
+            answerOptions = getAnswerOptions(titel);
+            question = getQuestion(titel);
 
 
-            if (answerOptions.Length != 4)
+            if (answerOptions.Count != 4)
             {
-                MessageBox.Show("error, multiple choice should have 4 question options, only received " + answerOptions.Length);
+                MessageBox.Show("error, multiple choice should have 4 question options, only received " + answerOptions.Count);
                 return;
             }
 
@@ -193,17 +196,30 @@ namespace PP_AddIn___minieks
             */
 
         }
-
-        string[] getAnswerOptions(int questionCount)
+        private Spoergsmaalsdata hentSpoergsmaal(string valgtTitel)
         {
+            Spoergsmaalsdata data = new Spoergsmaalsdata();
+            string mellemmand = File.ReadAllText("C:\\ProgramData\\PowerPointQuiz\\" + valgtTitel + ".json");
+            data = JsonConvert.DeserializeObject<Spoergsmaalsdata>(mellemmand);
+            return data;
+        }
+
+        List<string> getAnswerOptions(string valgtTitel)
+        {
+            Spoergsmaalsdata data = hentSpoergsmaal(valgtTitel);
             //TODO: Get the answer options at a specific question
-            string[] returnstring = {"Jonathan", "Jonatan", "Johnathan", "Cathrine"};
+            List<string> returnstring = new List<string>();
+            foreach (string svarMulighed in data.svarMuligheder)
+            {
+                returnstring.Add(svarMulighed);
+            }
             return returnstring;
         }
-        string getQuestion(int questionCount)
+        string getQuestion(string valgtTitel)
         {
+            Spoergsmaalsdata data = hentSpoergsmaal(valgtTitel);
             //TODO: Get the question at a specific question
-            string returnstring = "Hvordan staves Jonathan?";
+            string returnstring = data.spoergsmaal;
             return returnstring;
         }
 
@@ -211,6 +227,7 @@ namespace PP_AddIn___minieks
         {
             
         }
+
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
 
