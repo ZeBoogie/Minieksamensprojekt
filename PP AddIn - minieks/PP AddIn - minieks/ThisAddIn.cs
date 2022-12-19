@@ -14,6 +14,7 @@ using System.Drawing.Text;
 using System.Threading;
 using System.Reflection;
 using System.Security.Cryptography;
+using Newtonsoft.Json;
 
 namespace PP_AddIn___minieks
 {
@@ -146,6 +147,7 @@ namespace PP_AddIn___minieks
         }
         public void showQuestionPage(int index, int questionCount)
         {
+
             //Tell webserver to send webpages to multiple choice question
             Ribbon1.invokeConnection("nextQuestion");
 
@@ -154,17 +156,18 @@ namespace PP_AddIn___minieks
             //(Det som Cahtrine startede på at designe i powerpoint, nu i kode)
 
             //Variables with the answer options an the question itself
-            string[] answerOptions = { "" };
+            List<string> answerOptions = new List<string>();
             string question;
 
             //method that should be made where the variables are available:
-            answerOptions = getAnswerOptions(questionCount);
-            question = getQuestion(questionCount);
+            string titel = "";
+            answerOptions = getAnswerOptions(titel);
+            question = getQuestion(titel);
 
 
-            if (answerOptions.Length != 4)
+            if (answerOptions.Count != 4)
             {
-                MessageBox.Show("error, multiple choice should have 4 question options, only received " + answerOptions.Length);
+                MessageBox.Show("error, multiple choice should have 4 question options, only received " + answerOptions.Count);
                 return;
             }
 
@@ -176,17 +179,23 @@ namespace PP_AddIn___minieks
             
 
             //insert 4 questions
-            PowerPoint.Shape shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 100, 100, 500, 50);
+            PowerPoint.Shape shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, height/3, width/2, height/3);
             shape.TextFrame.TextRange.InsertAfter(answerOptions[0]);
 
-            shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 100, 500, 50);
+            shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, width/2, height/3, width/2, height/3);
             shape.TextFrame.TextRange.InsertAfter(answerOptions[1]);
-            // TODO: repeat with different coordinates. also make the design with boxes with colors etc
+
+			shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, (2*height/3), width/2, height/3);
+			shape.TextFrame.TextRange.InsertAfter(answerOptions[2]);
+
+			shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, width/2, (2*height)/3, width/2, height/3);
+			shape.TextFrame.TextRange.InsertAfter(answerOptions[3]);
+			// TODO: repeat with different coordinates. also make the design with boxes with colors etc
 
 
-            //Insert question
-            //TODO: figure out coordinates, and possibly size of text as well.
-            shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 500, 50);
+			//Insert question
+			//TODO: figure out coordinates, and possibly size of text as well.
+			shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, width, height/3);
             shape.TextFrame.TextRange.InsertAfter(question);
 
 
@@ -200,17 +209,30 @@ namespace PP_AddIn___minieks
             */
 
         }
-
-        string[] getAnswerOptions(int questionCount)
+        private Spoergsmaalsdata hentSpoergsmaal(string valgtTitel)
         {
+            Spoergsmaalsdata data = new Spoergsmaalsdata();
+            string mellemmand = File.ReadAllText("C:\\ProgramData\\PowerPointQuiz\\" + valgtTitel + ".json");
+            data = JsonConvert.DeserializeObject<Spoergsmaalsdata>(mellemmand);
+            return data;
+        }
+
+        List<string> getAnswerOptions(string valgtTitel)
+        {
+            Spoergsmaalsdata data = hentSpoergsmaal(valgtTitel);
             //TODO: Get the answer options at a specific question
-            string[] returnstring = {"Jonathan", "Jonatan", "Johnathan", "Cathrine"};
+            List<string> returnstring = new List<string>();
+            foreach (string svarMulighed in data.svarMuligheder)
+            {
+                returnstring.Add(svarMulighed);
+            }
             return returnstring;
         }
-        string getQuestion(int questionCount)
+        string getQuestion(string valgtTitel)
         {
+            Spoergsmaalsdata data = hentSpoergsmaal(valgtTitel);
             //TODO: Get the question at a specific question
-            string returnstring = "Hvordan staves Jonathan?";
+            string returnstring = data.spoergsmaal;
             return returnstring;
         }
 
@@ -218,6 +240,7 @@ namespace PP_AddIn___minieks
         {
             
         }
+
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
 
