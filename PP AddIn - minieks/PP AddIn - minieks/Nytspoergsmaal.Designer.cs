@@ -226,6 +226,7 @@
             // 
             // insertBillede1_btn
             // 
+            this.insertBillede1_btn.Image = global::PP_AddIn___minieks.Properties.Resources.Billedeikon3;
             this.insertBillede1_btn.Location = new System.Drawing.Point(760, 156);
             this.insertBillede1_btn.Name = "insertBillede1_btn";
             this.insertBillede1_btn.Size = new System.Drawing.Size(26, 26);
@@ -236,6 +237,7 @@
             // 
             // insertBillede2_btn
             // 
+            this.insertBillede2_btn.Image = global::PP_AddIn___minieks.Properties.Resources.Billedeikon3;
             this.insertBillede2_btn.Location = new System.Drawing.Point(760, 188);
             this.insertBillede2_btn.Name = "insertBillede2_btn";
             this.insertBillede2_btn.Size = new System.Drawing.Size(26, 26);
@@ -246,6 +248,7 @@
             // 
             // insertBillede3_btn
             // 
+            this.insertBillede3_btn.Image = global::PP_AddIn___minieks.Properties.Resources.Billedeikon3;
             this.insertBillede3_btn.Location = new System.Drawing.Point(760, 220);
             this.insertBillede3_btn.Name = "insertBillede3_btn";
             this.insertBillede3_btn.Size = new System.Drawing.Size(26, 26);
@@ -256,6 +259,7 @@
             // 
             // insertBillede4_btn
             // 
+            this.insertBillede4_btn.Image = global::PP_AddIn___minieks.Properties.Resources.Billedeikon3;
             this.insertBillede4_btn.Location = new System.Drawing.Point(760, 252);
             this.insertBillede4_btn.Name = "insertBillede4_btn";
             this.insertBillede4_btn.Size = new System.Drawing.Size(26, 26);
