@@ -1,33 +1,32 @@
 ﻿@page
 @model WebsiteMiniProjekt2.Pages.NamepageModel
 @{
+    ViewData["Title"] = "Namepage";
 }
-    <html>
-    <style >
-    .TextPlacement {
-        position: absolute;
-        top: 30%;
-        left: 50%;
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-        -ms-transform: translateX(-50%);
-        transform: translateX(-50%);
-    }
-    </style>
-    <body>
-    <div class="TextPlacement" style="text-align:center";>
+<html>
+<style >
+.TextPlacement {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+</style>
+<body>
+<div class="TextPlacement" style="text-align:center";>
 
-            <h2>Write your name</h2>
-            <form>
-                <input type="text" id="Name" name="WriteName"><br>
-            <input type="submit" id ="submitName" value="Submit"> <br>
-            </form>
+        <h2>Write your name</h2>
+        <form>
+            <input type="text" id="Name" name="WriteName"><br>
+        <input type="submit" id="submitName" value="Submit"> <br>
+        </form>
+    </div>
 
-
-        </div>
-
-    </body>
-    </html>
+</body>
+</html>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 
 <script>

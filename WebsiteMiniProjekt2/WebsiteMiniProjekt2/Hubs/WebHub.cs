@@ -46,12 +46,12 @@ namespace WebsiteMiniProjekt2.Hubs
 
             await Clients.Caller.SendAsync("goToPage", "Namepage");
 
-            //Client (webpage), asks if a user has entered a valid code
-            //if this is the case, then send back a command to the client
-            //telling them to switch side
-        }
+			//Client (webpage), asks if a user has entered a valid code
+			//if this is the case, then send back a command to the client
+			//telling them to switch side
+		}
 
-        public async Task AttamptedUsername(string userName) 
+		public async Task AttamptedUsername(string userName) 
             //this method hasn't been tested
         {
             Trace.WriteLine("attempted chossing following username " + userName);
@@ -72,11 +72,12 @@ namespace WebsiteMiniProjekt2.Hubs
 			playersAndAnswers.Add(userName, new List<string>());
             await Clients.Caller.SendAsync("goToPage", "Waitingpage");
 
-            //Client (webpage), asks if a user has entered a valid code
-            //if this is the case, then send back a command to the client
-            //telling them to switch side
-        }
-        public async Task nextQuestion() //sends webpages to multiple choice
+
+			//Client (webpage), asks if a user has entered a valid code
+			//if this is the case, then send back a command to the client
+			//telling them to switch side
+		}
+		public async Task nextQuestion() //sends webpages to multiple choice
         {
             await Clients.All.SendAsync("nextQuestion");
             Trace.WriteLine("sending clients to next question");

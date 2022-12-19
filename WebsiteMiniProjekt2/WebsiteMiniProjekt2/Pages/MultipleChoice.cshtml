@@ -99,7 +99,7 @@
 		<button class="button button1" id="TL">A</button>
 		</div>
 	<div class="Rightup">
-		<button class="button button2">B</button>
+		<button class="button button2" id="TR">B</button>
 		</div>
 	<div class="Leftdown">
 		<button class="button button3">C</button>
@@ -121,6 +121,7 @@
 			return console.error(err.toString());
 		});
 		event.preventDefault();
+
 	});
 
 	document.getElementById("TL").addEventListener("click", function (event) {
@@ -128,6 +129,9 @@
 			return console.error(err.toString());
 		});
 		event.preventDefault();
+	});
+	
+	document.getElementById("TR").addEventListener("click", function (event) {
 	});
 
 	connection.on("nextQuestion", function () {

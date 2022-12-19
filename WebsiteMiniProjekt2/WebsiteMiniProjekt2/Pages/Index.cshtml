@@ -3,23 +3,16 @@
 @{
     ViewData["Title"] = "Home page";
 }
-    
+
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p id ="topText">Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p id ="topText">Type the quiz code</p>
     <h2>Write the quiz code</h2>
     <form>
         <input type="text" id="QuizCode" name="Quiz code"><br>
         <input type="submit" value="Submit" id="Submit"><br>
     </form>
-
-    <a asp-page="/MultipleChoice">Multiple Choice </a><br>
-    <a asp-page="/Resultpage">Result</a><br>
-    <a asp-page="/TrueFalse">True false</a><br />
-    <a asp-page="/ThreeAnswer">Three Answers</a><br>
-    <a asp-page="/WriteAnswer">Write Answer</a><br>
-    <button id="sendMessageButton" value="Send Message"></button>
 </div>
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
