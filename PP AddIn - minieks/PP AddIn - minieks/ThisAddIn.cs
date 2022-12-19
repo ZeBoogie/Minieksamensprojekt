@@ -40,10 +40,17 @@ namespace PP_AddIn___minieks
             return 5;
         }
 
-        int getCurrentSlideIndex()
+        int getIndexAtTitle(string questionTitle)
         {
-            //TODO: Write code that gets the index of the current slide WHEN PRESENTING
             return 1;
+        }
+
+        string getQuestionOnSlide(SlideShowWindow Wn)
+        {
+            int i = Wn.View.GetClickIndex();
+            MessageBox.Show("index of slide is: " + i);
+            //TODO: Write code that gets the index of the current slide WHEN PRESENTING
+            return "Hvordan staver man til Jonathan.";
         }
 
 
@@ -70,7 +77,8 @@ namespace PP_AddIn___minieks
 
             if (isOnQuestionSlide() && count > 0 && count < amountOfQuestion())
             {
-                int slideIndex = getCurrentSlideIndex();
+                string titelOfQuestion = getQuestionOnSlide(Wn);
+                int slideIndex = getIndexAtTitle(titelOfQuestion);
 
                 //delete everything on current slide (except code), so that the slide is ready to be updated.
                 PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[slideIndex];
@@ -129,7 +137,6 @@ namespace PP_AddIn___minieks
         {
             //TODO: make method that changes the current slide to result design.
             PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[index];
-            MessageBox.Show("from result page: " + Sld.Shapes.Count);
 
             PowerPoint.Shape textBox = Sld.Shapes.AddTextbox(
                 Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 200, 500, 50);
