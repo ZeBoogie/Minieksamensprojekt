@@ -169,17 +169,23 @@ namespace PP_AddIn___minieks
             
 
             //insert 4 questions
-            PowerPoint.Shape shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 100, 100, 500, 50);
+            PowerPoint.Shape shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, height/3, width/2, height/3);
             shape.TextFrame.TextRange.InsertAfter(answerOptions[0]);
 
-            shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 100, 500, 50);
+            shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, width/2, height/3, width/2, height/3);
             shape.TextFrame.TextRange.InsertAfter(answerOptions[1]);
-            // TODO: repeat with different coordinates. also make the design with boxes with colors etc
+
+			shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, (2*height/3), width/2, height/3);
+			shape.TextFrame.TextRange.InsertAfter(answerOptions[2]);
+
+			shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, width/2, (2*height)/3, width/2, height/3);
+			shape.TextFrame.TextRange.InsertAfter(answerOptions[3]);
+			// TODO: repeat with different coordinates. also make the design with boxes with colors etc
 
 
-            //Insert question
-            //TODO: figure out coordinates, and possibly size of text as well.
-            shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 500, 50);
+			//Insert question
+			//TODO: figure out coordinates, and possibly size of text as well.
+			shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, width, height/3);
             shape.TextFrame.TextRange.InsertAfter(question);
 
 
