@@ -15,6 +15,7 @@ using System.Threading;
 using System.Reflection;
 using System.Security.Cryptography;
 using Newtonsoft.Json;
+using System.Security.AccessControl;
 
 namespace PP_AddIn___minieks
 {
@@ -33,7 +34,6 @@ namespace PP_AddIn___minieks
         public bool isOnQuestionSlide(SlideShowWindow Wn)
         {
             int slideIndex = Wn.View.CurrentShowPosition;
-            MessageBox.Show("getClickindex is: " + slideIndex);
             //TODO: Write code that gets the index of the current slide WHEN PRESENTING
             PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[slideIndex];
             string[] titles = Spoergsmaalsstyring_frm.loadFiles();
@@ -49,7 +49,7 @@ namespace PP_AddIn___minieks
                 }
             }
             //TODO: Write code that checks if we are on curent slide
-            return true;
+            return false;
         }
         public int amountOfQuestion()
         {
@@ -61,7 +61,6 @@ namespace PP_AddIn___minieks
         string getQuestionOnSlide(SlideShowWindow Wn)
         {
             int slideIndex = Wn.View.CurrentShowPosition;
-            MessageBox.Show("getClickindex is: " + slideIndex);
             PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[slideIndex];
             string[] titles = Spoergsmaalsstyring_frm.loadFiles();
             foreach (PowerPoint.Shape shape in Sld.Shapes)
@@ -70,7 +69,6 @@ namespace PP_AddIn___minieks
                 {
                     if (shape.TextFrame.TextRange.Text == titles[i])
                     {
-                        MessageBox.Show("The title on this page is" + titles[i]);
                         return titles[i];
                     }
                 }
@@ -83,6 +81,8 @@ namespace PP_AddIn___minieks
         int count = 0;
         bool onQuestion = true;
         bool firstTimeSlideChanged = true;
+        bool wasOnQuestionSlide = false;
+        int slideIndex = 0;
         private void shouldChangeSlide(SlideShowWindow Wn)
         {
             if(firstTimeLaunched)
@@ -100,10 +100,19 @@ namespace PP_AddIn___minieks
             firstTimeSlideChanged = false;
 
 
-            if (isOnQuestionSlide(Wn))
+            if (isOnQuestionSlide(Wn) || wasOnQuestionSlide)
             {
+                if (wasOnQuestionSlide)
+                {
+                    wasOnQuestionSlide = false;
+
+                }
+                else // if just encountered the question slide
+                {
+                    wasOnQuestionSlide = true;
+                    slideIndex = Wn.View.CurrentShowPosition;
+                }
                 string titelOfQuestion = getQuestionOnSlide(Wn);
-                int slideIndex = Wn.View.CurrentShowPosition;
 
                 //delete everything on current slide (except code), so that the slide is ready to be updated.
                 PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[slideIndex];
@@ -127,13 +136,12 @@ namespace PP_AddIn___minieks
                 if (onQuestion)
                 {
                     onQuestion = false;
-
-                    showQuestionPage(slideIndex, count);
+                    showQuestionPage(slideIndex);
                 }
                 else
                 {
                     onQuestion = true;
-                    showResult(slideIndex, count);
+                    showResult(slideIndex);
                     count += 1;
                 }
 
@@ -153,12 +161,11 @@ namespace PP_AddIn___minieks
                     return;
                 }
                 objSlideShowView = objPres.SlideShowWindow.View;
-                objSlideShowView = objPres.SlideShowWindow.View;
-                objSlideShowView.GotoSlide(1);
+                objSlideShowView.GotoSlide(slideIndex);
             }
         }
 
-        private void showResult(int index, int questionCount)
+        private void showResult(int index)
         {
             //TODO: make method that changes the current slide to result design.
             PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[index];
@@ -169,7 +176,7 @@ namespace PP_AddIn___minieks
             //TODO: tilføj al teksten som det skal være på Result Page. Lige nu kan det ses at det bare er en enkelt tekstboks et tilfældigt sted
             //(Det som Cahtrine startede på at designe i powerpoint, nu i kode)
         }
-        public void showQuestionPage(int index, int questionCount)
+        public void showQuestionPage(int index)
         {
 
             //Tell webserver to send webpages to multiple choice question

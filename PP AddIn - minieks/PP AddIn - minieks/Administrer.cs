@@ -50,7 +50,7 @@ namespace PP_AddIn___minieks
                     navn = navn.Remove(navn.Length - 5, 5);
                     Spoergsmaalsliste_lb.Items.Add(navn);
                 }
-                MessageBox.Show("Spørgsmål slettet", "Spørgsmål slettet");
+                MessageBox.Show("Spørgsmål slettet");
             }
         }
 

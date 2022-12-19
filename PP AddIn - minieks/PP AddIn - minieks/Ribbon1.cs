@@ -95,7 +95,6 @@ namespace PP_AddIn___minieks
                 foreach (var item in slide.Shapes)
                 {
                     var shape = (PowerPoint.Shape)item;
-                    MessageBox.Show(shape.Name);
                     if (shape.HasTextFrame == MsoTriState.msoTrue)
                     {
                         if (shape.TextFrame.HasText == MsoTriState.msoTrue)
@@ -103,7 +102,6 @@ namespace PP_AddIn___minieks
                             
                             var textRange = shape.TextFrame.TextRange;
                             var text = textRange.Text;
-                            MessageBox.Show(text);
                             if(text == oldText)
                             {
                                 shape.TextFrame.TextRange.Text = newText;
