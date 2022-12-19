@@ -153,7 +153,7 @@ namespace PP_AddIn___minieks
             string question;
 
             //method that should be made where the variables are available:
-            string titel = "";
+            string titel = "dobbelt";
             answerOptions = getAnswerOptions(titel);
             question = getQuestion(titel);
 
@@ -172,24 +172,39 @@ namespace PP_AddIn___minieks
             
 
             //insert 4 questions
-            PowerPoint.Shape shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, height/3, width/2, height/3);
+            PowerPoint.Shape shape = Sld.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle, 5, height/3+5, width/2-10, height/3-10);
             shape.TextFrame.TextRange.InsertAfter(answerOptions[0]);
+            shape.Fill.ForeColor.RGB = System.Drawing.Color.FromArgb(0, 0, 255).ToArgb();
+            shape.Line.Visible = MsoTriState.msoFalse;
+            shape.TextFrame.TextRange.Font.Color.RGB = System.Drawing.Color.FromArgb(0, 0, 0).ToArgb();
+            //shape.TextFrame.TextRange.ParagraphFormat.Alignment = PpParagraphAlignment.ppAlignCenter;
 
-            shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, width/2, height/3, width/2, height/3);
+            shape = Sld.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle, width /2+5, height/3+5, width/2-10, height/3-10);
             shape.TextFrame.TextRange.InsertAfter(answerOptions[1]);
+            shape.Fill.ForeColor.RGB = System.Drawing.Color.FromArgb(0, 155, 0).ToArgb();
+            shape.Line.Visible = MsoTriState.msoFalse;
+            shape.TextFrame.TextRange.Font.Color.RGB = System.Drawing.Color.FromArgb(0, 0, 0).ToArgb();
 
-			shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, (2*height/3), width/2, height/3);
+            shape = Sld.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle, 5, (2*height/3)+5, width/2-10, height/3-10);
 			shape.TextFrame.TextRange.InsertAfter(answerOptions[2]);
+            shape.Fill.ForeColor.RGB = System.Drawing.Color.FromArgb(255, 0, 0).ToArgb();
+            shape.Line.Visible = MsoTriState.msoFalse;
+            shape.TextFrame.TextRange.Font.Color.RGB = System.Drawing.Color.FromArgb(0, 0, 0).ToArgb();
 
-			shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, width/2, (2*height)/3, width/2, height/3);
+            shape = Sld.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle, width / 2+5, (2 * height) / 3 + 5, width / 2 - 10, height / 3 - 10);
 			shape.TextFrame.TextRange.InsertAfter(answerOptions[3]);
-			// TODO: repeat with different coordinates. also make the design with boxes with colors etc
+            shape.Fill.ForeColor.RGB = System.Drawing.Color.FromArgb(0, 255, 255).ToArgb();
+            shape.Line.Visible = MsoTriState.msoFalse;
+            shape.TextFrame.TextRange.Font.Color.RGB = System.Drawing.Color.FromArgb(0, 0, 0).ToArgb();
+            // TODO: repeat with different coordinates. also make the design with boxes with colors etc
 
 
-			//Insert question
-			//TODO: figure out coordinates, and possibly size of text as well.
-			shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, width, height/3);
+            //Insert question
+            //TODO: figure out coordinates, and possibly size of text as well.
+            shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, width, height/3);
             shape.TextFrame.TextRange.InsertAfter(question);
+            shape.TextFrame.TextRange.ParagraphFormat.Alignment = PpParagraphAlignment.ppAlignCenter;
+
 
 
 
