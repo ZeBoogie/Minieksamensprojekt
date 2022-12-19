@@ -41,15 +41,10 @@ namespace PP_AddIn___minieks
             return 5;
         }
 
-        int getIndexAtTitle(string questionTitle)
-        {
-            return 1;
-        }
-
         string getQuestionOnSlide(SlideShowWindow Wn)
         {
-            int i = Wn.View.GetClickIndex();
-            MessageBox.Show("index of slide is: " + i);
+            int i = Wn.View.CurrentShowPosition;
+            MessageBox.Show("getClickindex is: " + i);
             //TODO: Write code that gets the index of the current slide WHEN PRESENTING
             return "Hvordan staver man til Jonathan.";
         }
@@ -79,7 +74,7 @@ namespace PP_AddIn___minieks
             if (isOnQuestionSlide() && count > 0 && count < amountOfQuestion())
             {
                 string titelOfQuestion = getQuestionOnSlide(Wn);
-                int slideIndex = getIndexAtTitle(titelOfQuestion);
+                int slideIndex = Wn.View.CurrentShowPosition;
 
                 //delete everything on current slide (except code), so that the slide is ready to be updated.
                 PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[slideIndex];
@@ -219,6 +214,13 @@ namespace PP_AddIn___minieks
 
         List<string> getAnswerOptions(string valgtTitel)
         {
+            List<string> returdnstring = new List<string>();
+            returdnstring.Add("Jonatahn");
+            returdnstring.Add("Jonathn");
+            returdnstring.Add("Jonatn");
+            returdnstring.Add("Jonan");
+            return returdnstring;
+
             Spoergsmaalsdata data = hentSpoergsmaal(valgtTitel);
             //TODO: Get the answer options at a specific question
             List<string> returnstring = new List<string>();
@@ -230,6 +232,8 @@ namespace PP_AddIn___minieks
         }
         string getQuestion(string valgtTitel)
         {
+           
+            return "hvordan staver man Jonathan";
             Spoergsmaalsdata data = hentSpoergsmaal(valgtTitel);
             //TODO: Get the question at a specific question
             string returnstring = data.spoergsmaal;
