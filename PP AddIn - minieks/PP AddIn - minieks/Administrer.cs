@@ -9,7 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.PowerPoint;
+using Microsoft.Office.Tools.Ribbon;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
+using Office = Microsoft.Office.Core;
 
 namespace PP_AddIn___minieks
 {
@@ -58,9 +61,16 @@ namespace PP_AddIn___minieks
 
         private void button1_Click_3(object sender, EventArgs e)
         {
-            //PowerPoint.Shape bob = new PowerPoint.Shape();
-            //bob.
-            this.Close();
+            if (Spoergsmaalsliste_lb.SelectedIndex != -1)
+            {
+                valgt = Spoergsmaalsliste_lb.SelectedItem.ToString();
+                PowerPoint.Slide sld = Globals.ThisAddIn.Application.ActiveWindow.View.Slide;
+                PowerPoint.Shape shape = sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 0, 0);
+                shape.TextFrame.TextRange.InsertAfter(valgt);
+                this.Close();
+            }
+
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)

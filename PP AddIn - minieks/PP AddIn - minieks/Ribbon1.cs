@@ -75,8 +75,7 @@ namespace PP_AddIn___minieks
         //Nyt spørgsmål klik
         private void button1_Click_1(object sender, RibbonControlEventArgs e)
         {
-             var myForm = new Nyt_spaargsmaal_frm();
-             myForm.Show();
+
         }
 
 
