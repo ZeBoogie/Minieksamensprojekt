@@ -64,12 +64,15 @@ namespace PP_AddIn___minieks
             SetupConnection();
         }
 
+        //Administrer spørgsmål klik
         private void button1_Click(object sender, RibbonControlEventArgs e)
         {
             var myForm = new Spoergsmaalsstyring_frm();
             myForm.Show();
         }
 
+
+        //Nyt spørgsmål klik
         private void button1_Click_1(object sender, RibbonControlEventArgs e)
         {
              var myForm = new Nyt_spaargsmaal_frm();

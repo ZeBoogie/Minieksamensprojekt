@@ -65,15 +65,23 @@ namespace PP_AddIn___minieks
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string[] titles = loadFiles();
+            foreach (string title in titles)
+            {
+                Spoergsmaalsliste_lb.Items.Add(title);
+            }
+        }
+        public static string[] loadFiles()
+        {
             string path = "C:\\ProgramData\\PowerPointQuiz";
             DirectoryInfo d = new DirectoryInfo(path);
-            FileInfo[] Files = d.GetFiles();
-            foreach (FileInfo file in Files)
+            FileInfo[] files = d.GetFiles();
+            string[] titleNames = new string[files.Length];
+            for(int i = 0; i < files.Length; i++)
             {
-                string  navn = file.Name;
-                navn = navn.Remove(navn.Length - 5, 5);
-                Spoergsmaalsliste_lb.Items.Add(navn);
+                titleNames[i] = files[i].Name.Remove((int)(files[i].Name.Length) - 5, 5);
             }
+            return titleNames;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

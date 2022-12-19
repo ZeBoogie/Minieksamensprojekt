@@ -30,8 +30,24 @@ namespace PP_AddIn___minieks
             this.Application.SlideShowNextSlide += new PowerPoint.EApplication_SlideShowNextSlideEventHandler(shouldChangeSlide);
         }
 
-        public bool isOnQuestionSlide()
+        public bool isOnQuestionSlide(SlideShowWindow Wn)
         {
+            int slideIndex = Wn.View.CurrentShowPosition;
+            MessageBox.Show("getClickindex is: " + slideIndex);
+            //TODO: Write code that gets the index of the current slide WHEN PRESENTING
+            PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[slideIndex];
+            string[] titles = Spoergsmaalsstyring_frm.loadFiles();
+            foreach (PowerPoint.Shape shape in Sld.Shapes)
+            {
+                for(int i = 0; i < titles.Length; i++)
+                {
+                    if (shape.TextFrame.TextRange.Text == titles[i])
+                    {
+                        MessageBox.Show("There is a textbox on this page, that i recognize as i title");
+                        return true;
+                    }
+                }
+            }
             //TODO: Write code that checks if we are on curent slide
             return true;
         }
@@ -43,10 +59,9 @@ namespace PP_AddIn___minieks
 
         string getQuestionOnSlide(SlideShowWindow Wn)
         {
-            int i = Wn.View.CurrentShowPosition;
-            MessageBox.Show("getClickindex is: " + i);
-            //TODO: Write code that gets the index of the current slide WHEN PRESENTING
+
             return "Hvordan staver man til Jonathan.";
+
         }
 
 
@@ -71,7 +86,7 @@ namespace PP_AddIn___minieks
             firstTimeSlideChanged = false;
 
 
-            if (isOnQuestionSlide() && count > 0 && count < amountOfQuestion())
+            if (isOnQuestionSlide(Wn) && count > 0 && count < amountOfQuestion())
             {
                 string titelOfQuestion = getQuestionOnSlide(Wn);
                 int slideIndex = Wn.View.CurrentShowPosition;
