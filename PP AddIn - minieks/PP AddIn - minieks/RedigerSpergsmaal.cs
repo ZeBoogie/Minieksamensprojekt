@@ -40,7 +40,7 @@ namespace PP_AddIn___minieks
 
         private void redigerSpoergsmaal_frm_Load(object sender, EventArgs e)
         {
-           Spoergsmaalsdata data = new Spoergsmaalsdata();
+            Spoergsmaalsdata data = new Spoergsmaalsdata();
             string mellemmand = File.ReadAllText("C:\\ProgramData\\PowerPointQuiz\\" + valgt + ".json");
             data = JsonConvert.DeserializeObject<Spoergsmaalsdata>(mellemmand);
             Svartype_comboB.SelectedItem = data.type;

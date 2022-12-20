@@ -115,7 +115,7 @@ namespace WebsiteMiniProjekt2.Hubs
 
             await Clients.Caller.SendAsync("useThisCode", code);
         }
-        public Task saveDataToDatabase(List<string> titlesOfQuestions, List<List<string>> questions,
+        public Task saveDataToDatabase(List<string> titlesOfQuestions, List<string> questions, List<List<string>> answerOptions,
             DateTime sessionStart, DateTime sessionEnd, int PowerPointID)
         {
             //PowerPointID is a number used so that you can only acces data that belongs to the powerpoint.

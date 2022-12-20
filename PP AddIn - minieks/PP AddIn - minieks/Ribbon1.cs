@@ -27,6 +27,7 @@ namespace PP_AddIn___minieks
         private const string uri = "https://localhost:7252/webHub";
         static string nonCodeText = "Join the quiz with XXXX\nat Myrequizzen.com";
         string codeText = "error";
+        DateTime startSession;
 
         public static string getNonCodeText()
         {
@@ -114,27 +115,47 @@ namespace PP_AddIn___minieks
 
         private void StartStopSession_btn_Click(object sender, RibbonControlEventArgs e)
         {
-            if (!sessionActive)
+            if (!sessionActive) //when starting session
             {
                 _connection.InvokeAsync("giveMeCode");
-                Trace.WriteLine("hi");
                 StartStopSession_btn.Image = Properties.Resources.Stopknap;
                 StartStopSession_btn.Label = "Stop session";
                 sessionActive = true;
-            }
-            else
-            {
+
+                startSession = DateTime.Now;
+			}
+			else //when ending sessions
+			{
                 sessionActive = false;
                 StartStopSession_btn.Image = Properties.Resources.Startknap;
                 _connection.InvokeAsync("removeCode", mycode);
 				StartStopSession_btn.Label = "Start session";
 				changetext(nonCodeText, codeText);
-                mycode = 0;
-            }
+
+				List<string> titlesOfQuestions = new List<string>();
+                titlesOfQuestions = Spoergsmaalsstyring_frm.loadFiles().ToList();
+
+				List<List<string>> answerOptions = new List<List<string>>();
+				answerOptions = getAllAnswerOptions(titlesOfQuestions);
+
+                List<string> questions = new List<string>();
+
+                DateTime sessionEnd = DateTime.Now;
+                int PowerPointID = 1;
+				_connection.InvokeAsync("saveDataToDatabase", titlesOfQuestions, questions, answerOptions, startSession, sessionEnd, PowerPointID);
+
+				mycode = 0; //reset code connected to server
+
+			}
+		}
+
+		public List<List<string>> getAllAnswerOptions(List<string> titles)
+        {
+            //titles also being the names of the files, wherein the questions are.
+            //TODO: return all the questions
+            return new List<List<string>>();
         }
-
-
-        int textboxwidth = 300;
+		int textboxwidth = 300;
         int textboxheight = 50;
         private void BRbutton_Click(object sender, RibbonControlEventArgs e)
         {
