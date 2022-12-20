@@ -11,10 +11,12 @@ namespace WebsiteMiniProjekt2.Pages
         {
             _logger = logger;
         }
-
+        public void redirict()
+        {
+            Response.Redirect("/Namepage?Code=1234");
+        }
         public void OnGet()
         {
-
         }
     }
 }

@@ -2,6 +2,7 @@
 @model WebsiteMiniProjekt2.Pages.NamepageModel
 @{
     ViewData["Title"] = "Namepage";
+    string code = Request.Query["Code"];
 }
 <html>
 <style >
@@ -19,6 +20,8 @@
 <div class="TextPlacement" style="text-align:center";>
 
         <h2>Write your name</h2>
+        <h3>code is @code</h3>
+
         <form>
             <input type="text" id="Name" name="WriteName"><br>
         <input type="submit" id="submitName" value="Submit"> <br>
@@ -65,6 +68,6 @@
         return console.error(err.toString());
     });
     event.preventDefault();
-    window.location.replace("/" + nameOfPage);
+    window.location.replace("/" + nameOfPage + "/?Code=" + @code + "/?Name=myName");
 });
 </script>

@@ -15,11 +15,13 @@ connection.start().then(function () {
     event.preventDefault();
 });
 
+var code;
+
 //when submit is clicked (this button is only on landing page (index)) then
 //get the code in the forms, and ask the webserver if the code is valid.
 //if this is the case, then it switches the current page to waiting page
 document.getElementById("Submit").addEventListener("click", function (event) {
-    var code = document.getElementById("QuizCode").value //this is a string!
+    code = document.getElementById("QuizCode").value //this is a string!
     connection.invoke("AttemptedLogin", code).catch(function (err) {
         return console.error(err.toString());
     });
@@ -35,7 +37,7 @@ connection.on("goToPage", function (nameOfPage) {
         return console.error(err.toString());
     });
     event.preventDefault();
-    window.location.replace("/" + nameOfPage);
+    window.location.replace("/" + nameOfPage + "/?Code=" + code);
 });
 
 connection.on("wrongStatement", function (errorStatement) {
