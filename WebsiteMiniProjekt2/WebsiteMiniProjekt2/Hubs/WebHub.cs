@@ -115,8 +115,24 @@ namespace WebsiteMiniProjekt2.Hubs
 
             await Clients.Caller.SendAsync("useThisCode", code);
         }
-        
-        public Task submitAnswer(string nameOfQuizzer, string quizID, string answer)
+        public Task saveDataToDatabase(List<string> titlesOfQuestions, List<List<string>> questions,
+            DateTime sessionStart, DateTime sessionEnd, int PowerPointID)
+        {
+            //PowerPointID is a number used so that you can only acces data that belongs to the powerpoint.
+			//takes all the important data as input (i think, you can add more if needed)
+            //you can acces all the players' answers and names in the dictionary, as seen in code below.
+            foreach (KeyValuePair<string, List<string>> ele2 in playersAndAnswers)
+			{
+				Trace.WriteLine("this is the dictionary");
+				Trace.WriteLine("dictionary key is users name and is " + ele2.Key + " and the amount of answers from that player is " + ele2.Value.Count);
+			};
+
+
+			//save all the data above into database
+			return Task.CompletedTask;
+		}
+
+		public Task submitAnswer(string nameOfQuizzer, string quizID, string answer)
         {
             foreach (KeyValuePair<string, List<string>> ele2 in playersAndAnswers)
             {
