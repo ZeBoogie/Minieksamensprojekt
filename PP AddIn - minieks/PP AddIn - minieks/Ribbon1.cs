@@ -15,6 +15,8 @@ using System.Collections;
 using System.Drawing;
 using System.Runtime.Remoting;
 using System.Reflection;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace PP_AddIn___minieks
 {
@@ -142,18 +144,39 @@ namespace PP_AddIn___minieks
 
                 DateTime sessionEnd = DateTime.Now;
                 int PowerPointID = 1;
+				string result = $"Titles of questions are: {string.Join(", ", titlesOfQuestions)} ---- AnswerOptions are: ";
+
+				foreach (List<string> titleOfAnswerOption in answerOptions)
+                {
+
+					result += string.Join(", ", titleOfAnswerOption) + " || next list of answeroptions -> ";
+				}
+
+                Trace.WriteLine(result);
 				_connection.InvokeAsync("saveDataToDatabase", titlesOfQuestions, questions, answerOptions, startSession, sessionEnd, PowerPointID);
 
 				mycode = 0; //reset code connected to server
 
 			}
 		}
-
+        public List<string> getAllQuestions(List<string> titles)
+		{
+            return new List<string>();
+        }
 		public List<List<string>> getAllAnswerOptions(List<string> titles)
         {
             //titles also being the names of the files, wherein the questions are.
-            //TODO: return all the questions
-            return new List<List<string>>();
+            //TODO: return all the answer options.
+            List<List<string>> answerOptions = new List<List<string>>();
+            foreach(string title in titles)
+            {
+				Spoergsmaalsdata data = new Spoergsmaalsdata();
+				string mellemmand = File.ReadAllText("C:\\ProgramData\\PowerPointQuiz\\" + title + ".json");
+				data = JsonConvert.DeserializeObject<Spoergsmaalsdata>(mellemmand);
+				List<string> answerOptionsAtTitle = data.svarMuligheder;
+                answerOptions.Add(answerOptionsAtTitle);
+            }
+            return answerOptions;
         }
 		int textboxwidth = 300;
         int textboxheight = 50;
