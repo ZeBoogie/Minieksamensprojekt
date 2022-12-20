@@ -116,7 +116,7 @@ namespace WebsiteMiniProjekt2.Hubs
             await Clients.Caller.SendAsync("useThisCode", code);
         }
         
-        public Task submitAnswer(string nameOfQuizzer, int answer)
+        public Task submitAnswer(string nameOfQuizzer, string quizID, string answer)
         {
             foreach (KeyValuePair<string, List<string>> ele2 in playersAndAnswers)
             {
@@ -125,29 +125,29 @@ namespace WebsiteMiniProjekt2.Hubs
 			}
             try
             {
-				List<string> answers = playersAndAnswers["nameOfQuizzer"];
-				answers.Add(nameOfQuizzer);
-				playersAndAnswers["nameOfQuizzer"] = answers;
+				List<string> answers = playersAndAnswers[nameOfQuizzer]; //save the answers of the quizzer in list
+				answers.Add(answer); //add the new answers
+				playersAndAnswers[nameOfQuizzer] = answers;
 			}
             catch(Exception ex)
             {
-
+                Trace.WriteLine("couldn't add answers to " + nameOfQuizzer + ". Perhaps he didn't exist. ans was" + answer);
             }
-            
-			Trace.WriteLine(playersAndAnswers);
+
+            //print dictionary second time
+            foreach (KeyValuePair<string, List<string>> ele2 in playersAndAnswers)
+            {
+                Trace.WriteLine("printing dictionary second time");
+                Trace.WriteLine("dictionary key is " + ele2.Key + " and count is " + ele2.Value.Count);
+            }
+
+            Trace.WriteLine(playersAndAnswers);
 			return Task.CompletedTask;
 
             //TODO save answer in dictionary.
 		}
 
-		public Task PrintSstring(string String) //be aware that input from
-											   //html forms, will most likely be a string, you have earlier in your
-											   //life spent more than an hour being confused why there was an
-											   //error on your server, due to this... 13-12-2022
-		{
-			Trace.WriteLine(String);
-			return Task.CompletedTask;
-		}
+
 
 		public static void saveAnswersToDatabase()
         {
@@ -160,7 +160,7 @@ namespace WebsiteMiniProjekt2.Hubs
                                                //life spent more than an hour being confused why there was an
                                                //error on your server, due to this... 13-12-2022
         {
-            Trace.WriteLine(String);
+            Trace.WriteLine(" --------------" + String + "--------------");
             return Task.CompletedTask;
         }
 

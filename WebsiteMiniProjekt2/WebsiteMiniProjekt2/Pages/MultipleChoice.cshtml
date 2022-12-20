@@ -1,6 +1,8 @@
 ﻿@page
 @model WebsiteMiniProjekt2.Pages.QuistionPageModel
 @{
+	string name = Request.Query["Name"];
+    string code = Request.Query["Code"];
 }
  
 <style>
@@ -95,6 +97,7 @@
 
 	</style>
 	<body>
+	<h1 id="topText">Waiting... </h1>
 	<div class="Leftup">
 		<button class="button button1" id="TL">A</button>
 		</div>
@@ -117,26 +120,34 @@
 	var connection = new signalR.HubConnectionBuilder().withUrl("/webHub").build();
 
 	connection.start().then(function () {
-		connection.invoke("PrintString", "connection MultipleChoice started").catch(function (err) {
-			return console.error(err.toString());
-		});
+		connection.invoke("PrintString", "connection multplechoice started").catch(function (err) {
+            return console.error(err.toString());
+        });
 		event.preventDefault();
-
 	});
 
 	document.getElementById("TL").addEventListener("click", function (event) {
-		connection.invoke("submitAnswer", "nameOfQuizzer", 0).catch(function (err) {
+		document.getElementById("topText").innerHTML = "TL clicked";
+
+		connection.invoke("PrintString", "Tl Clicked").catch(function (err) {
+            return console.error(err.toString());
+        });
+		event.preventDefault();
+
+		connection.invoke("PrintString", "page to go to is: " + @name).catch(function (err) {
+            return console.error(err.toString());
+        });
+        event.preventDefault();
+
+		connection.invoke("submitAnswer", "" + @name, "43", "0").catch(function (err) {
 			return console.error(err.toString());
 		});
 		event.preventDefault();
 	});
 	
-	document.getElementById("TR").addEventListener("click", function (event) {
-	});
-
+	
 	connection.on("nextQuestion", function () {
 		document.getElementById("topText").innerHTML = "changing page";
 		window.location.replace("/MultipleChoice");
 	});
 </script>
-	

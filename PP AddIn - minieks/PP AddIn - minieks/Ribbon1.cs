@@ -175,14 +175,14 @@ namespace PP_AddIn___minieks
 
         private void TRbutton_Click(object sender, RibbonControlEventArgs e)
         {
-            Trace.WriteLine("brbutton");
+            Trace.WriteLine("TRbutton");
             insertTextBox(1, 0);
-        }
+			_connection.InvokeAsync("nextQuestion");
+		}
         private void BLbutton_Click(object sender, RibbonControlEventArgs e)
         {
-            Trace.WriteLine("brbutton");
+            Trace.WriteLine("BLbutton");
             insertTextBox(0, 1);
-
         }
     }
 }

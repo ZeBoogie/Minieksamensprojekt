@@ -48,9 +48,11 @@
         event.preventDefault();
     });
 
+    var username = "";
+
     //eventlistener for submit button, that takes the name, and 
     document.getElementById("submitName").addEventListener("click", function (event) {
-        var username = document.getElementById("Name").value //this is a string!
+        username = document.getElementById("Name").value //this is a string!
         connection.invoke("AttamptedUsername", username).catch(function (err) {
             return console.error(err.toString());
         });
@@ -64,10 +66,10 @@
 
     //method to receive commands on which page the webpage should be on.
     connection.on("goToPage", function (nameOfPage) {
-    connection.invoke("PrintString", "page to go to is: " + nameOfPage).catch(function (err) {
+    connection.invoke("PrintString", "page to go to is: " + nameOfPage + @code).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();
-    window.location.replace("/" + nameOfPage + "/?Code=" + @code + "/?Name=myName");
+    window.location.replace("/" + nameOfPage + "?Code=" + @code + "&Name=" + username);
 });
 </script>
