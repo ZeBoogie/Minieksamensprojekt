@@ -82,7 +82,15 @@ namespace WebsiteMiniProjekt2.Hubs
 		}
 		public async Task nextQuestion() //sends webpages to multiple choice
         {
-            await Clients.All.SendAsync("nextQuestion");
+			foreach (KeyValuePair<string, List<string>> ele2 in playersAndAnswers)
+			{
+				Trace.WriteLine("----adding noAnswer to all players-----");
+				List<string> answers = ele2.Value; //save the answers of the quizzer in list
+				answers.Add("noAnswer"); //modify the last element of the list, as it earlier has been set to "noAnswer"
+				playersAndAnswers[ele2.Key] = answers;
+				Trace.WriteLine("added " + ele2.Value + " to player " + ele2.Value);
+			}
+			await Clients.All.SendAsync("nextQuestion");
             Trace.WriteLine("sending clients to next question");
         }
 
@@ -178,29 +186,29 @@ namespace WebsiteMiniProjekt2.Hubs
         {
             foreach (KeyValuePair<string, List<string>> ele2 in playersAndAnswers)
             {
-				Trace.WriteLine("printing dictionary");
-				Trace.WriteLine("dictionary key is " + ele2.Key + " and count is " + ele2.Value.Count);
+				Trace.WriteLine("---printing dictionary - at submitAnswer---");
+				Trace.WriteLine("dictionary key is " + ele2.Key + " and it countains following amount of answers: " + ele2.Value.Count);
 			}
             try
             {
 				List<string> answers = playersAndAnswers[nameOfQuizzer]; //save the answers of the quizzer in list
-				answers.Add(answer); //add the new answers
+                answers[answers.Count-1] = answer; //modify the last element of the list, as it earlier has been set to "noAnswer"
 				playersAndAnswers[nameOfQuizzer] = answers;
+
 			}
             catch(Exception ex)
             {
-                Trace.WriteLine("couldn't add answers to " + nameOfQuizzer + ". Perhaps he didn't exist. ans was" + answer);
+                Trace.WriteLine("****couldn't add answers to " + nameOfQuizzer + ". Perhaps he didn't exist. ans was" + answer + "****");
             }
 
             //print dictionary second time
             foreach (KeyValuePair<string, List<string>> ele2 in playersAndAnswers)
             {
-                Trace.WriteLine("printing dictionary second time");
-                Trace.WriteLine("dictionary key is " + ele2.Key + " and count is " + ele2.Value.Count);
+                Trace.WriteLine("----If no exception was thrown---");
+                Trace.WriteLine("dictionary key is " + ele2.Key + " and it contains following answers: " + string.Join(", ", ele2.Value));
             }
 
-            Trace.WriteLine(playersAndAnswers);
-			return Task.CompletedTask;
+            return Task.CompletedTask;
 
             //TODO save answer in dictionary.
 		}

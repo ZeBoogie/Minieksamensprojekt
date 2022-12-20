@@ -97,7 +97,7 @@
 
 	</style>
 	<body>
-	<h1 id="topText">Waiting... </h1>
+	<h3 id="topText">Waiting... </h3>
 	<div class="Leftup">
 		<button class="button button1" id="TL">A</button>
 		</div>
@@ -120,6 +120,7 @@
 	var connection = new signalR.HubConnectionBuilder().withUrl("/webHub").build();
 
 	connection.start().then(function () {
+		document.getElementById("topText").innerHTML = "Connected  to server - waiting for click or nextquestion";
 		connection.invoke("PrintString", "connection multplechoice started").catch(function (err) {
             return console.error(err.toString());
         });
@@ -127,19 +128,32 @@
 	});
 
 	document.getElementById("TL").addEventListener("click", function (event) {
-		document.getElementById("topText").innerHTML = "TL clicked";
-
-		connection.invoke("PrintString", "Tl Clicked").catch(function (err) {
-            return console.error(err.toString());
-        });
+		window.location.replace("/Waitingpage?Code=" + @code + "&Name=" + @name);
+		connection.invoke("submitAnswer", "" + @name, "" + @code, "0").catch(function (err) {
+			return console.error(err.toString());
+		});
 		event.preventDefault();
+	});
 
-		connection.invoke("PrintString", "page to go to is: " + @name).catch(function (err) {
-            return console.error(err.toString());
-        });
-        event.preventDefault();
+	document.getElementById("TR").addEventListener("click", function (event) {
+		window.location.replace("/Waitingpage?Code=" + @code + "&Name=" + @name);
+		connection.invoke("submitAnswer", "" + @name, "" + @code, "1").catch(function (err) {
+			return console.error(err.toString());
+		});
+		event.preventDefault();
+	});
 
-		connection.invoke("submitAnswer", "" + @name, "43", "0").catch(function (err) {
+	document.getElementById("BL").addEventListener("click", function (event) {
+		window.location.replace("/Waitingpage?Code=" + @code + "&Name=" + @name);
+		connection.invoke("submitAnswer", "" + @name, "" + @code, "2").catch(function (err) {
+			return console.error(err.toString());
+		});
+		event.preventDefault();
+	});
+
+	document.getElementById("BR").addEventListener("click", function (event) {
+		window.location.replace("/Waitingpage?Code=" + @code + "&Name=" + @name);
+		connection.invoke("submitAnswer", "" + @name, "" + @code, "3").catch(function (err) {
 			return console.error(err.toString());
 		});
 		event.preventDefault();
