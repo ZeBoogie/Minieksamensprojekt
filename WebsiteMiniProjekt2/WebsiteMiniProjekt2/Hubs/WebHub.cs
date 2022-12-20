@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 using System.Xml.Linq;
+using Newtonsoft.Json;
+using Microsoft.Data.Sqlite;
 
 namespace WebsiteMiniProjekt2.Hubs
 {
@@ -24,6 +26,7 @@ namespace WebsiteMiniProjekt2.Hubs
             if(codesInUse.Contains(code))
             {
                 codesInUse.Remove(code);
+                svend();
             }
         }
 
@@ -123,11 +126,50 @@ namespace WebsiteMiniProjekt2.Hubs
 
             await Clients.Caller.SendAsync("useThisCode", code);
         }
+        public void svend()
+        {
+            Database DatabaseObj = new Database();
+            string query = "INSERT INTO Personer (Navn) VALUES (@bob)";
+            SqliteCommand myCommand = new SqliteCommand(query, DatabaseObj.myConnecntion);
+
+            if (DatabaseObj.myConnecntion.State != System.Data.ConnectionState.Open)
+            {
+                DatabaseObj.myConnecntion.Open();
+            }
+            myCommand.Parameters.AddWithValue("@bob", "cage");
+            myCommand.ExecuteNonQuery();
+            if (DatabaseObj.myConnecntion.State != System.Data.ConnectionState.Closed)
+            {
+                DatabaseObj.myConnecntion.Close();
+            }
+        }
+
         public Task saveDataToDatabase(List<string> titlesOfQuestions, List<string> questions, List<List<string>> answerOptions,
             DateTime sessionStart, DateTime sessionEnd, int PowerPointID)
         {
+            /*Spoergsmaalsdata data = new Spoergsmaalsdata();
+            string mellemmand = File.ReadAllText("C:\\ProgramData\\PowerPointQuiz\\" + valgt + ".json");
+            data = JsonConvert.DeserializeObject<Spoergsmaalsdata>(mellemmand);
+            */
+            
+            Database DatabaseObj = new Database();
+            string query = "INSERT INTO Personer (Navn) VALUES (@bob)";
+            SqliteCommand myCommand = new SqliteCommand(query, DatabaseObj.myConnecntion);
+           
+            if (DatabaseObj.myConnecntion.State != System.Data.ConnectionState.Open) 
+            {
+                DatabaseObj.myConnecntion.Open();
+            }
+            myCommand.Parameters.AddWithValue("@bob", "cage");
+            myCommand.ExecuteNonQuery();
+            if (DatabaseObj.myConnecntion.State != System.Data.ConnectionState.Closed)
+            {
+                DatabaseObj.myConnecntion.Close();
+            }
+
+
             //PowerPointID is a number used so that you can only acces data that belongs to the powerpoint.
-			//takes all the important data as input (i think, you can add more if needed)
+            //takes all the important data as input (i think, you can add more if needed)
             //you can acces all the players' answers and names in the dictionary, as seen in code below.
             foreach (KeyValuePair<string, List<string>> ele2 in playersAndAnswers)
 			{

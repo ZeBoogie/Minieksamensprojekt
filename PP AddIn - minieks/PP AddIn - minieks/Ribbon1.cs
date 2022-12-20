@@ -17,6 +17,8 @@ using System.Runtime.Remoting;
 using System.Reflection;
 using Newtonsoft.Json;
 using System.IO;
+using Microsoft.Office.Interop.Excel;
+using Microsoft.Data.Sqlite;
 
 namespace PP_AddIn___minieks
 {
@@ -234,6 +236,44 @@ namespace PP_AddIn___minieks
         {
             Trace.WriteLine("BLbutton");
             insertTextBox(0, 1);
+        }
+
+        private void SessionDownload_comboB_TextChanged(object sender, RibbonControlEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, RibbonControlEventArgs e)
+        {
+            Excelmaking();
+        }
+
+        void Excelmaking()
+        {
+            Workbook workbook;
+            Worksheet worksheet;
+            Microsoft.Office.Interop.Excel._Application excel = new Microsoft.Office.Interop.Excel.Application();
+            string path = "C:\\Users\\Jonat\\Documents\\test.xlsx";
+            workbook = excel.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
+            workbook.SaveAs(path);
+            excel.Workbooks.Open(path);
+            
+        }
+
+        private void button1_Click_3(object sender, RibbonControlEventArgs e)
+        {
+            svend();
+        }
+
+        public void svend()
+        {
+            Database DatabaseObj = new Database();
+            string query = "INSERT INTO Personer (Navn) VALUES (@bob)";
+            SqliteCommand myCommand = new SqliteCommand(query, DatabaseObj.myConnection);
+            DatabaseObj.OpenConnection();
+            myCommand.Parameters.AddWithValue("@bob", "cage");
+            myCommand.ExecuteNonQuery();
+            DatabaseObj.CloseConnection();
         }
     }
 }
