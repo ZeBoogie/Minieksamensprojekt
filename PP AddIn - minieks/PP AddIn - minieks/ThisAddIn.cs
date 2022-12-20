@@ -16,6 +16,8 @@ using System.Reflection;
 using System.Security.Cryptography;
 using Newtonsoft.Json;
 using System.Security.AccessControl;
+using Microsoft.VisualStudio.Tools.Applications.Runtime;
+using System.Diagnostics;
 
 namespace PP_AddIn___minieks
 {
@@ -82,7 +84,7 @@ namespace PP_AddIn___minieks
         bool onQuestion = true;
         bool firstTimeSlideChanged = true;
         bool wasOnQuestionSlide = false;
-        int slideIndex = 0;
+        static int slideIndex = 0;
         private void shouldChangeSlide(SlideShowWindow Wn)
         {
             if(firstTimeLaunched)
@@ -129,11 +131,10 @@ namespace PP_AddIn___minieks
                         shapeIndexToDelete += 1;
                     }
                 }
-                
-
-                //change whatever is on the current slide to question or result, depending on what
-                //previous condition was (onQuestion)
-                if (onQuestion)
+                int[] hardCodedAnswers = {3,4,4,3,3};
+				//change whatever is on the current slide to question or result, depending on what
+				//previous condition was (onQuestion)
+				if (onQuestion)
                 {
                     onQuestion = false;
                     showQuestionPage(slideIndex);
@@ -141,7 +142,8 @@ namespace PP_AddIn___minieks
                 else
                 {
                     onQuestion = true;
-                    showResult(slideIndex);
+					//Ribbon1.invokeConnection("timeIsOver");
+					showResult(hardCodedAnswers);
                     count += 1;
                 }
 
@@ -165,29 +167,73 @@ namespace PP_AddIn___minieks
             }
         }
 
-        private void showResult(int index)
+        public static void showResult(int[] answerthings)
         {
-            //TODO: make method that changes the current slide to result design.
-            PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[index];
+            int index = slideIndex;
+            Trace.WriteLine("ShowResult method in thisaddin.cs received following answers: " + string.Join(", ", answerthings));
+            //method that changes the current slide to result design.
+            PowerPoint.Slide Sld = Globals.ThisAddIn.Application.ActivePresentation.Slides[index];
+			float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
+			float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
 
-            PowerPoint.Shape textBox = Sld.Shapes.AddTextbox(
-                Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 200, 500, 50);
-            textBox.TextFrame.TextRange.InsertAfter("Congratulations, you are on the result page.");
-            //TODO: tilføj al teksten som det skal være på Result Page. Lige nu kan det ses at det bare er en enkelt tekstboks et tilfældigt sted
-            //(Det som Cahtrine startede på at designe i powerpoint, nu i kode)
-        }
-        public void showQuestionPage(int index)
+
+
+			//title
+			int widthOfTitle = (int)Math.Round(width * 0.8);
+			int heightOfTitle = 100;
+
+			PowerPoint.Shape shape = Sld.Shapes.AddTextbox(
+				Office.MsoTextOrientation.msoTextOrientationHorizontal, (width - widthOfTitle) / 2, (int)(0.25 * heightOfTitle), widthOfTitle, heightOfTitle);
+			shape.TextFrame.TextRange.InsertAfter("Results");
+			shape.TextFrame.TextRange.ParagraphFormat.Alignment = PpParagraphAlignment.ppAlignCenter;
+
+            //boxes:
+            string[] answerOptions = { "Didn't answer", "A", "B", "C", "D" };
+			int margin = 60;
+			int heightOfButtomText = 50;
+
+			int WidthOfBox = (int)Math.Round((width - (answerOptions.Length+1) * margin) / answerOptions.Length);
+            int heightOfBox = (int)Math.Round(height - heightOfTitle - 1.2 * heightOfButtomText);
+
+
+            int yCoordinat = (int)1.2 * heightOfTitle;
+			float answerY = (float)(height - heightOfButtomText * 1.1);
+            int[] R = {100, 0, 0, 255, 0 };
+			int[] G = {100, 0, 155, 255, 0 };
+			int[] B = {100, 255, 0, 0, 255 };
+
+            float totalAnswers = answerthings.Sum();
+
+			for (int i = 0; i < answerOptions.Length; i++)
+			{
+
+				float intemediateHeightOfBox = heightOfBox * (float)(answerthings[i] / totalAnswers);
+                
+				shape = Sld.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle, (i+1) * margin + i* WidthOfBox, yCoordinat+intemediateHeightOfBox, WidthOfBox, intemediateHeightOfBox);
+				shape.Fill.ForeColor.RGB = System.Drawing.Color.FromArgb(R[i], G[i], B[i]).ToArgb();
+				shape.Line.Visible = MsoTriState.msoFalse;
+				shape.TextFrame.TextRange.Font.Color.RGB = System.Drawing.Color.FromArgb(0, 0, 0).ToArgb();
+
+				shape = Sld.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle, (i + 1) * margin + i * WidthOfBox, answerY, WidthOfBox, heightOfButtomText);
+                shape.TextFrame.TextRange.InsertAfter(answerOptions[i]);
+			}
+
+
+
+
+		}
+		public void showQuestionPage(int index)
         {
 
-            //Tell webserver to send webpages to multiple choice question
-            Ribbon1.invokeConnection("nextQuestion");
+			//Tell webserver to send webpages to multiple choice question
+			Ribbon1.invokeConnection("nextQuestion");
 
 
-            //TODO: tilføj al teksten som det skal være på Question pagen.. Lige nu kan det ses at det bare er en enkelt tekstboks et tilfældigt sted
-            //(Det som Cahtrine startede på at designe i powerpoint, nu i kode)
+			//TODO: tilføj al teksten som det skal være på Question pagen.. Lige nu kan det ses at det bare er en enkelt tekstboks et tilfældigt sted
+			//(Det som Cahtrine startede på at designe i powerpoint, nu i kode)
 
-            //Variables with the answer options an the question itself
-            List<string> answerOptions = new List<string>();
+			//Variables with the answer options an the question itself
+			List<string> answerOptions = new List<string>();
             string question;
 
             //method that should be made where the variables are available:
@@ -234,11 +280,9 @@ namespace PP_AddIn___minieks
             shape.Fill.ForeColor.RGB = System.Drawing.Color.FromArgb(0, 255, 255).ToArgb();
             shape.Line.Visible = MsoTriState.msoFalse;
             shape.TextFrame.TextRange.Font.Color.RGB = System.Drawing.Color.FromArgb(0, 0, 0).ToArgb();
-            // TODO: repeat with different coordinates. also make the design with boxes with colors etc
 
 
             //Insert question
-            //TODO: figure out coordinates, and possibly size of text as well.
             shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, width, height/3);
             shape.TextFrame.TextRange.InsertAfter(question);
             shape.TextFrame.TextRange.ParagraphFormat.Alignment = PpParagraphAlignment.ppAlignCenter;
