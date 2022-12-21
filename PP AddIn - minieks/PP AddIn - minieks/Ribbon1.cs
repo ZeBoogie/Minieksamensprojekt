@@ -296,27 +296,11 @@ namespace PP_AddIn___minieks
             insertTextBox(0, 1);
         }
 
-        private void SessionDownload_comboB_TextChanged(object sender, RibbonControlEventArgs e)
-        {
-
-        }
 
         private void button2_Click(object sender, RibbonControlEventArgs e)
         {
-            Excelmaking();
+            var myForm = new Download_frm();
+            myForm.Show();
         }
-
-        void Excelmaking()
-        {
-            Workbook workbook;
-            Worksheet worksheet;
-            Microsoft.Office.Interop.Excel._Application excel = new Microsoft.Office.Interop.Excel.Application();
-            string path = "C:\\Users\\Jonat\\Documents\\test.xlsx";
-            workbook = excel.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
-            workbook.SaveAs(path);
-            excel.Workbooks.Open(path);
-            
-        }
-
     }
 }
