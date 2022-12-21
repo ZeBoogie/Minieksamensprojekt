@@ -53,7 +53,6 @@
             this.group2 = this.Factory.CreateRibbonGroup();
             this.ChemSketch_btn = this.Factory.CreateRibbonButton();
             this.Download = this.Factory.CreateRibbonGroup();
-            this.SessionDownload_comboB = this.Factory.CreateRibbonComboBox();
             this.Download_btn = this.Factory.CreateRibbonButton();
             this.Spørgsmålslaver.SuspendLayout();
             this.spoergsmaal_grp.SuspendLayout();
@@ -202,18 +201,9 @@
             // 
             // Download
             // 
-            this.Download.Items.Add(this.SessionDownload_comboB);
             this.Download.Items.Add(this.Download_btn);
             this.Download.Label = "Download";
             this.Download.Name = "Download";
-            // 
-            // SessionDownload_comboB
-            // 
-            this.SessionDownload_comboB.Label = "Download Excel";
-            this.SessionDownload_comboB.Name = "SessionDownload_comboB";
-            this.SessionDownload_comboB.ShowLabel = false;
-            this.SessionDownload_comboB.Text = null;
-            this.SessionDownload_comboB.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.SessionDownload_comboB_TextChanged);
             // 
             // Download_btn
             // 
@@ -263,7 +253,6 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton BLbutton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton TLbutton;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup Download;
-        internal Microsoft.Office.Tools.Ribbon.RibbonComboBox SessionDownload_comboB;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton Download_btn;
     }
 
