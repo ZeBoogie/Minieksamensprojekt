@@ -7,7 +7,7 @@
 
 <div class="text-center">
     <h1 id ="topText">Waiting... </h1>
-    <button id="TL">A</button>
+    <button id="ActAsReceivedNextQuestion">A</button>
 
 </div>
 
@@ -34,7 +34,7 @@
     window.location.replace("/" + nameOfPage + "?Code=" + @code + "&Name=" + username);
     });
 
-    document.getElementById("TL").addEventListener("click", function (event) {
+    document.getElementById("ActAsReceivedNextQuestion").addEventListener("click", function (event) {
         //sending everyone to next question (this should really only happen from the powerpoint)
         connection.invoke("nextQuestion").catch(function (err) {
             return console.error(err.toString());
@@ -47,7 +47,7 @@
             return console.error(err.toString());
         });
         event.preventDefault();
-        window.location.replace("/MultipleChoice?Code=" + @code + "&Name=" + @name);
+        //window.location.replace("/MultipleChoice?Code=" + @code + "&Name=" + @name);
     });
 
 
@@ -57,7 +57,7 @@
             return console.error(err.toString());
         });
         event.preventDefault();
-        window.location.replace("/MultipleChoice?Code=" + @code + "&Name=" + username);
+        window.location.replace("/MultipleChoice?Code=" + @code + "&Name=" + @name);
     });
     
 </script>

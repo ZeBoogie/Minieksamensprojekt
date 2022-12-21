@@ -105,10 +105,10 @@
 		<button class="button button2" id="TR">B</button>
 		</div>
 	<div class="Leftdown">
-		<button class="button button3">C</button>
+		<button class="button button3" id="BL">C</button>
 		</div>
 	<div class="Rightdown">
-		<button class="button button4">D</button>
+		<button class="button button4" id="BR">D</button>
 		</div>
 	</body>
 
@@ -160,8 +160,7 @@
 	});
 	
 	
-	connection.on("nextQuestion", function () {
-		document.getElementById("topText").innerHTML = "changing page";
-		window.location.replace("/MultipleChoice");
+	connection.on("goToWaitingpage", function () {
+		window.location.replace("/Waitingpage?Code=" + @code + "&Name=" + @name);
 	});
 </script>

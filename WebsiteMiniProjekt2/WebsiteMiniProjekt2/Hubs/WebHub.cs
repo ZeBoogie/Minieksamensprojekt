@@ -88,10 +88,10 @@ namespace WebsiteMiniProjekt2.Hubs
 				List<string> answers = ele2.Value; //save the answers of the quizzer in list
 				answers.Add("noAnswer"); //modify the last element of the list, as it earlier has been set to "noAnswer"
 				playersAndAnswers[ele2.Key] = answers;
-				Trace.WriteLine("added " + ele2.Value + " to player " + ele2.Value);
+				Trace.WriteLine("added " + ele2.Value.Last<string>() + " to player " + ele2.Key);
 			}
 			await Clients.All.SendAsync("nextQuestion");
-            Trace.WriteLine("sending clients to next question");
+            Trace.WriteLine("--sending clients to next question, from nextQuestion method--");
         }
 
         public async Task giveMeCode()
@@ -184,12 +184,11 @@ namespace WebsiteMiniProjekt2.Hubs
 
 		public Task submitAnswer(string nameOfQuizzer, string quizID, string answer)
         {
-            foreach (KeyValuePair<string, List<string>> ele2 in playersAndAnswers)
-            {
-				Trace.WriteLine("---printing dictionary - at submitAnswer---");
-				Trace.WriteLine("dictionary key is " + ele2.Key + " and it countains following amount of answers: " + ele2.Value.Count);
-			}
-            try
+
+			Trace.WriteLine("---printing dictionary - at submitAnswer---");
+			Trace.WriteLine("player who answered was " + nameOfQuizzer + " and it countains following amount of answers: " + playersAndAnswers[nameOfQuizzer].Count);
+            Trace.WriteLine("the players answer was as following at the start: " + answer);
+			try
             {
 				List<string> answers = playersAndAnswers[nameOfQuizzer]; //save the answers of the quizzer in list
                 answers[answers.Count-1] = answer; //modify the last element of the list, as it earlier has been set to "noAnswer"
@@ -202,18 +201,41 @@ namespace WebsiteMiniProjekt2.Hubs
             }
 
             //print dictionary second time
-            foreach (KeyValuePair<string, List<string>> ele2 in playersAndAnswers)
-            {
-                Trace.WriteLine("----If no exception was thrown---");
-                Trace.WriteLine("dictionary key is " + ele2.Key + " and it contains following answers: " + string.Join(", ", ele2.Value));
-            }
 
-            return Task.CompletedTask;
+            Trace.WriteLine("----If no exception was thrown---");
+			Trace.WriteLine("dictionary key is " + nameOfQuizzer + " and it contains following answers: " + string.Join(", ", playersAndAnswers[nameOfQuizzer]));
+			Trace.WriteLine("the players answer was as following at the start: " + answer);
+
+			return Task.CompletedTask;
 
             //TODO save answer in dictionary.
 		}
 
+        public async Task timeIsOver() //send clients on multiplechoice to waiting page
+        {
+            //also sends data to powerpoint with what everyone answered on last question
+            int[] answers = new int[5];
+			foreach (KeyValuePair<string, List<string>> ele2 in playersAndAnswers)
+			{
+                if (ele2.Value.Last<string>() == "noAnswer")
+                {
+                    answers[0]++;
+                }
+                else if(int.TryParse(ele2.Value.Last<string>(), out int answerIndex))
+                {
+                    answers[answerIndex+1]++;
+				}
+                else
+                {
+					Trace.WriteLine("----OOOPS - Couldn't parse answer-----");
+				}
+			}
 
+			await Clients.All.SendAsync("hereAreAnswers", answers);
+			Trace.WriteLine("sending clients to next question");
+
+			await Clients.All.SendAsync("goToWaitingpage");
+		}
 
 		public static void saveAnswersToDatabase()
         {

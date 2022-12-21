@@ -55,14 +55,21 @@ namespace PP_AddIn___minieks
                 changetext(codeText, nonCodeText);
             });
 
+            _connection.On<int[]>("hereAreAnswers", (answers) =>
+			{
+				System.Diagnostics.Trace.WriteLine($"Powerpoint in Ribbon1.cs has received {string.Join(", ", answers)}");
+                ThisAddIn.showResult(answers);
+			});
 
-            _connection.StartAsync();
+
+			_connection.StartAsync();
         }
 
         public static void invokeConnection(string methodName)
         {
             _connection.InvokeAsync(methodName);
         }
+
 
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
