@@ -203,13 +203,15 @@ namespace PP_AddIn___minieks
 			int[] B = {100, 255, 0, 0, 255 };
 
             float totalAnswers = answerthings.Sum();
+            float zoom = (answerthings.Max()) / (answerthings.Max()-answerthings.Min());
 
 			for (int i = 0; i < answerOptions.Length; i++)
 			{
 
-				float intemediateHeightOfBox = heightOfBox * (float)(answerthings[i] / totalAnswers);
+				float intemediateHeightOfBox = zoom * heightOfBox * (float)(answerthings[i] / totalAnswers);
                 
-				shape = Sld.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle, (i+1) * margin + i* WidthOfBox, yCoordinat+intemediateHeightOfBox, WidthOfBox, intemediateHeightOfBox);
+				shape = Sld.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle, (i+1) * margin + i* WidthOfBox, heightOfBox + yCoordinat-intemediateHeightOfBox, WidthOfBox, intemediateHeightOfBox);
+				shape.TextFrame.TextRange.InsertAfter("" + answerthings[i]);
 				shape.Fill.ForeColor.RGB = System.Drawing.Color.FromArgb(R[i], G[i], B[i]).ToArgb();
 				shape.Line.Visible = MsoTriState.msoFalse;
 				shape.TextFrame.TextRange.Font.Color.RGB = System.Drawing.Color.FromArgb(0, 0, 0).ToArgb();
