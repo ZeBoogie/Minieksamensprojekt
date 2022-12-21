@@ -60,17 +60,26 @@ namespace PP_AddIn___minieks
             string mellemmand = File.ReadAllText("C:\\ProgramData\\PowerPointQuiz\\Svar\\" + "21-12-202217-47-26" + ".json");
             data = JsonConvert.DeserializeObject<Svardata>(mellemmand);
             Excel excel = new Excel(@"Test.xlsx", 1);
+            excel.CelleInsert(0, 0, "Session start:");
+            excel.CelleInsert(1, 0, "Session slut:");
+            excel.CelleInsert(0,1,data.sessionStart.ToString());
+            excel.CelleInsert(1, 1, data.sessionEnd.ToString());
             int i = 0;
-            foreach (string question in data.questions)
+            int j = 0;
+            foreach (string s in data.questions)
             {
-                excel.CelleInsert(i, 0, question);
+                excel.CelleInsert(3 + i, 0, s);
+                foreach (string q in data.answerOptions[j])
+                {
+                    excel.CelleInsert(3 + i, 1, q);
+                    i++;
+                }
+                j++;
                 i++;
             }
 
             excel.save();
             excel.close();
-            //Excelmaking();
-
         }
     }
 }
