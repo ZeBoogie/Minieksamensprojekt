@@ -8,7 +8,7 @@
             public List<string> svarMuligheder;
             public List<bool> korrektSvar;
             public List<string> billeder;
-            public Spoergsmaalsdata(string titel, string spoergsmaal, List<string> svarMuligheder, List<bool> korrektSvar, List<string> billeder, string type)
+            public Spoergsmaalsdata(string titel, List<string> titlesOfQuestions, string spoergsmaal, List<string> svarMuligheder, List<bool> korrektSvar, List<string> billeder, string type)
             {
                 this.titel = titel;
                 this.spoergsmaal = spoergsmaal;

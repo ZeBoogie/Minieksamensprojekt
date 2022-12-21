@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 using Microsoft.Data.Sqlite;
+using System.Collections.Generic;
 
 namespace WebsiteMiniProjekt2.Hubs
 {
@@ -137,20 +138,26 @@ namespace WebsiteMiniProjekt2.Hubs
             titlesOfQuestions.Add("title2");
 
             List<string> questions = new List<string>();
-            titlesOfQuestions.Add("question1");
-            titlesOfQuestions.Add("question2");
+            questions.Add("question1");
+            questions.Add("question2");
 
             List<List<string>> answers = new List<List<string>>();
             answers.Add(new List<string>() { "1", "2" });
             answers.Add(new List<string>() { "1", "3" });
-            saveDataToDatabase(titlesOfQuestions, titlesOfQuestions, answers, a, b);
+            saveDataToDatabase(titlesOfQuestions, questions, answers, a, b);
             return Task.CompletedTask;
         }
 
-        private void saveDataToDatabase(List<string> titlesOfQuestions, List<string> questions, List<List<string>> answerOptions,
+        public Task saveDataToDatabase(List<string> titlesOfQuestions, List<string> questions, List<List<string>> answerOptions,
             DateTime sessionStart, DateTime sessionEnd)
         {
             Trace.WriteLine(sessionEnd);
+
+            Svardata saveData = new Svardata(titlesOfQuestions, questions, answerOptions, sessionStart, sessionEnd);
+            string titel = sessionEnd.ToString().Replace(':', '-').Replace("/", "-").Replace(" ", "");
+            string fileName = "C:\\ProgramData\\PowerPointQuiz\\Svar\\" + titel + ".json";
+            string jsonString = JsonConvert.SerializeObject(saveData, Formatting.Indented);
+            File.WriteAllText(fileName, jsonString);
 
 
             //PowerPointID is a number used so that you can only acces data that belongs to the powerpoint.
@@ -163,7 +170,8 @@ namespace WebsiteMiniProjekt2.Hubs
 			};
 
 
-			//save all the data above into database
+            //save all the data above into database
+            return Task.CompletedTask;
 		}
 
 		public Task submitAnswer(string nameOfQuizzer, string quizID, string answer)
