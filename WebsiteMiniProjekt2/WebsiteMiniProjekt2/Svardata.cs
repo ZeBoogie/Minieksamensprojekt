@@ -7,14 +7,13 @@ namespace WebsiteMiniProjekt2
         string Session;
         List<string> Spoergsmaal;
         List<List<string>> Spoergsmaal_;
-        int korrekt;
 
         public Svardata(string Session)
         {
             this.Session = Session;
         }
 
-        public void samlData(string titel, List<string> bruger, List<int> bud)
+        public void samlData(string titel, string korrekt, List<string> bruger, List<int> bud)
         {
             int i = 0;
             foreach (string b in bruger)
@@ -28,8 +27,10 @@ namespace WebsiteMiniProjekt2
             Spoergsmaal_.Add(bruger);
         }
 
-        private void konverter(string fileName)
+        private void konverter()
         {
+            string titel = DateTime.Now.ToString().Replace(':', '.');
+            string fileName = "C:\\ProgramData\\PowerPointQuiz\\Svar" + titel + ".json";
             string jsonString = JsonConvert.SerializeObject(this, Formatting.Indented);
             File.WriteAllText(fileName, jsonString);
         }
