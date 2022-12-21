@@ -298,7 +298,6 @@
     <Compile Include="Administrer.Designer.cs">
       <DependentUpon>Administrer.cs</DependentUpon>
     </Compile>
-    <Compile Include="SQLtransfer.cs" />
     <Compile Include="RedigerSpergsmaal.cs">
       <SubType>Form</SubType>
     </Compile>

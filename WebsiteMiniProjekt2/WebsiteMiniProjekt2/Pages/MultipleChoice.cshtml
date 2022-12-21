@@ -96,7 +96,6 @@
 
 	</style>
 	<body>
-	<h3 id="topText">Waiting... </h3>
 	<div class="Leftup">
 		<button class="button button1" id="TL">A</button>
 		</div>
@@ -122,7 +121,6 @@
 	var connection = new signalR.HubConnectionBuilder().withUrl("/webHub").build();
 
 	connection.start().then(function () {
-		document.getElementById("topText").innerHTML = "Connected  to server - waiting for click or nextquestion";
 		connection.invoke("PrintString", "connection multplechoice started").catch(function (err) {
             return console.error(err.toString());
         });

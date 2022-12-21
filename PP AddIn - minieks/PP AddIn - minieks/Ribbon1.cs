@@ -260,21 +260,5 @@ namespace PP_AddIn___minieks
             
         }
 
-        private void button1_Click_3(object sender, RibbonControlEventArgs e)
-        {
-            MessageBox.Show("tiden er:" + DateTime.Now.ToString().Replace(':','.'),"");
-            //svend();
-        }
-
-        public void svend()
-        {
-            Database DatabaseObj = new Database();
-            string query = "INSERT INTO Personer (Navn) VALUES (@bob)";
-            SqliteCommand myCommand = new SqliteCommand(query, DatabaseObj.myConnection);
-            DatabaseObj.OpenConnection();
-            myCommand.Parameters.AddWithValue("@bob", "cage");
-            myCommand.ExecuteNonQuery();
-            DatabaseObj.CloseConnection();
-        }
     }
 }

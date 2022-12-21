@@ -35,15 +35,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
-            this.Spoergsmaalslaver = this.Factory.CreateRibbonTab();
+            this.Spørgsmålslaver = this.Factory.CreateRibbonTab();
             this.spoergsmaal_grp = this.Factory.CreateRibbonGroup();
-            this.Session_grp = this.Factory.CreateRibbonGroup();
-            this.group1 = this.Factory.CreateRibbonGroup();
-            this.group2 = this.Factory.CreateRibbonGroup();
-            this.Download = this.Factory.CreateRibbonGroup();
-            this.SessionDownload_comboB = this.Factory.CreateRibbonComboBox();
             this.Administrer_btn = this.Factory.CreateRibbonButton();
             this.Opret_btn = this.Factory.CreateRibbonButton();
+            this.Session_grp = this.Factory.CreateRibbonGroup();
             this.LavLink_menu = this.Factory.CreateRibbonMenu();
             this.menu1 = this.Factory.CreateRibbonMenu();
             this.BRbutton = this.Factory.CreateRibbonButton();
@@ -52,10 +48,14 @@
             this.BLbutton = this.Factory.CreateRibbonButton();
             this.menu2 = this.Factory.CreateRibbonMenu();
             this.StartStopSession_btn = this.Factory.CreateRibbonButton();
+            this.group1 = this.Factory.CreateRibbonGroup();
             this.button1 = this.Factory.CreateRibbonButton();
+            this.group2 = this.Factory.CreateRibbonGroup();
             this.ChemSketch_btn = this.Factory.CreateRibbonButton();
+            this.Download = this.Factory.CreateRibbonGroup();
+            this.SessionDownload_comboB = this.Factory.CreateRibbonComboBox();
             this.Download_btn = this.Factory.CreateRibbonButton();
-            this.Spoergsmaalslaver.SuspendLayout();
+            this.Spørgsmålslaver.SuspendLayout();
             this.spoergsmaal_grp.SuspendLayout();
             this.Session_grp.SuspendLayout();
             this.group1.SuspendLayout();
@@ -63,16 +63,16 @@
             this.Download.SuspendLayout();
             this.SuspendLayout();
             // 
-            // Spoergsmaalslaver
+            // Spørgsmålslaver
             // 
-            this.Spoergsmaalslaver.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
-            this.Spoergsmaalslaver.Groups.Add(this.spoergsmaal_grp);
-            this.Spoergsmaalslaver.Groups.Add(this.Session_grp);
-            this.Spoergsmaalslaver.Groups.Add(this.group1);
-            this.Spoergsmaalslaver.Groups.Add(this.group2);
-            this.Spoergsmaalslaver.Groups.Add(this.Download);
-            this.Spoergsmaalslaver.Label = "Spørgsmålslaver";
-            this.Spoergsmaalslaver.Name = "Spoergsmaalslaver";
+            this.Spørgsmålslaver.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
+            this.Spørgsmålslaver.Groups.Add(this.spoergsmaal_grp);
+            this.Spørgsmålslaver.Groups.Add(this.Session_grp);
+            this.Spørgsmålslaver.Groups.Add(this.group1);
+            this.Spørgsmålslaver.Groups.Add(this.group2);
+            this.Spørgsmålslaver.Groups.Add(this.Download);
+            this.Spørgsmålslaver.Label = "PPQuiz";
+            this.Spørgsmålslaver.Name = "Spørgsmålslaver";
             // 
             // spoergsmaal_grp
             // 
@@ -80,39 +80,6 @@
             this.spoergsmaal_grp.Items.Add(this.Opret_btn);
             this.spoergsmaal_grp.Label = "Spørgsmål";
             this.spoergsmaal_grp.Name = "spoergsmaal_grp";
-            // 
-            // Session_grp
-            // 
-            this.Session_grp.Items.Add(this.LavLink_menu);
-            this.Session_grp.Items.Add(this.StartStopSession_btn);
-            this.Session_grp.Label = "Session";
-            this.Session_grp.Name = "Session_grp";
-            // 
-            // group1
-            // 
-            this.group1.Items.Add(this.button1);
-            this.group1.Label = "Excel";
-            this.group1.Name = "group1";
-            // 
-            // group2
-            // 
-            this.group2.Items.Add(this.ChemSketch_btn);
-            this.group2.Label = "ChemSketch";
-            this.group2.Name = "group2";
-            // 
-            // Download
-            // 
-            this.Download.Items.Add(this.SessionDownload_comboB);
-            this.Download.Items.Add(this.Download_btn);
-            this.Download.Label = "Download";
-            this.Download.Name = "Download";
-            // 
-            // SessionDownload_comboB
-            // 
-            this.SessionDownload_comboB.Label = "Download Excel";
-            this.SessionDownload_comboB.Name = "SessionDownload_comboB";
-            this.SessionDownload_comboB.ShowLabel = false;
-            this.SessionDownload_comboB.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.SessionDownload_comboB_TextChanged);
             // 
             // Administrer_btn
             // 
@@ -130,6 +97,13 @@
             this.Opret_btn.Name = "Opret_btn";
             this.Opret_btn.ShowImage = true;
             this.Opret_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click_1);
+            // 
+            // Session_grp
+            // 
+            this.Session_grp.Items.Add(this.LavLink_menu);
+            this.Session_grp.Items.Add(this.StartStopSession_btn);
+            this.Session_grp.Label = "Session";
+            this.Session_grp.Name = "Session_grp";
             // 
             // LavLink_menu
             // 
@@ -197,6 +171,12 @@
             this.StartStopSession_btn.ShowImage = true;
             this.StartStopSession_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.StartStopSession_btn_Click);
             // 
+            // group1
+            // 
+            this.group1.Items.Add(this.button1);
+            this.group1.Label = "Excel";
+            this.group1.Name = "group1";
+            // 
             // button1
             // 
             this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -204,7 +184,12 @@
             this.button1.Label = "Upload liste";
             this.button1.Name = "button1";
             this.button1.ShowImage = true;
-            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click_3);
+            // 
+            // group2
+            // 
+            this.group2.Items.Add(this.ChemSketch_btn);
+            this.group2.Label = "ChemSketch";
+            this.group2.Name = "group2";
             // 
             // ChemSketch_btn
             // 
@@ -214,6 +199,21 @@
             this.ChemSketch_btn.Name = "ChemSketch_btn";
             this.ChemSketch_btn.ShowImage = true;
             this.ChemSketch_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click_2);
+            // 
+            // Download
+            // 
+            this.Download.Items.Add(this.SessionDownload_comboB);
+            this.Download.Items.Add(this.Download_btn);
+            this.Download.Label = "Download";
+            this.Download.Name = "Download";
+            // 
+            // SessionDownload_comboB
+            // 
+            this.SessionDownload_comboB.Label = "Download Excel";
+            this.SessionDownload_comboB.Name = "SessionDownload_comboB";
+            this.SessionDownload_comboB.ShowLabel = false;
+            this.SessionDownload_comboB.Text = null;
+            this.SessionDownload_comboB.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.SessionDownload_comboB_TextChanged);
             // 
             // Download_btn
             // 
@@ -225,10 +225,10 @@
             // 
             this.Name = "Ribbon1";
             this.RibbonType = "Microsoft.PowerPoint.Presentation";
-            this.Tabs.Add(this.Spoergsmaalslaver);
+            this.Tabs.Add(this.Spørgsmålslaver);
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.Ribbon1_Load);
-            this.Spoergsmaalslaver.ResumeLayout(false);
-            this.Spoergsmaalslaver.PerformLayout();
+            this.Spørgsmålslaver.ResumeLayout(false);
+            this.Spørgsmålslaver.PerformLayout();
             this.spoergsmaal_grp.ResumeLayout(false);
             this.spoergsmaal_grp.PerformLayout();
             this.Session_grp.ResumeLayout(false);
@@ -245,7 +245,7 @@
 
         #endregion
 
-        internal Microsoft.Office.Tools.Ribbon.RibbonTab Spoergsmaalslaver;
+        internal Microsoft.Office.Tools.Ribbon.RibbonTab Spørgsmålslaver;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup spoergsmaal_grp;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton Administrer_btn;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton Opret_btn;
