@@ -29,6 +29,14 @@ document.getElementById("Submit").addEventListener("click", function (event) {
 });
 
 
+document.getElementById("JonatanTestGemData").addEventListener("click", function (event) {
+    connection.invoke("TestJonathansTing").catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+});
+
+
 
 
 //method to receive commands on which page the webpage should be on.

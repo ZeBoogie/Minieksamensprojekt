@@ -26,7 +26,6 @@ namespace WebsiteMiniProjekt2.Hubs
             if(codesInUse.Contains(code))
             {
                 codesInUse.Remove(code);
-                svend();
             }
         }
 
@@ -126,46 +125,32 @@ namespace WebsiteMiniProjekt2.Hubs
 
             await Clients.Caller.SendAsync("useThisCode", code);
         }
-        public void svend()
-        {
-            Database DatabaseObj = new Database();
-            string query = "INSERT INTO Personer (Navn) VALUES (@bob)";
-            SqliteCommand myCommand = new SqliteCommand(query, DatabaseObj.myConnecntion);
 
-            if (DatabaseObj.myConnecntion.State != System.Data.ConnectionState.Open)
-            {
-                DatabaseObj.myConnecntion.Open();
-            }
-            myCommand.Parameters.AddWithValue("@bob", "cage");
-            myCommand.ExecuteNonQuery();
-            if (DatabaseObj.myConnecntion.State != System.Data.ConnectionState.Closed)
-            {
-                DatabaseObj.myConnecntion.Close();
-            }
+
+        public Task TestJonathansTing()
+        {
+            //giver den der tester data en masse presat bras.
+            DateTime a = DateTime.Now;
+            DateTime b = DateTime.Now.AddMinutes(4);
+            List<string> titlesOfQuestions = new List<string>();
+            titlesOfQuestions.Add("title1");
+            titlesOfQuestions.Add("title2");
+
+            List<string> questions = new List<string>();
+            titlesOfQuestions.Add("question1");
+            titlesOfQuestions.Add("question2");
+
+            List<List<string>> answers = new List<List<string>>();
+            answers.Add(new List<string>() { "1", "2" });
+            answers.Add(new List<string>() { "1", "3" });
+            saveDataToDatabase(titlesOfQuestions, titlesOfQuestions, answers, a, b);
+            return Task.CompletedTask;
         }
 
-        public Task saveDataToDatabase(List<string> titlesOfQuestions, List<string> questions, List<List<string>> answerOptions,
-            DateTime sessionStart, DateTime sessionEnd, int PowerPointID)
+        private void saveDataToDatabase(List<string> titlesOfQuestions, List<string> questions, List<List<string>> answerOptions,
+            DateTime sessionStart, DateTime sessionEnd)
         {
-            /*Spoergsmaalsdata data = new Spoergsmaalsdata();
-            string mellemmand = File.ReadAllText("C:\\ProgramData\\PowerPointQuiz\\" + valgt + ".json");
-            data = JsonConvert.DeserializeObject<Spoergsmaalsdata>(mellemmand);
-            */
-            
-            Database DatabaseObj = new Database();
-            string query = "INSERT INTO Personer (Navn) VALUES (@bob)";
-            SqliteCommand myCommand = new SqliteCommand(query, DatabaseObj.myConnecntion);
-           
-            if (DatabaseObj.myConnecntion.State != System.Data.ConnectionState.Open) 
-            {
-                DatabaseObj.myConnecntion.Open();
-            }
-            myCommand.Parameters.AddWithValue("@bob", "cage");
-            myCommand.ExecuteNonQuery();
-            if (DatabaseObj.myConnecntion.State != System.Data.ConnectionState.Closed)
-            {
-                DatabaseObj.myConnecntion.Close();
-            }
+            Trace.WriteLine(sessionEnd);
 
 
             //PowerPointID is a number used so that you can only acces data that belongs to the powerpoint.
@@ -179,7 +164,6 @@ namespace WebsiteMiniProjekt2.Hubs
 
 
 			//save all the data above into database
-			return Task.CompletedTask;
 		}
 
 		public Task submitAnswer(string nameOfQuizzer, string quizID, string answer)
