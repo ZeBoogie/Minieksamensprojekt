@@ -142,8 +142,27 @@ namespace WebsiteMiniProjekt2.Hubs
             questions.Add("question2");
 
             List<List<string>> answers = new List<List<string>>();
-            answers.Add(new List<string>() { "1", "2" });
-            answers.Add(new List<string>() { "1", "3" });
+            answers.Add(new List<string>() { "svarmulighed1", "svarmulighed2", "svarmulighed3", "svarmulighe4" });
+            answers.Add(new List<string>() { "svarmuligheda", "svarmulighedb", "svarmulighedc", "svarmulighedd" });
+
+            playersAndAnswers.Add("Jonathan", new List<string>());
+            playersAndAnswers.Add("Jonatan", new List<string>());
+
+            for(int i = 0; i < 2; i++)
+            {
+                foreach (KeyValuePair<string, List<string>> ele2 in playersAndAnswers)
+                {
+                    Trace.WriteLine("----adding noAnswer to all players-----");
+                    List<string> ans= ele2.Value; //save the answers of the quizzer in list
+                    ans.Add("noAnswer"); //modify the last element of the list, as it earlier has been set to "noAnswer"
+                    playersAndAnswers[ele2.Key] = ans;
+                    Trace.WriteLine("added " + ele2.Value.Last<string>() + " to player " + ele2.Key);
+                }
+            }
+
+
+
+
             saveDataToDatabase(titlesOfQuestions, questions, answers, a, b);
             return Task.CompletedTask;
         }
@@ -153,7 +172,7 @@ namespace WebsiteMiniProjekt2.Hubs
         {
             Trace.WriteLine(sessionEnd);
 
-            Svardata saveData = new Svardata(titlesOfQuestions, questions, answerOptions, sessionStart, sessionEnd);
+            Svardata saveData = new Svardata(titlesOfQuestions, questions, answerOptions, sessionStart, sessionEnd, playersAndAnswers);
             string titel = sessionEnd.ToString().Replace(':', '-').Replace("/", "-").Replace(" ", "");
             string fileName = "C:\\ProgramData\\PowerPointQuiz\\Svar\\" + titel + ".json";
             string jsonString = JsonConvert.SerializeObject(saveData, Formatting.Indented);

@@ -152,7 +152,6 @@ namespace PP_AddIn___minieks
                 List<string> questions = new List<string>();
 
                 DateTime sessionEnd = DateTime.Now;
-                int PowerPointID = 1;
 				string result = $"Titles of questions are: {string.Join(", ", titlesOfQuestions)} ---- AnswerOptions are: ";
 
 				foreach (List<string> titleOfAnswerOption in answerOptions)
@@ -162,7 +161,7 @@ namespace PP_AddIn___minieks
 				}
 
                 Trace.WriteLine(result);
-				_connection.InvokeAsync("saveDataToDatabase", titlesOfQuestions, questions, answerOptions, startSession, sessionEnd, PowerPointID);
+				_connection.InvokeAsync("saveDataToDatabase", titlesOfQuestions, questions, answerOptions, startSession, sessionEnd);
 
 				mycode = 0; //reset code connected to server
 

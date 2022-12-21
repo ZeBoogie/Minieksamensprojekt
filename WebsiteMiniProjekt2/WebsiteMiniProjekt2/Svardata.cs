@@ -9,14 +9,16 @@ namespace WebsiteMiniProjekt2
         public List<List<string>> answerOptions;
         public DateTime sessionStart;
         public DateTime sessionEnd;
+        public Dictionary<string, List<string>> playersAndAnswers;
         public Svardata(List<string> titlesOfQuestions, List<string> questions, List<List<string>> answerOptions,
-            DateTime sessionStart, DateTime sessionEnd)
+            DateTime sessionStart, DateTime sessionEnd, Dictionary<string, List<string>> playersAndAnswers)
         {
             this.titlesOfQuestions = titlesOfQuestions;
             this.questions = questions;
             this.answerOptions = answerOptions;
             this.sessionStart = sessionStart;
             this.sessionEnd = sessionEnd;
+            this.playersAndAnswers = playersAndAnswers;
         }
 
     }
