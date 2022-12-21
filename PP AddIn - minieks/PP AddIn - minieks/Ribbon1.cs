@@ -68,12 +68,29 @@ namespace PP_AddIn___minieks
 			});
 
 
-			_connection.StartAsync();
+            _connection.On< Dictionary<string, int>> ("displayTheseRankings", (names) =>
+            {
+                System.Diagnostics.Trace.WriteLine($"Powerpoint in Ribbon1.cs is running displayTheseRankings");
+                Globals.ThisAddIn.displayRankings(names);
+            });
+
+
+            _connection.StartAsync();
         }
 
         public static void invokeConnection(string methodName)
         {
             _connection.InvokeAsync(methodName);
+        }
+
+        public static void getRankings()
+        {
+            Trace.WriteLine("getRAnkings invoke connection");
+            List<string> titlesOfQuestions = Globals.ThisAddIn.usedTitles;
+
+            List<List<bool>> correctAnswers = getAllCorrectAnswers(titlesOfQuestions);
+            _connection.InvokeAsync("getRankings", correctAnswers);
+
         }
 
 
@@ -181,7 +198,7 @@ namespace PP_AddIn___minieks
 
 			}
 		}
-        public List<List<bool>> getAllCorrectAnswers(List<string> titlesOfQuestions)
+        public static List<List<bool>> getAllCorrectAnswers(List<string> titlesOfQuestions)
         {
             List<List<bool>> allCorrectAnswers = new List<List<bool>>();
             foreach (string title in titlesOfQuestions)
@@ -232,6 +249,8 @@ namespace PP_AddIn___minieks
             insertTextBox(1, 1);
 
         }
+
+
 
 
         private void insertTextBox(int x, int y)

@@ -20,6 +20,7 @@ using Microsoft.VisualStudio.Tools.Applications.Runtime;
 using System.Diagnostics;
 using System.Globalization;
 using System.Timers;
+using Microsoft.Office.Interop.Excel;
 
 namespace PP_AddIn___minieks
 {
@@ -103,6 +104,8 @@ namespace PP_AddIn___minieks
                 if(!(onQuestion || onResultPage)) //if on on the way to resultpage
                 {
                     onResultPage= true;
+                    _timer.Stop();
+
                     // Makes certain to stay on the same slide.
                     Presentation objPres;
                     SlideShowView objSlideShowView;
@@ -157,8 +160,8 @@ namespace PP_AddIn___minieks
                     onResultPage = false;
 
                     //---- WARNING, IF WEBSERVER ISN'T RUNNING, THEN RESULTPAGE WON'T BE SHOWN ---
-                    //Ribbon1.invokeConnection("timeIsOver");
-					showResult(hardCodedAnswers);
+                    Ribbon1.invokeConnection("timeIsOver");
+					//showResult(hardCodedAnswers);
                     count += 1;
                 }
 
@@ -168,6 +171,9 @@ namespace PP_AddIn___minieks
         }
         private static PowerPoint.Shape _timerShape;
 
+
+
+        //--------------------- Show Result ----------------------
         public static void showResult(int[] answerthings)
         {
             int index = slideIndex;
@@ -227,6 +233,31 @@ namespace PP_AddIn___minieks
                 shape.TextFrame.TextRange.InsertAfter(answerOptions[i]);
 			}
 
+            Ribbon1.getRankings(); //method that sends to webhub, to return a dictionary with who placed where.
+        }
+
+
+        // ---- Rankings ----
+        public void displayRankings(Dictionary<string, int> names)
+        {
+            Trace.WriteLine("---displaying rankings from thisaddin---");
+            foreach (KeyValuePair<string, int> element in names)
+            {
+                Trace.WriteLine("added " + element.Value + " to player " + element.Key);
+            }
+            int y = 20;
+            int placement = 1;
+            float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
+            float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
+
+            foreach (KeyValuePair<string, int> element in names)
+            {
+                PowerPoint.Slide Sld = Globals.ThisAddIn.Application.ActivePresentation.Slides[slideIndex];
+                PowerPoint.Shape shape = Sld.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle, (int)Math.Round(width * 0.8), y, (int)Math.Round(width * 0.18), 20);
+                shape.TextFrame.TextRange.InsertAfter(placement + ": " + element.Key + " : " + element.Value.ToString());
+                y += 25;
+                placement++;
+            }
         }
 
         static System.Timers.Timer _timer = new System.Timers.Timer(TimeSpan.FromSeconds(1).TotalMilliseconds);
@@ -337,11 +368,10 @@ namespace PP_AddIn___minieks
 
             //timer
             _timerShape = Sld.Shapes.AddTextbox(MsoTextOrientation.msoTextOrientationHorizontal, 20, 20, 100, 20);
-            _timerShape.TextFrame.TextRange.Text = "00:05";
+            _timerShape.TextFrame.TextRange.Text = "00:20";
             _timerShape.TextFrame.TextRange.Font.Size = 20;
             _timer.Elapsed += TimerTick;
             _timer.Start();
-
         }
         private Spoergsmaalsdata hentSpoergsmaal(string valgtTitel) //returner en klasse med alt data fra
                                                                     //en bestemt fil som er givet som parameter

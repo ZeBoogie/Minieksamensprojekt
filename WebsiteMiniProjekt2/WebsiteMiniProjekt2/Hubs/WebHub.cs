@@ -167,6 +167,45 @@ namespace WebsiteMiniProjekt2.Hubs
             return Task.CompletedTask;
         }
 
+        public async Task getRankings(List<List<bool>> correctAnswers)
+        {
+            Trace.WriteLine("----------getrankings called-------");
+
+            Dictionary<string, int> rankingsDictionary = new Dictionary<string, int>();
+
+            foreach (KeyValuePair<string, List<string>> ele2 in playersAndAnswers)
+            {
+                rankingsDictionary.Add(ele2.Key, 0);
+                int atQuestion = 0;
+                foreach(string answer in ele2.Value)
+                {
+                    if (int.TryParse(answer, out int answerIndex))
+                    {
+                        if (correctAnswers[atQuestion][answerIndex] == true)
+                        {
+                            rankingsDictionary[ele2.Key]++;
+                        }
+                    }
+                    atQuestion++;
+                }
+            }
+            rankingsDictionary.OrderBy(kvp => kvp.Value);
+            while(rankingsDictionary.Count > 3)
+            {
+                rankingsDictionary.Remove(rankingsDictionary.ElementAt(3).Key);
+
+            }
+
+
+
+            foreach (KeyValuePair<string, int> element in rankingsDictionary)
+            {
+                Trace.WriteLine("added " + element.Value + " to player " + element.Key);
+            }
+
+            await Clients.Caller.SendAsync("displayTheseRankings", rankingsDictionary);
+        }
+
         public Task saveDataToDatabase(List<string> titlesOfQuestions, List<string> questions, List<List<string>> answerOptions,
             DateTime sessionStart, DateTime sessionEnd, List<List<bool>> correctAnswers)
         {
@@ -248,12 +287,7 @@ namespace WebsiteMiniProjekt2.Hubs
 			await Clients.All.SendAsync("goToWaitingpage");
 		}
 
-		public static void saveAnswersToDatabase()
-        {
-            //TODO: A method that saves all the relevant data to a database
-            //There should be created variables for session time start etc.
-            //F.eks. dictionary of what people has answered sould be saved
-        }
+
         public Task PrintString(string String) //be aware that input from
                                                //html forms, will most likely be a string, you have earlier in your
                                                //life spent more than an hour being confused why there was an
