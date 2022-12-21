@@ -155,8 +155,8 @@ namespace PP_AddIn___minieks
                     onResultPage = false;
 
                     //---- WARNING, IF WEBSERVER ISN'T RUNNING, THEN RESULTPAGE WON'T BE SHOWN ---
-                    Ribbon1.invokeConnection("timeIsOver");
-					//showResult(hardCodedAnswers);
+                    //Ribbon1.invokeConnection("timeIsOver");
+					showResult(hardCodedAnswers);
                     count += 1;
                 }
 

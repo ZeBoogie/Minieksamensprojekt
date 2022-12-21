@@ -19,6 +19,7 @@ using Newtonsoft.Json;
 using System.IO;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Data.Sqlite;
+using System.Security.Policy;
 
 namespace PP_AddIn___minieks
 {
@@ -165,6 +166,9 @@ namespace PP_AddIn___minieks
 					result += string.Join(", ", titleOfAnswerOption) + " || next list of answeroptions -> ";
 				}
 
+                List<List<bool>> correctAnswers = new List<List<bool>> ();
+                correctAnswers = getAllCorrectAnswers(titlesOfQuestions);
+
                 Trace.WriteLine(result);
 				_connection.InvokeAsync("saveDataToDatabase", titlesOfQuestions, questions, answerOptions, startSession, sessionEnd);
 
@@ -174,6 +178,19 @@ namespace PP_AddIn___minieks
 
 			}
 		}
+        public List<List<bool>> getAllCorrectAnswers(List<string> titlesOfQuestions)
+        {
+            List<List<bool>> allCorrectAnswers = new List<List<bool>>();
+            foreach (string title in titlesOfQuestions)
+            {
+                Spoergsmaalsdata data = new Spoergsmaalsdata();
+                string mellemmand = File.ReadAllText("C:\\ProgramData\\PowerPointQuiz\\" + title + ".json");
+                data = JsonConvert.DeserializeObject<Spoergsmaalsdata>(mellemmand);
+                List<bool> questionAtTitle = data.korrektSvar;
+                allCorrectAnswers.Add(questionAtTitle);
+            }
+            return allCorrectAnswers;
+        }
         public List<string> getAllQuestions(List<string> titles)
 		{
             //titles also being the names of the files, wherein the questions are.
@@ -210,6 +227,12 @@ namespace PP_AddIn___minieks
         {
             Trace.WriteLine("brbutton");
             insertTextBox(1, 1);
+            PowerPoint.Shape textBox = Globals.ThisAddIn.Application.ActiveWindow.View.Slide.Shapes.AddTextbox(
+                MsoTextOrientation.msoTextOrientationHorizontal,
+                100, 100, 50, 50);
+            textBox.TextFrame.TextRange.Text = "05:00";
+            textBox.TextFrame.TextRange.Font.Size = 64;
+            textBox.Tags.Add("TimerTag", "DigitalTimer");
         }
 
         private void insertTextBox(int x, int y)
