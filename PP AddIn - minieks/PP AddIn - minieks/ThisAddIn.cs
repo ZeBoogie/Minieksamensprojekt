@@ -131,7 +131,7 @@ namespace PP_AddIn___minieks
                         shapeIndexToDelete += 1;
                     }
                 }
-                int[] hardCodedAnswers = {3,4,4,3,3};
+                int[] hardCodedAnswers = {2,7,4,3,3};
 				//change whatever is on the current slide to question or result, depending on what
 				//previous condition was (onQuestion)
 				if (onQuestion)
@@ -203,12 +203,16 @@ namespace PP_AddIn___minieks
 			int[] B = {100, 255, 0, 0, 255 };
 
             float totalAnswers = answerthings.Sum();
-            float zoom = (answerthings.Max()) / (answerthings.Max()-answerthings.Min());
 
 			for (int i = 0; i < answerOptions.Length; i++)
 			{
+                float zoom = 0;
+                if (answerthings[i] != 0)
+                {
+					zoom =  (float)answerthings[i] / (float)answerthings.Max();
+				}
 
-				float intemediateHeightOfBox = zoom * heightOfBox * (float)(answerthings[i] / totalAnswers);
+				float intemediateHeightOfBox = zoom * heightOfBox;
                 
 				shape = Sld.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle, (i+1) * margin + i* WidthOfBox, heightOfBox + yCoordinat-intemediateHeightOfBox, WidthOfBox, intemediateHeightOfBox);
 				shape.TextFrame.TextRange.InsertAfter("" + answerthings[i]);
