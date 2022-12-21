@@ -28,6 +28,7 @@ namespace PP_AddIn___minieks
         {
             
             Directory.CreateDirectory("C:\\ProgramData\\PowerPointQuiz");
+            Directory.CreateDirectory("C:\\ProgramData\\PowerPointQuiz\\Svar");
 
 
             this.Application.SlideShowNextSlide += new PowerPoint.EApplication_SlideShowNextSlideEventHandler(shouldChangeSlide);

@@ -262,7 +262,8 @@ namespace PP_AddIn___minieks
 
         private void button1_Click_3(object sender, RibbonControlEventArgs e)
         {
-            svend();
+            MessageBox.Show("tiden er:" + DateTime.Now.ToString().Replace(':','.'),"");
+            //svend();
         }
 
         public void svend()
