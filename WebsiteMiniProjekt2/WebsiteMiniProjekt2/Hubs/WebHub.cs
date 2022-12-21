@@ -160,19 +160,19 @@ namespace WebsiteMiniProjekt2.Hubs
                 }
             }
 
+            List<List<bool>> correctAnswers = new List<List<bool>>() { new List<bool>(){ true, false, false, true }, new List<bool>() { true, false, false, true } };
 
 
-
-            saveDataToDatabase(titlesOfQuestions, questions, answers, a, b);
+            saveDataToDatabase(titlesOfQuestions, questions, answers, a, b, correctAnswers);
             return Task.CompletedTask;
         }
 
         public Task saveDataToDatabase(List<string> titlesOfQuestions, List<string> questions, List<List<string>> answerOptions,
-            DateTime sessionStart, DateTime sessionEnd)
+            DateTime sessionStart, DateTime sessionEnd, List<List<bool>> correctAnswers)
         {
             Trace.WriteLine(sessionEnd);
 
-            Svardata saveData = new Svardata(titlesOfQuestions, questions, answerOptions, sessionStart, sessionEnd, playersAndAnswers);
+            Svardata saveData = new Svardata(titlesOfQuestions, questions, answerOptions, sessionStart, sessionEnd, playersAndAnswers, correctAnswers);
             string titel = sessionEnd.ToString().Replace(':', '-').Replace("/", "-").Replace(" ", "");
             string fileName = "C:\\ProgramData\\PowerPointQuiz\\Svar\\" + titel + ".json";
             string jsonString = JsonConvert.SerializeObject(saveData, Formatting.Indented);
