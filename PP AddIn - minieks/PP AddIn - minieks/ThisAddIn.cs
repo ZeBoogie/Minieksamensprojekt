@@ -18,6 +18,8 @@ using Newtonsoft.Json;
 using System.Security.AccessControl;
 using Microsoft.VisualStudio.Tools.Applications.Runtime;
 using System.Diagnostics;
+using System.Globalization;
+using System.Timers;
 
 namespace PP_AddIn___minieks
 {
@@ -85,7 +87,7 @@ namespace PP_AddIn___minieks
         int count = 0;
         bool onQuestion = true;
         bool firstTimeSlideChanged = true;
-        bool onResultPage = false;
+        static bool onResultPage = false;
         static int slideIndex = 0;
         private void shouldChangeSlide(SlideShowWindow Wn)
         {
@@ -164,6 +166,7 @@ namespace PP_AddIn___minieks
                 count = 0;
             }
         }
+        private static PowerPoint.Shape _timerShape;
 
         public static void showResult(int[] answerthings)
         {
@@ -224,11 +227,46 @@ namespace PP_AddIn___minieks
                 shape.TextFrame.TextRange.InsertAfter(answerOptions[i]);
 			}
 
+        }
+
+        static System.Timers.Timer _timer = new System.Timers.Timer(TimeSpan.FromSeconds(1).TotalMilliseconds);
+
+        private static void TimerTick(object _, ElapsedEventArgs __)
+        {
+            string timeText = _timerShape.TextFrame2.TextRange.Text;
+            if (TimeSpan.TryParseExact(timeText, "mm\\:ss",
+                CultureInfo.InvariantCulture, out TimeSpan time))
+            {
+                if (time.TotalSeconds == 0)
+                {
+                    onResultPage = true;
+                    // act like changing slides, to go  to resultpage
+                    Presentation objPres;
+                    SlideShowView objSlideShowView;
+
+                    objPres = Globals.ThisAddIn.Application.ActivePresentation;
+                    objPres.SlideShowSettings.ShowPresenterView = MsoTriState.msoFalse;
+                    try
+                    {
+                        objPres.SlideShowSettings.Run();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Couldn't go to next question.");
+                        return;
+                    }
+                    objSlideShowView = objPres.SlideShowWindow.View;
+                    objSlideShowView.GotoSlide(slideIndex);
+                    _timer.Stop();
+                    return;
+                }
+                time = time - TimeSpan.FromSeconds(1);
+                _timerShape.TextFrame.TextRange.Text = time.ToString("mm\\:ss");
+            }
+        }
 
 
-
-		}
-		public void showQuestionPage(int index, string titel)
+        public void showQuestionPage(int index, string titel)
         {
 
 			//Tell webserver to send webpages to multiple choice question
@@ -287,21 +325,22 @@ namespace PP_AddIn___minieks
             shape.TextFrame.TextRange.Font.Color.RGB = System.Drawing.Color.FromArgb(0, 0, 0).ToArgb();
 
 
-            //Insert question
+            //Insert question 
             shape = Sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, width, height/3);
             shape.TextFrame.TextRange.InsertAfter(question);
             shape.TextFrame.TextRange.ParagraphFormat.Alignment = PpParagraphAlignment.ppAlignCenter;
+            shape.TextFrame.TextRange.Font.Size = 50;
 
 
 
 
-            /* Code for grouping, if needed...
-            string[] myRangeArray = new string[3];
-            myRangeArray[0] = "shape1";
-            myRangeArray[1] = "shape2";
-            myRangeArray[2] = "shape3";
-            Sld.Shapes.Range(myRangeArray).Group();
-            */
+
+            //timer
+            _timerShape = Sld.Shapes.AddTextbox(MsoTextOrientation.msoTextOrientationHorizontal, 20, 20, 100, 20);
+            _timerShape.TextFrame.TextRange.Text = "00:05";
+            _timerShape.TextFrame.TextRange.Font.Size = 20;
+            _timer.Elapsed += TimerTick;
+            _timer.Start();
 
         }
         private Spoergsmaalsdata hentSpoergsmaal(string valgtTitel) //returner en klasse med alt data fra

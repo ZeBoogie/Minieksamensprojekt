@@ -20,6 +20,9 @@ using System.IO;
 using Microsoft.Office.Interop.Excel;
 using Microsoft.Data.Sqlite;
 using System.Security.Policy;
+using System.Globalization;
+using System.Timers;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PP_AddIn___minieks
 {
@@ -227,13 +230,9 @@ namespace PP_AddIn___minieks
         {
             Trace.WriteLine("brbutton");
             insertTextBox(1, 1);
-            PowerPoint.Shape textBox = Globals.ThisAddIn.Application.ActiveWindow.View.Slide.Shapes.AddTextbox(
-                MsoTextOrientation.msoTextOrientationHorizontal,
-                100, 100, 50, 50);
-            textBox.TextFrame.TextRange.Text = "05:00";
-            textBox.TextFrame.TextRange.Font.Size = 64;
-            textBox.Tags.Add("TimerTag", "DigitalTimer");
+
         }
+
 
         private void insertTextBox(int x, int y)
         {
