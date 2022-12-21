@@ -94,7 +94,7 @@ namespace PP_AddIn___minieks
                     excel.CelleInsert(1 + i, 0, b);
                     foreach (string c in data.playersAndAnswers[b])
                     {
-                        excel.CelleInsert(1 + j, 1 + i, c);
+                        excel.CelleInsert(1 + i, 1 + j, c);
                         j++;
                     }
                     j = 0;
