@@ -29,12 +29,7 @@ document.getElementById("Submit").addEventListener("click", function (event) {
 });
 
 
-document.getElementById("JonatanTestGemData").addEventListener("click", function (event) {
-    connection.invoke("TestJonathansTing").catch(function (err) {
-        return console.error(err.toString());
-    });
-    event.preventDefault();
-});
+
 
 
 

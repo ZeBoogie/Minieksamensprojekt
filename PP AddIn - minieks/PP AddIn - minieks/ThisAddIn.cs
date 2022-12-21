@@ -50,7 +50,6 @@ namespace PP_AddIn___minieks
                 {
                     if (shape.TextFrame.TextRange.Text == titles[i])
                     {
-                        MessageBox.Show("There is a textbox on this page, that i recognize as i title");
                         return true;
                     }
                 }

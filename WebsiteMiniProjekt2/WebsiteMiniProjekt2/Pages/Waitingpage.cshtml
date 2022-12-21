@@ -6,7 +6,6 @@
 
 <div class="text-center">
     <h1 id ="topText">Waiting... </h1>
-    <button id="ActAsReceivedNextQuestion">A</button>
 
 </div>
 
@@ -34,24 +33,6 @@
     });
     event.preventDefault();
     window.location.replace("/" + nameOfPage + "?Code=" + code + "&Name=" + name);
-    });
-
-    document.getElementById("ActAsReceivedNextQuestion").addEventListener("click", function (event) {
-        //printing that button was clicked
-        connection.invoke("PrintString", "button on waiting page clicked Clicked and code is: " + code + "changing to multiplechoice").catch(function (err) {
-            return console.error(err.toString());
-        });
-        event.preventDefault();
-
-        //sending everyone to next question (this should really only happen from the powerpoint)
-        connection.invoke("nextQuestion").catch(function (err) {
-            return console.error(err.toString());
-        });
-        event.preventDefault();
-
-
-
-        window.location.replace("/MultipleChoice?Code=" + code + "&Name=" + name);
     });
 
 
