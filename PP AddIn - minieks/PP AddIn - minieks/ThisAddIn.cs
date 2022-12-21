@@ -23,7 +23,8 @@ namespace PP_AddIn___minieks
 {
     public partial class ThisAddIn
     {
-
+        public List<string> usedTitles = new List<string>();
+        
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             
@@ -84,38 +85,43 @@ namespace PP_AddIn___minieks
         int count = 0;
         bool onQuestion = true;
         bool firstTimeSlideChanged = true;
-        bool wasOnQuestionSlide = false;
+        bool onResultPage = false;
         static int slideIndex = 0;
         private void shouldChangeSlide(SlideShowWindow Wn)
         {
-            if(firstTimeLaunched)
-            {
-                count += 1;
-                firstTimeLaunched = false;
-            }
+            //when you "change slide - go to f.eks. resultpage - it does two slide changes, so one must be cancelled.           
 
-            //when powerpoint is opened, it counts as a slide change, whic
-            if (!firstTimeSlideChanged)
+            if (isOnQuestionSlide(Wn) || (!(onQuestion || onResultPage)) || onResultPage)
             {
-                firstTimeSlideChanged = true;
-                return;
-            }
-            firstTimeSlideChanged = false;
 
-
-            if (isOnQuestionSlide(Wn) || wasOnQuestionSlide)
-            {
-                if (wasOnQuestionSlide)
+                if(onQuestion) // if just encountered the question slide
                 {
-                    wasOnQuestionSlide = false;
-
-                }
-                else // if just encountered the question slide
-                {
-                    wasOnQuestionSlide = true;
                     slideIndex = Wn.View.CurrentShowPosition;
                 }
+                if(!(onQuestion || onResultPage)) //if on on the way to resultpage
+                {
+                    onResultPage= true;
+                    // Makes certain to stay on the same slide.
+                    Presentation objPres;
+                    SlideShowView objSlideShowView;
+
+                    objPres = Globals.ThisAddIn.Application.ActivePresentation;
+                    objPres.SlideShowSettings.ShowPresenterView = MsoTriState.msoFalse;
+                    try
+                    {
+                        objPres.SlideShowSettings.Run();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Couldn't go to next question.");
+                        return;
+                    }
+                    objSlideShowView = objPres.SlideShowWindow.View;
+                    objSlideShowView.GotoSlide(slideIndex);
+                    return;
+                }
                 string titelOfQuestion = getQuestionOnSlide(Wn);
+
 
                 //delete everything on current slide (except code), so that the slide is ready to be updated.
                 PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[slideIndex];
@@ -137,34 +143,25 @@ namespace PP_AddIn___minieks
 				//previous condition was (onQuestion)
 				if (onQuestion)
                 {
+                    usedTitles.Add(titelOfQuestion);
                     onQuestion = false;
                     showQuestionPage(slideIndex, titelOfQuestion);
                 }
                 else
                 {
+
+                    //display resultpage.
                     onQuestion = true;
-					Ribbon1.invokeConnection("timeIsOver");
+                    onResultPage = false;
+
+                    //---- WARNING, IF WEBSERVER ISN'T RUNNING, THEN RESULTPAGE WON'T BE SHOWN ---
+                    Ribbon1.invokeConnection("timeIsOver");
 					//showResult(hardCodedAnswers);
                     count += 1;
                 }
 
-                //Makes certain to stay on the same slide.
-                Presentation objPres;
-                SlideShowView objSlideShowView;
 
-                objPres = Globals.ThisAddIn.Application.ActivePresentation;
-                objPres.SlideShowSettings.ShowPresenterView = MsoTriState.msoFalse;
-                try
-                {
-                    objPres.SlideShowSettings.Run();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Couldn't go to next question.");
-                    return;
-                }
-                objSlideShowView = objPres.SlideShowWindow.View;
-                objSlideShowView.GotoSlide(slideIndex);
+                count = 0;
             }
         }
 
