@@ -137,13 +137,13 @@ namespace PP_AddIn___minieks
 				if (onQuestion)
                 {
                     onQuestion = false;
-                    showQuestionPage(slideIndex);
+                    showQuestionPage(slideIndex, titelOfQuestion);
                 }
                 else
                 {
                     onQuestion = true;
-					//Ribbon1.invokeConnection("timeIsOver");
-					showResult(hardCodedAnswers);
+					Ribbon1.invokeConnection("timeIsOver");
+					//showResult(hardCodedAnswers);
                     count += 1;
                 }
 
@@ -186,9 +186,11 @@ namespace PP_AddIn___minieks
 				Office.MsoTextOrientation.msoTextOrientationHorizontal, (width - widthOfTitle) / 2, (int)(0.25 * heightOfTitle), widthOfTitle, heightOfTitle);
 			shape.TextFrame.TextRange.InsertAfter("Results");
 			shape.TextFrame.TextRange.ParagraphFormat.Alignment = PpParagraphAlignment.ppAlignCenter;
+            shape.TextFrame.TextRange.Font.Size = 24;
 
-            //boxes:
-            string[] answerOptions = { "Didn't answer", "A", "B", "C", "D" };
+
+			//boxes:
+			string[] answerOptions = { "Didn't answer", "A", "B", "C", "D" };
 			int margin = 60;
 			int heightOfButtomText = 50;
 
@@ -199,7 +201,7 @@ namespace PP_AddIn___minieks
             int yCoordinat = (int)1.2 * heightOfTitle;
 			float answerY = (float)(height - heightOfButtomText * 1.1);
             int[] R = {100, 0, 0, 255, 0 };
-			int[] G = {100, 0, 155, 255, 0 };
+			int[] G = {100, 0, 155, 0, 255 };
 			int[] B = {100, 255, 0, 0, 255 };
 
             float totalAnswers = answerthings.Sum();
@@ -228,7 +230,7 @@ namespace PP_AddIn___minieks
 
 
 		}
-		public void showQuestionPage(int index)
+		public void showQuestionPage(int index, string titel)
         {
 
 			//Tell webserver to send webpages to multiple choice question
@@ -243,7 +245,6 @@ namespace PP_AddIn___minieks
             string question;
 
             //method that should be made where the variables are available:
-            string titel = "dobbelt";
             answerOptions = getAnswerOptions(titel);
             question = getQuestion(titel);
 
@@ -305,7 +306,8 @@ namespace PP_AddIn___minieks
             */
 
         }
-        private Spoergsmaalsdata hentSpoergsmaal(string valgtTitel)
+        private Spoergsmaalsdata hentSpoergsmaal(string valgtTitel) //returner en klasse med alt data fra
+                                                                    //en bestemt fil som er givet som parameter
         {
             Spoergsmaalsdata data = new Spoergsmaalsdata();
             string mellemmand = File.ReadAllText("C:\\ProgramData\\PowerPointQuiz\\" + valgtTitel + ".json");
@@ -315,15 +317,7 @@ namespace PP_AddIn___minieks
 
         List<string> getAnswerOptions(string valgtTitel)
         {
-            List<string> returdnstring = new List<string>();
-            returdnstring.Add("Jonatahn");
-            returdnstring.Add("Jonathn");
-            returdnstring.Add("Jonatn");
-            returdnstring.Add("Jonan");
-            return returdnstring;
-
             Spoergsmaalsdata data = hentSpoergsmaal(valgtTitel);
-            //TODO: Get the answer options at a specific question
             List<string> returnstring = new List<string>();
             foreach (string svarMulighed in data.svarMuligheder)
             {
@@ -331,12 +325,9 @@ namespace PP_AddIn___minieks
             }
             return returnstring;
         }
-        string getQuestion(string valgtTitel)
+        string getQuestion(string valgtTitel)//returner et objekt med alt data fra en fil.
         {
-           
-            return "hvordan staver man Jonathan";
             Spoergsmaalsdata data = hentSpoergsmaal(valgtTitel);
-            //TODO: Get the question at a specific question
             string returnstring = data.spoergsmaal;
             return returnstring;
         }

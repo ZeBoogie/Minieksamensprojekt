@@ -37,7 +37,7 @@ connection.on("goToPage", function (nameOfPage) {
         return console.error(err.toString());
     });
     event.preventDefault();
-    window.location.replace("/" + nameOfPage + "?Code=" + code);
+    window.location.replace("/" + nameOfPage + "/?Code=" + code);
 });
 
 connection.on("wrongStatement", function (errorStatement) {

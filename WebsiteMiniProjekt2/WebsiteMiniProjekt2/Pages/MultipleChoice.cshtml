@@ -1,8 +1,7 @@
 ﻿@page
 @model WebsiteMiniProjekt2.Pages.QuistionPageModel
 @{
-	string name = Request.Query["Name"];
-    string code = Request.Query["Code"];
+
 }
  
 <style>
@@ -113,9 +112,12 @@
 	</body>
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/urlreader.js" asp-append-version="true"></script>
 
 <script>
 	"use strict";
+	var code = ParseQueryString()[0].value;
+	var name = ParseQueryString()[1].value;
 
 	var connection = new signalR.HubConnectionBuilder().withUrl("/webHub").build();
 
@@ -126,34 +128,34 @@
         });
 		event.preventDefault();
 	});
-
+	var replacestring = "/Waitingpage?Code=" + code + "&Name=" + name;
 	document.getElementById("TL").addEventListener("click", function (event) {
-		window.location.replace("/Waitingpage?Code=" + @code + "&Name=" + @name);
-		connection.invoke("submitAnswer", "" + @name, "" + @code, "0").catch(function (err) {
+		window.location.replace(replacestring);
+		connection.invoke("submitAnswer", "" + name, "" + code, "0").catch(function (err) {
 			return console.error(err.toString());
 		});
 		event.preventDefault();
 	});
 
 	document.getElementById("TR").addEventListener("click", function (event) {
-		window.location.replace("/Waitingpage?Code=" + @code + "&Name=" + @name);
-		connection.invoke("submitAnswer", "" + @name, "" + @code, "1").catch(function (err) {
+		window.location.replace(replacestring);
+		connection.invoke("submitAnswer", "" + name, "" + code, "1").catch(function (err) {
 			return console.error(err.toString());
 		});
 		event.preventDefault();
 	});
 
 	document.getElementById("BL").addEventListener("click", function (event) {
-		window.location.replace("/Waitingpage?Code=" + @code + "&Name=" + @name);
-		connection.invoke("submitAnswer", "" + @name, "" + @code, "2").catch(function (err) {
+		window.location.replace(replacestring);
+		connection.invoke("submitAnswer", "" + name, "" + code, "2").catch(function (err) {
 			return console.error(err.toString());
 		});
 		event.preventDefault();
 	});
 
 	document.getElementById("BR").addEventListener("click", function (event) {
-		window.location.replace("/Waitingpage?Code=" + @code + "&Name=" + @name);
-		connection.invoke("submitAnswer", "" + @name, "" + @code, "3").catch(function (err) {
+		window.location.replace(replacestring);
+		connection.invoke("submitAnswer", "" + name, "" + code, "3").catch(function (err) {
 			return console.error(err.toString());
 		});
 		event.preventDefault();
@@ -161,6 +163,6 @@
 	
 	
 	connection.on("goToWaitingpage", function () {
-		window.location.replace("/Waitingpage?Code=" + @code + "&Name=" + @name);
+		window.location.replace(replacestring);
 	});
 </script>
