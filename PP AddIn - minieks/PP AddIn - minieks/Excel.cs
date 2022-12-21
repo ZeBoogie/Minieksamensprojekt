@@ -23,6 +23,11 @@ namespace PP_AddIn___minieks
             ws = wb.Worksheets[sheet];
         }
 
+        public Excel() 
+        {
+            
+        }
+
         public void CelleInsert(int i, int j, string s)
         {
             i++;
@@ -35,9 +40,29 @@ namespace PP_AddIn___minieks
             wb.Save();
         }
 
+        public void saveAs(string titel)
+        {
+            wb.SaveAs(titel);
+        }
+
         public void close()
         {
             wb.Close();
+        }
+        public void nyFil()
+        {
+            this.wb = excel.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
+            this.ws = wb.Worksheets[1];
+        }
+
+        public void nytSheet()
+        {
+            Worksheet temptsheet = wb.Worksheets.Add(After: ws);
+        }
+
+        public void ChooseSheet(int i)
+        {
+            this.ws = wb.Worksheets[i];
         }
 
     }

@@ -41,7 +41,6 @@
             this.group1 = this.Factory.CreateRibbonGroup();
             this.group2 = this.Factory.CreateRibbonGroup();
             this.Download = this.Factory.CreateRibbonGroup();
-            this.SessionDownload_comboB = this.Factory.CreateRibbonComboBox();
             this.Administrer_btn = this.Factory.CreateRibbonButton();
             this.Opret_btn = this.Factory.CreateRibbonButton();
             this.LavLink_menu = this.Factory.CreateRibbonMenu();
@@ -103,18 +102,12 @@
             // 
             // Download
             // 
-            this.Download.Items.Add(this.SessionDownload_comboB);
             this.Download.Items.Add(this.Download_btn);
             this.Download.Label = "Download";
             this.Download.Name = "Download";
             // 
             // SessionDownload_comboB
             // 
-            this.SessionDownload_comboB.Label = "Download Excel";
-            this.SessionDownload_comboB.Name = "SessionDownload_comboB";
-            this.SessionDownload_comboB.ShowLabel = false;
-            this.SessionDownload_comboB.Text = null;
-            this.SessionDownload_comboB.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.SessionDownload_comboB_TextChanged);
             // 
             // Administrer_btn
             // 
@@ -215,21 +208,6 @@
             this.ChemSketch_btn.Name = "ChemSketch_btn";
             this.ChemSketch_btn.ShowImage = true;
             this.ChemSketch_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click_2);
-            // 
-            // Download
-            // 
-            this.Download.Items.Add(this.SessionDownload_comboB);
-            this.Download.Items.Add(this.Download_btn);
-            this.Download.Label = "Download";
-            this.Download.Name = "Download";
-            // 
-            // SessionDownload_comboB
-            // 
-            this.SessionDownload_comboB.Label = "Download Excel";
-            this.SessionDownload_comboB.Name = "SessionDownload_comboB";
-            this.SessionDownload_comboB.ShowLabel = false;
-            this.SessionDownload_comboB.Text = null;
-            this.SessionDownload_comboB.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.SessionDownload_comboB_TextChanged);
             // 
             // Download_btn
             // 
