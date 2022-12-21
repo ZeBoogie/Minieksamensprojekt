@@ -33,6 +33,8 @@ namespace PP_AddIn___minieks
         string codeText = "error";
         DateTime startSession;
 
+
+
         public static string getNonCodeText()
         {
             return nonCodeText;
@@ -143,13 +145,16 @@ namespace PP_AddIn___minieks
 				StartStopSession_btn.Label = "Start session";
 				changetext(nonCodeText, codeText);
 
-				List<string> titlesOfQuestions = new List<string>();
-                titlesOfQuestions = Spoergsmaalsstyring_frm.loadFiles().ToList();
 
-				List<List<string>> answerOptions = new List<List<string>>();
+                //---save session to "database"---
+				List<string> titlesOfQuestions = new List<string>();
+                titlesOfQuestions = Globals.ThisAddIn.usedTitles;
+
+                List<List<string>> answerOptions = new List<List<string>>();
 				answerOptions = getAllAnswerOptions(titlesOfQuestions);
 
                 List<string> questions = new List<string>();
+                questions = getAllQuestions(titlesOfQuestions);
 
                 DateTime sessionEnd = DateTime.Now;
 				string result = $"Titles of questions are: {string.Join(", ", titlesOfQuestions)} ---- AnswerOptions are: ";
@@ -163,13 +168,26 @@ namespace PP_AddIn___minieks
                 Trace.WriteLine(result);
 				_connection.InvokeAsync("saveDataToDatabase", titlesOfQuestions, questions, answerOptions, startSession, sessionEnd);
 
-				mycode = 0; //reset code connected to server
+
+                //reset code connected to server
+                mycode = 0;
 
 			}
 		}
         public List<string> getAllQuestions(List<string> titles)
 		{
-            return new List<string>();
+            //titles also being the names of the files, wherein the questions are.
+            //TODO: return all the questions from the titles.
+            List<string> allQuestions = new List<string>();
+            foreach (string title in titles)
+            {
+                Spoergsmaalsdata data = new Spoergsmaalsdata();
+                string mellemmand = File.ReadAllText("C:\\ProgramData\\PowerPointQuiz\\" + title + ".json");
+                data = JsonConvert.DeserializeObject<Spoergsmaalsdata>(mellemmand);
+                string questionAtTitle = data.spoergsmaal;
+                allQuestions.Add(questionAtTitle);
+            }
+            return allQuestions;
         }
 		public List<List<string>> getAllAnswerOptions(List<string> titles)
         {
