@@ -104,6 +104,10 @@ namespace PP_AddIn___minieks
                 excel.save();
                 excel.close();
             }
+            else
+            {
+                MessageBox.Show("Du skal lige vælge hvilken fil du ville konverete.", "Fil ikke valgt");
+            }
         }
     }
 }
