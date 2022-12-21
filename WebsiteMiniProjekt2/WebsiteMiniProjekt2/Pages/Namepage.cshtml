@@ -2,7 +2,7 @@
 @model WebsiteMiniProjekt2.Pages.NamepageModel
 @{
     ViewData["Title"] = "Namepage";
-    string code = Request.Query["Code"];
+
 }
 <html>
 <style >
@@ -20,7 +20,6 @@
 <div class="TextPlacement" style="text-align:center";>
 
         <h2>Write your name</h2>
-        <h3>code is @code</h3>
 
         <form>
             <input type="text" id="Name" name="WriteName"><br>
@@ -31,18 +30,23 @@
 </body>
 </html>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/urlreader.js" asp-append-version="true"></script>
 
 <script>
     "use strict";
-
+    var code = ParseQueryString()[0].value;
     var connection = new signalR.HubConnectionBuilder().withUrl("/webHub").build();
+
+    console.log("this is querystring" + code);
+
 
     //Disable the send button until connection is established.
     document.getElementById("submitName").disabled = true;
 
     connection.start().then(function () {
+
         document.getElementById("submitName").disabled = false;
-        connection.invoke("PrintString", "connection namepage started").catch(function (err) {
+        connection.invoke("PrintString", "connection namepage started - i read the code as " + code).catch(function (err) {
             return console.error(err.toString());
         });
         event.preventDefault();
@@ -70,6 +74,6 @@
         return console.error(err.toString());
     });
     event.preventDefault();
-    window.location.replace("/" + nameOfPage + "?Code=" + @code + "&Name=" + username);
+    window.location.replace("/" + nameOfPage + "/?Code=" + code + "&Name=" + username);
 });
 </script>
