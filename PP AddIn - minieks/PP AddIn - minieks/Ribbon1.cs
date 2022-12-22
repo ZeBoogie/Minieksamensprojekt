@@ -171,26 +171,35 @@ namespace PP_AddIn___minieks
 				List<string> titlesOfQuestions = new List<string>();
                 titlesOfQuestions = Globals.ThisAddIn.usedTitles;
 
-                List<List<string>> answerOptions = new List<List<string>>();
-				answerOptions = getAllAnswerOptions(titlesOfQuestions);
-
-                List<string> questions = new List<string>();
-                questions = getAllQuestions(titlesOfQuestions);
-
-                DateTime sessionEnd = DateTime.Now;
-				string result = $"Titles of questions are: {string.Join(", ", titlesOfQuestions)} ---- AnswerOptions are: ";
-
-				foreach (List<string> titleOfAnswerOption in answerOptions)
+                if (titlesOfQuestions.Count > 0)
                 {
+                    List<List<string>> answerOptions = new List<List<string>>();
+                    answerOptions = getAllAnswerOptions(titlesOfQuestions);
 
-					result += string.Join(", ", titleOfAnswerOption) + " || next list of answeroptions -> ";
-				}
+                    List<string> questions = new List<string>();
+                    questions = getAllQuestions(titlesOfQuestions);
 
-                List<List<bool>> correctAnswers = new List<List<bool>> ();
-                correctAnswers = getAllCorrectAnswers(titlesOfQuestions);
+                    DateTime sessionEnd = DateTime.Now;
+                    string result = $"Titles of questions are: {string.Join(", ", titlesOfQuestions)} ---- AnswerOptions are: ";
 
-                Trace.WriteLine(result);
-				_connection.InvokeAsync("saveDataToDatabase", titlesOfQuestions, questions, answerOptions, startSession, sessionEnd);
+                    foreach (List<string> titleOfAnswerOption in answerOptions)
+                    {
+
+                        result += string.Join(", ", titleOfAnswerOption) + " || next list of answeroptions -> ";
+                    }
+
+                    List<List<bool>> correctAnswers = new List<List<bool>>();
+                    correctAnswers = getAllCorrectAnswers(titlesOfQuestions);
+
+                    Trace.WriteLine(result);
+                    _connection.InvokeAsync("saveDataToDatabase", titlesOfQuestions, questions, answerOptions, startSession, sessionEnd, correctAnswers);
+                }
+                else
+                {
+                    MessageBox.Show("There were no encountered titles to save");
+                }
+
+
 
 
                 //reset code connected to server

@@ -37,12 +37,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
             this.Spørgsmålslaver = this.Factory.CreateRibbonTab();
             this.spoergsmaal_grp = this.Factory.CreateRibbonGroup();
-            this.Session_grp = this.Factory.CreateRibbonGroup();
-            this.group1 = this.Factory.CreateRibbonGroup();
-            this.group2 = this.Factory.CreateRibbonGroup();
-            this.Download = this.Factory.CreateRibbonGroup();
             this.Administrer_btn = this.Factory.CreateRibbonButton();
             this.Opret_btn = this.Factory.CreateRibbonButton();
+            this.Session_grp = this.Factory.CreateRibbonGroup();
             this.LavLink_menu = this.Factory.CreateRibbonMenu();
             this.menu1 = this.Factory.CreateRibbonMenu();
             this.BRbutton = this.Factory.CreateRibbonButton();
@@ -51,7 +48,9 @@
             this.BLbutton = this.Factory.CreateRibbonButton();
             this.menu2 = this.Factory.CreateRibbonMenu();
             this.StartStopSession_btn = this.Factory.CreateRibbonButton();
+            this.group1 = this.Factory.CreateRibbonGroup();
             this.button1 = this.Factory.CreateRibbonButton();
+            this.group2 = this.Factory.CreateRibbonGroup();
             this.ChemSketch_btn = this.Factory.CreateRibbonButton();
             this.Download = this.Factory.CreateRibbonGroup();
             this.Download_btn = this.Factory.CreateRibbonButton();
@@ -81,34 +80,6 @@
             this.spoergsmaal_grp.Label = "Spørgsmål";
             this.spoergsmaal_grp.Name = "spoergsmaal_grp";
             // 
-            // Session_grp
-            // 
-            this.Session_grp.Items.Add(this.LavLink_menu);
-            this.Session_grp.Items.Add(this.StartStopSession_btn);
-            this.Session_grp.Label = "Session";
-            this.Session_grp.Name = "Session_grp";
-            // 
-            // group1
-            // 
-            this.group1.Items.Add(this.button1);
-            this.group1.Label = "Excel";
-            this.group1.Name = "group1";
-            // 
-            // group2
-            // 
-            this.group2.Items.Add(this.ChemSketch_btn);
-            this.group2.Label = "ChemSketch";
-            this.group2.Name = "group2";
-            // 
-            // Download
-            // 
-            this.Download.Items.Add(this.Download_btn);
-            this.Download.Label = "Download";
-            this.Download.Name = "Download";
-            // 
-            // SessionDownload_comboB
-            // 
-            // 
             // Administrer_btn
             // 
             this.Administrer_btn.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -125,6 +96,13 @@
             this.Opret_btn.Name = "Opret_btn";
             this.Opret_btn.ShowImage = true;
             this.Opret_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click_1);
+            // 
+            // Session_grp
+            // 
+            this.Session_grp.Items.Add(this.LavLink_menu);
+            this.Session_grp.Items.Add(this.StartStopSession_btn);
+            this.Session_grp.Label = "Session";
+            this.Session_grp.Name = "Session_grp";
             // 
             // LavLink_menu
             // 
@@ -192,6 +170,12 @@
             this.StartStopSession_btn.ShowImage = true;
             this.StartStopSession_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.StartStopSession_btn_Click);
             // 
+            // group1
+            // 
+            this.group1.Items.Add(this.button1);
+            this.group1.Label = "Excel";
+            this.group1.Name = "group1";
+            // 
             // button1
             // 
             this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -199,6 +183,12 @@
             this.button1.Label = "Upload liste";
             this.button1.Name = "button1";
             this.button1.ShowImage = true;
+            // 
+            // group2
+            // 
+            this.group2.Items.Add(this.ChemSketch_btn);
+            this.group2.Label = "ChemSketch";
+            this.group2.Name = "group2";
             // 
             // ChemSketch_btn
             // 
@@ -208,6 +198,12 @@
             this.ChemSketch_btn.Name = "ChemSketch_btn";
             this.ChemSketch_btn.ShowImage = true;
             this.ChemSketch_btn.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click_2);
+            // 
+            // Download
+            // 
+            this.Download.Items.Add(this.Download_btn);
+            this.Download.Label = "Download";
+            this.Download.Name = "Download";
             // 
             // Download_btn
             // 
