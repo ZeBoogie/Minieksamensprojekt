@@ -36,6 +36,7 @@ namespace PP_AddIn___minieks
 
 
             this.Application.SlideShowNextSlide += new PowerPoint.EApplication_SlideShowNextSlideEventHandler(shouldChangeSlide);
+
         }
 
         public bool isOnQuestionSlide(SlideShowWindow Wn)
@@ -91,7 +92,7 @@ namespace PP_AddIn___minieks
         static int slideIndex = 0;
         private void shouldChangeSlide(SlideShowWindow Wn)
         {
-            //when you "change slide - go to f.eks. resultpage - it does two slide changes, so one must be cancelled.           
+            // when you "change slide - go to f.eks. resultpage - it does two slide changes, so one must be cancelled.           
 
             if (isOnQuestionSlide(Wn) || (!(onQuestion || onResultPage)) || onResultPage)
             {
@@ -127,6 +128,7 @@ namespace PP_AddIn___minieks
                 string titelOfQuestion = getQuestionOnSlide(Wn);
 
 
+                
                 //delete everything on current slide (except code), so that the slide is ready to be updated.
                 PowerPoint.Slide Sld = this.Application.ActivePresentation.Slides[slideIndex];
                 int shapesCount = Sld.Shapes.Count;
@@ -170,8 +172,6 @@ namespace PP_AddIn___minieks
         }
         private static PowerPoint.Shape _timerShape;
 
-
-
         //--------------------- Show Result ----------------------
         public static void showResult(int[] answerthings)
         {
@@ -193,6 +193,7 @@ namespace PP_AddIn___minieks
 			shape.TextFrame.TextRange.InsertAfter("Results");
 			shape.TextFrame.TextRange.ParagraphFormat.Alignment = PpParagraphAlignment.ppAlignCenter;
             shape.TextFrame.TextRange.Font.Size = 24;
+
 
 
 			//boxes:
@@ -302,10 +303,6 @@ namespace PP_AddIn___minieks
 			//Tell webserver to send webpages to multiple choice question
 			Ribbon1.invokeConnection("nextQuestion");
 
-
-			//TODO: tilføj al teksten som det skal være på Question pagen.. Lige nu kan det ses at det bare er en enkelt tekstboks et tilfældigt sted
-			//(Det som Cahtrine startede på at designe i powerpoint, nu i kode)
-
 			//Variables with the answer options an the question itself
 			List<string> answerOptions = new List<string>();
             string question;
@@ -360,10 +357,6 @@ namespace PP_AddIn___minieks
             shape.TextFrame.TextRange.InsertAfter(question);
             shape.TextFrame.TextRange.ParagraphFormat.Alignment = PpParagraphAlignment.ppAlignCenter;
             shape.TextFrame.TextRange.Font.Size = 50;
-
-
-
-
 
             //timer
             _timerShape = Sld.Shapes.AddTextbox(MsoTextOrientation.msoTextOrientationHorizontal, 20, 20, 100, 20);

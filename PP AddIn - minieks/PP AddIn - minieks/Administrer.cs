@@ -61,11 +61,17 @@ namespace PP_AddIn___minieks
 
         private void button1_Click_3(object sender, EventArgs e)
         {
+            float height = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;
+            float width = Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth;
+            int textWidth = 100;
+            int textHeight = 50;
+
             if (Spoergsmaalsliste_lb.SelectedIndex != -1)
             {
                 valgt = Spoergsmaalsliste_lb.SelectedItem.ToString();
                 PowerPoint.Slide sld = Globals.ThisAddIn.Application.ActiveWindow.View.Slide;
-                PowerPoint.Shape shape = sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, 0, 0, 0, 0);
+                PowerPoint.Shape shape = sld.Shapes.AddTextbox(Office.MsoTextOrientation.msoTextOrientationHorizontal, (width-textWidth)/2, (height-textHeight)/2, textWidth, textHeight);
+                shape.TextFrame.TextRange.ParagraphFormat.Alignment = PpParagraphAlignment.ppAlignCenter;
                 shape.TextFrame.TextRange.InsertAfter(valgt);
                 this.Close();
             }
